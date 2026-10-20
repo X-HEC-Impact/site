@@ -146,7 +146,10 @@ export const accueil = {
    - dateFin : facultatif, pour un événement sur plusieurs jours.
    - Un événement passe automatiquement dans « Événements passés »
      le lendemain de sa date (ou de sa date de fin).
-   - image : facultatif, par exemple '/images/events/mon-slug.jpg'.
+   - image : facultatif, la bannière en haut de la page, par exemple
+     '/images/events/mon-slug/banniere.jpg' (avec imageAlt pour la décrire).
+     Sans image, la texture du format s'affiche.
+   - photos : facultatif, galerie « En images » en bas de la page.
    - inscriptionsOuvertes : true affiche le formulaire d'inscription.
    - reserveA : facultatif. Pour un événement interne, sans inscription
      publique (ex. la LEX) : le texte remplace le formulaire.
@@ -165,6 +168,8 @@ export type Evenement = {
   description: string;
   programme?: { quand: string; quoi: string }[];
   image?: string;
+  imageAlt?: string;
+  photos?: { src: string; alt: string }[];
   inscriptionsOuvertes: boolean;
   reserveA?: string;
   accroche?: string;
@@ -227,6 +232,26 @@ Un voyage à faible impact carbone : 19,3 kg de CO2e par étudiant pour 10 jours
     titre: 'Hackathon Impact, 1re édition',
     date: '2025-12-13',
     lieu: 'Mouzaïa, Paris 19e',
+    image: '/images/events/hackathon-impact-2025/banniere.jpg',
+    imageAlt: 'Des équipes au travail pendant le Hackathon Impact',
+    photos: [
+      {
+        src: '/images/events/hackathon-impact-2025/equipe-au-travail.jpg',
+        alt: 'Une équipe échange autour d’une table pendant le hackathon',
+      },
+      {
+        src: '/images/events/hackathon-impact-2025/intervention-public.jpg',
+        alt: 'Le public assiste à une intervention',
+      },
+      {
+        src: '/images/events/hackathon-impact-2025/presentation-climat.jpg',
+        alt: 'Présentation sur l’évolution des températures mondiales',
+      },
+      {
+        src: '/images/events/hackathon-impact-2025/deroule-journee.jpg',
+        alt: 'Présentation du déroulé de la journée aux participants',
+      },
+    ],
     description:
       'Un marathon de 12 h non-stop pour réinventer l’impact. Étudiants et jeunes actifs aux profils variés sont passés en une journée de l’exploration des problèmes à des solutions concrètes, accompagnés par des alumni X-HEC et des entrepreneurs expérimentés, jusqu’au pitch devant un jury exigeant.',
     inscriptionsOuvertes: false,

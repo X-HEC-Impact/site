@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import { Building2, HandCoins, Rocket, UserRound, type LucideIcon } from 'lucide-react';
+import { Grille } from '@/components/ui/Grille';
 import { Surtitre } from '@/components/ui/Titre';
 import type { Evenement } from '@/content/site';
 import { cx, typo } from '@/lib/utils';
@@ -102,6 +104,32 @@ export function Rencontres({
           <span className="font-medium text-sapin">Secteurs visés :</span> {secteurs}
         </p>
       )}
+    </section>
+  );
+}
+
+/** Galerie « En images » : photos en cases bordurées, bord à bord. */
+export function Galerie({ photos }: { photos: NonNullable<Evenement['photos']> }) {
+  return (
+    <section aria-labelledby="galerie-titre" className="border-b border-filet">
+      <h2 id="galerie-titre" className="surtitre px-5 py-8 text-center md:py-10">
+        En images
+      </h2>
+      <div className="border-t border-filet">
+        <Grille colonnes="sm:grid-cols-2">
+          {photos.map((photo) => (
+            <li key={photo.src} className="relative aspect-[3/2] overflow-hidden">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(min-width: 1200px) 600px, (min-width: 640px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </li>
+          ))}
+        </Grille>
+      </div>
     </section>
   );
 }

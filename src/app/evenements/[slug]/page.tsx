@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { AppelFinal } from '@/components/AppelFinal';
-import { ChiffresCles, Itineraire, Rencontres } from '@/components/evenements/BlocsEvenement';
+import { ChiffresCles, Galerie, Itineraire, Rencontres } from '@/components/evenements/BlocsEvenement';
 import { CarteInscription } from '@/components/evenements/CarteInscription';
 import { EtiquetteFormat } from '@/components/evenements/EtiquetteFormat';
 import { marges } from '@/components/ui/Section';
@@ -60,7 +60,7 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
         <div className="relative aspect-[16/9] overflow-hidden rounded-bouton lg:aspect-[21/8]">
           <Image
             src={evenement.image ?? formats[evenement.type].image}
-            alt={evenement.image ? evenement.titre : ''}
+            alt={evenement.image ? (evenement.imageAlt ?? evenement.titre) : ''}
             fill
             priority
             sizes="(min-width: 1200px) 1136px, 100vw"
@@ -124,6 +124,8 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
           </div>
         </aside>
       </div>
+
+      {evenement.photos && evenement.photos.length > 0 && <Galerie photos={evenement.photos} />}
 
       <AppelFinal />
     </>
