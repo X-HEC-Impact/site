@@ -122,13 +122,6 @@ export const accueil = {
     titre: 'Prochains',
     titreSuite: 'événements',
   },
-  /** Bloc « Retour sur… » : l’événement mis en avant et ses photos (dans public/images/events/). */
-  retour: {
-    surtitre: 'Retour sur',
-    evenement: 'hackathon-impact-2025',
-    /** Ajouter les photos ainsi : { src: '/images/events/hackathon-1.jpg', alt: 'Description de la photo' } */
-    photos: [] as { src: string; alt: string }[],
-  },
   cta: {
     titre: 'Un projet, un partenariat ?',
     titreSuite: 'Parlons-en.',
