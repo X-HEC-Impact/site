@@ -1,17 +1,12 @@
 import { cacheLife } from 'next/cache';
 import { evenements, type Evenement } from '@/content/site';
+import { dateEstFixee } from '@/lib/dates';
 
 /* ------------------------------------------------------------------
-   Outils autour des événements : tri « à venir / passés » et dates.
-   Le contenu lui-même est dans src/content/site.ts.
+   Événements « à venir » et « passés » (côté serveur uniquement).
+   Le contenu lui-même est dans src/content/site.ts, l'affichage des
+   dates dans src/lib/dates.ts.
    ------------------------------------------------------------------ */
-
-const FORMAT_ISO = /^\d{4}-\d{2}-\d{2}$/;
-
-/** Vrai si la date est une vraie date 'AAAA-MM-JJ' (et pas un placeholder). */
-export function dateEstFixee(date: string | undefined): date is string {
-  return !!date && FORMAT_ISO.test(date);
-}
 
 /** Date du jour à Paris, au format 'AAAA-MM-JJ'. */
 function aujourdhuiAParis() {
@@ -60,48 +55,8 @@ export function getEvenement(slug: string) {
   return evenements.find((e) => e.slug === slug);
 }
 
-/* ------------------------------------------------------------------
-   Affichage des dates
-   ------------------------------------------------------------------ */
-
-/** Ce qu'on affiche tant que la date n'est pas fixée : « Dates à venir » ou « Date à venir ». */
-function libelleAVenir(placeholder: string) {
-  return /DATES/i.test(placeholder) ? 'Dates à venir' : 'Date à venir';
-}
-
-function versDate(iso: string) {
-  return new Date(`${iso}T12:00:00Z`);
-}
-
-function format(iso: string, options: Intl.DateTimeFormatOptions) {
-  return new Intl.DateTimeFormat('fr-FR', { timeZone: 'UTC', ...options }).format(versDate(iso));
-}
-
-/**
- * Date courte en deux morceaux pour les grilles :
- * { principal: '13 déc.', annee: '2025' } ou { principal: '12–15 mars', annee: '2027' }.
- * Une date non fixée devient { principal: 'Dates à venir', fixee: false }.
- */
-export function dateCourte({ date, dateFin }: Pick<Evenement, 'date' | 'dateFin'>) {
-  if (!dateEstFixee(date)) return { principal: libelleAVenir(date), annee: '', fixee: false };
-
-  const annee = date.slice(0, 4);
-  if (!dateEstFixee(dateFin) || dateFin === date) {
-    return { principal: format(date, { day: 'numeric', month: 'short' }), annee, fixee: true };
-  }
-
-  const memeMois = date.slice(0, 7) === dateFin.slice(0, 7);
-  const principal = memeMois
-    ? `${format(date, { day: 'numeric' })}–${format(dateFin, { day: 'numeric', month: 'short' })}`
-    : `${format(date, { day: 'numeric', month: 'short' })} – ${format(dateFin, { day: 'numeric', month: 'short' })}`;
-  return { principal, annee: dateFin.slice(0, 4), fixee: true };
-}
-
-/** Date complète : « samedi 13 décembre 2025 », « du … au … », ou « Dates à venir ». */
-export function dateLongue({ date, dateFin }: Pick<Evenement, 'date' | 'dateFin'>) {
-  if (!dateEstFixee(date)) return libelleAVenir(date);
-  const longue = (iso: string) =>
-    format(iso, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-  if (!dateEstFixee(dateFin) || dateFin === date) return longue(date);
-  return `du ${longue(date)} au ${longue(dateFin)}`;
+/** Vrai si l'événement est terminé. */
+export async function evenementEstPasse(slug: string) {
+  const { passes } = await getEvenements();
+  return passes.some((e) => e.slug === slug);
 }

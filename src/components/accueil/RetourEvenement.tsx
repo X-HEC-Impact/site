@@ -6,8 +6,9 @@ import { LienFleche } from '@/components/ui/LienFleche';
 import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
 import { accueil } from '@/content/site';
-import { dateLongue, getEvenement } from '@/lib/evenements';
-import { cx, typo } from '@/lib/utils';
+import { dateLongue } from '@/lib/dates';
+import { getEvenement } from '@/lib/evenements';
+import { cx, decouperTitre, typo } from '@/lib/utils';
 
 const NOMBRE_PHOTOS = 3;
 
@@ -21,8 +22,7 @@ export function RetourEvenement() {
   if (!evenement) return null;
 
   // « Hackathon Impact, 1re édition » → titre en deux tons de part et d'autre de la virgule.
-  const [debut, ...reste] = evenement.titre.split(', ');
-  const suite = reste.join(', ');
+  const { debut, suite } = decouperTitre(evenement.titre);
 
   // Une grande case et deux petites. Sans photo, un emplacement « Photo à venir ».
   const cases = Array.from({ length: NOMBRE_PHOTOS }, (_, i) => retour.photos[i]);
@@ -31,7 +31,7 @@ export function RetourEvenement() {
     <section aria-labelledby="retour-titre" className="grid border-b border-filet md:grid-cols-12">
       <div className={cx(marges, 'apparition flex flex-col py-16 md:col-span-5 md:py-24')}>
         <Surtitre>{retour.surtitre}</Surtitre>
-        <Titre id="retour-titre" debut={suite ? `${debut},` : debut} suite={suite} className="mt-4" />
+        <Titre id="retour-titre" debut={debut} suite={suite} className="mt-4" />
 
         <ul className="mt-8 space-y-2 text-[15px]">
           <li className="flex items-center gap-2.5">

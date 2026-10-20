@@ -3,7 +3,7 @@ import { MapPin } from 'lucide-react';
 import { LienFleche } from '@/components/ui/LienFleche';
 import { EtiquetteFormat } from './EtiquetteFormat';
 import type { Evenement } from '@/content/site';
-import { dateCourte } from '@/lib/evenements';
+import { dateCourte } from '@/lib/dates';
 
 type Props = {
   evenement: Evenement;

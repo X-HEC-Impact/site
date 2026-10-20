@@ -24,3 +24,10 @@ export function typo(texte: string) {
 export function estLienExterne(href: string) {
   return /^(https?:|mailto:|tel:)/.test(href);
 }
+
+/** Coupe un titre à la première virgule pour l'afficher en deux tons. */
+export function decouperTitre(titre: string) {
+  const [debut, ...reste] = titre.split(', ');
+  const suite = reste.join(', ');
+  return suite ? { debut: `${debut},`, suite } : { debut, suite: undefined };
+}

@@ -4,7 +4,8 @@ import { LienFleche } from '@/components/ui/LienFleche';
 import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
 import { accueil } from '@/content/site';
-import { dateLongue, getEvenements } from '@/lib/evenements';
+import { dateLongue } from '@/lib/dates';
+import { getEvenements } from '@/lib/evenements';
 import { cx, typo } from '@/lib/utils';
 
 export async function Hero() {
