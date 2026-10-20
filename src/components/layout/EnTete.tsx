@@ -58,11 +58,14 @@ export function EnTete() {
         </nav>
 
         <div className="hidden items-center gap-2.5 md:flex">
-          <Bouton href="/contact" variante="contour" taille="petit" className="hidden lg:inline-flex">
-            Contact
-          </Bouton>
+          {/* Entre 768 et 1024 px, on garde la place pour le menu : « Contact » y est déjà. */}
+          <span className="hidden lg:block">
+            <Bouton href="/contact" variante="contour" taille="petit">
+              Contact
+            </Bouton>
+          </span>
           <Bouton href={annonce.lien} variante="noir" taille="petit">
-            S&apos;inscrire
+            S’inscrire
           </Bouton>
         </div>
 
@@ -113,7 +116,7 @@ export function EnTete() {
             Contact
           </Bouton>
           <Bouton href={annonce.lien} variante="noir" onClick={fermer}>
-            S&apos;inscrire
+            S’inscrire
           </Bouton>
         </div>
       </div>

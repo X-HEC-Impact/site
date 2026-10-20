@@ -32,7 +32,7 @@ export function Logo({ className }: { className?: string }) {
       aria-label="X-HEC Impact, retour à l'accueil"
     >
       <Marque />
-      <span className="font-titre text-[19px] font-medium tracking-[-0.02em]">
+      <span className="font-titre text-[19px] font-medium tracking-[-0.02em] whitespace-nowrap">
         X-HEC <span className="text-brume">Impact</span>
       </span>
     </Link>

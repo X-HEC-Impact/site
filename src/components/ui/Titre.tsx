@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
-import { cx } from '@/lib/utils';
+import { cx, typo } from '@/lib/utils';
+
+const soigne = (texte: ReactNode) => (typeof texte === 'string' ? typo(texte) : texte);
 
 type Props = {
   /** Première partie, en vert sapin (ou blanc sur fond sombre). */
@@ -23,11 +25,11 @@ export function Titre({ debut, suite, niveau = 'h2', sombre, id, className }: Pr
 
   return (
     <Balise id={id} className={cx(taille, sombre && 'text-white', className)}>
-      {debut}
+      {soigne(debut)}
       {suite && (
         <>
           {' '}
-          <span className={sombre ? 'text-lichen' : 'text-brume'}>{suite}</span>
+          <span className={sombre ? 'text-lichen' : 'text-brume'}>{soigne(suite)}</span>
         </>
       )}
     </Balise>

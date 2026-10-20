@@ -22,9 +22,10 @@ const classeLien = 'inline-flex items-center gap-2 text-ardoise transition-color
 function LienReseau({ href, libelle, icone }: { href: string; libelle: string; icone: ReactNode }) {
   if (estPlaceholder(href)) {
     return (
-      <span className={cx(classeLien, 'hover:text-ardoise')}>
+      <span className="flex flex-wrap items-center gap-x-2 text-ardoise">
         {icone}
-        {libelle} <span className="text-xs text-brume">[lien à venir]</span>
+        {libelle}
+        <span className="text-xs whitespace-nowrap text-brume">[lien à venir]</span>
       </span>
     );
   }

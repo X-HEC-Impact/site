@@ -1,11 +1,19 @@
-import { Section } from '@/components/ui/Section';
-import { Surtitre, Titre } from '@/components/ui/Titre';
+import { AppelFinal } from '@/components/accueil/AppelFinal';
+import { BandeauPartenaires } from '@/components/accueil/BandeauPartenaires';
+import { Hero } from '@/components/accueil/Hero';
+import { MotDuPresident } from '@/components/accueil/MotDuPresident';
+import { ProchainsEvenements } from '@/components/accueil/ProchainsEvenements';
+import { SectionFormats } from '@/components/accueil/SectionFormats';
 
 export default function Accueil() {
   return (
-    <Section>
-      <Surtitre>Association du Master Entrepreneurs X-HEC</Surtitre>
-      <Titre niveau="h1" debut="Entreprendre" suite="pour l'impact" className="mt-4" />
-    </Section>
+    <>
+      <Hero />
+      <BandeauPartenaires />
+      <SectionFormats />
+      <ProchainsEvenements />
+      <MotDuPresident />
+      <AppelFinal />
+    </>
   );
 }

@@ -19,7 +19,7 @@ export const association = {
   nom: 'X-HEC Impact',
   /** Utilisée pour le référencement (Google, partages sur les réseaux). */
   description:
-    "L'association du Master Entrepreneurs de l'École polytechnique et d'HEC Paris. Elle rassemble, accompagne et connecte les porteurs de projets à impact social et environnemental.",
+    "L’association du Master Entrepreneurs de l’École polytechnique et d’HEC Paris. Elle rassemble, accompagne et connecte les porteurs de projets à impact social et environnemental.",
   /** Phrase courte du pied de page. */
   accroche:
     'Rassembler, accompagner et connecter les porteurs de projets à impact social et environnemental.',
@@ -44,21 +44,21 @@ export const formats: Record<
     nom: 'LEX Europe',
     etiquette: 'LEX Europe',
     texte:
-      "Une learning expedition à travers l'Europe, pensée comme une alternative à la LEX San Francisco.",
+      'Une learning expedition à travers l’Europe, alternative à la LEX San Francisco.',
     image: '/images/textures/lex.webp',
   },
   conference: {
     nom: 'Conférences & tables rondes',
     etiquette: 'Conférence',
     texte:
-      "Fondateurs, chercheurs et décideurs partagent leur expérience et débattent des grands enjeux de l'impact.",
+      'Fondateurs, chercheurs et décideurs partagent leur expérience et débattent.',
     image: '/images/textures/conference.webp',
   },
   hackathon: {
     nom: 'Hackathon Impact',
     etiquette: 'Hackathon',
     texte:
-      'Une journée pour imaginer des solutions autour d’un objectif de développement durable rarement abordé.',
+      'Une journée de création autour d’un objectif de développement durable rarement abordé.',
     image: '/images/textures/hackathon.webp',
   },
 };
@@ -71,7 +71,7 @@ export const formats: Record<
 export const annonce = {
   afficher: true,
   texte: 'Prochain événement : LEX Europe, [DATES].',
-  libelleLien: "S'inscrire",
+  libelleLien: "S’inscrire",
   lien: '/evenements/lex-europe#inscription',
 };
 
@@ -94,9 +94,9 @@ export const accueil = {
   hero: {
     surtitre: 'Association du Master Entrepreneurs X-HEC',
     titre: 'Entreprendre',
-    titreSuite: "pour l'impact",
+    titreSuite: "pour l’impact",
     texte:
-      "X-HEC Impact rassemble, accompagne et connecte les porteurs de projets à impact social et environnemental. Learning expedition, conférences, hackathon : on crée les occasions de passer de l'idée à l'action.",
+      "X-HEC Impact rassemble, accompagne et connecte les porteurs de projets à impact social et environnemental. Learning expedition, conférences, hackathon : on crée les occasions de passer de l’idée à l’action.",
     image: '/images/textures/hero.webp',
     /** Laisser vide pour une texture décorative. Décrire la photo si c'en est une. */
     imageAlt: '',
@@ -105,7 +105,7 @@ export const accueil = {
     surtitre: 'Écoles et partenaires qui nous accompagnent',
   },
   formats: {
-    surtitre: "Ce qu'on fait",
+    surtitre: "Ce qu’on fait",
     titre: 'Trois formats.',
     titreSuite: 'Un même objectif.',
   },
@@ -116,8 +116,8 @@ export const accueil = {
   },
   president: {
     surtitre: 'Mot du président',
-    titre: 'Le mot',
-    titreSuite: 'du président',
+    titre: 'Pourquoi',
+    titreSuite: 'X-HEC Impact ?',
     citation: '[CITATION]',
     nom: '[NOM]',
     role: '[RÔLE]',
@@ -130,6 +130,7 @@ export const accueil = {
     texte:
       'Intervenir lors d’une table ronde, soutenir la LEX Europe, proposer un sujet de hackathon : écrivez-nous.',
     bouton: 'Nous écrire',
+    image: '/images/textures/appel.webp',
   },
 };
 
@@ -169,7 +170,7 @@ export const evenements: Evenement[] = [
     date: '[DATES]',
     lieu: '[VILLES ÉTAPES]',
     description:
-      "Une learning expedition à travers l'Europe, pensée comme une alternative à la LEX San Francisco, à la rencontre des entreprises et des acteurs qui font l'impact. [PRÉSENTATION DÉTAILLÉE]",
+      "Une learning expedition à travers l’Europe, pensée comme une alternative à la LEX San Francisco, à la rencontre des entreprises et des acteurs qui font l’impact. [PRÉSENTATION DÉTAILLÉE]",
     programme: [
       { quand: '[JOUR 1]', quoi: '[ÉTAPE ET VISITES]' },
       { quand: '[JOUR 2]', quoi: '[ÉTAPE ET VISITES]' },
@@ -193,7 +194,7 @@ export const evenements: Evenement[] = [
     date: '2025-12-13',
     lieu: 'Mouzaïa, Paris 19e',
     description:
-      "La première édition du Hackathon Impact : une journée pour imaginer des solutions autour d'un objectif de développement durable rarement abordé. [BILAN DE L'ÉDITION]",
+      "La première édition du Hackathon Impact : une journée pour imaginer des solutions autour d’un objectif de développement durable rarement abordé. [BILAN DE L’ÉDITION]",
     inscriptionsOuvertes: false,
   },
 ];
@@ -243,15 +244,15 @@ export const pages = {
   evenements: {
     surtitre: 'Agenda',
     titre: 'Nos événements.',
-    titreSuite: "Pour passer de l'idée à l'action.",
+    titreSuite: "Pour passer de l’idée à l’action.",
     description:
       'LEX Europe, conférences, tables rondes et Hackathon Impact : tous les événements de X-HEC Impact.',
   },
   equipe: {
-    surtitre: "L'équipe",
+    surtitre: "L’équipe",
     titre: 'Les visages',
     titreSuite: 'de X-HEC Impact.',
-    description: "Les étudiantes et étudiants du Master Entrepreneurs X-HEC qui font vivre l'association.",
+    description: "Les étudiantes et étudiants du Master Entrepreneurs X-HEC qui font vivre l’association.",
   },
   contact: {
     surtitre: 'Contact',
