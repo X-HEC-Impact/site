@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Couleurs du site (utilisables en classes : bg-sapin, text-ardoise…)
+   ------------------------------------------------------------------ */
+@theme {
+  --color-sapin: #062a21; /* titres, texte fort, sections sombres */
+  --color-vif: #2ec27e; /* bouton principal, chiffres clés — jamais en texte sur fond blanc */
+  --color-vif-texte: #17834f; /* vert pour du texte sur fond clair */
+  --color-ardoise: #4a5c57; /* texte courant */
+  --color-brume: #657671; /* second ton des titres, surtitres (contraste ≥ 4.5:1) */
+  --color-lichen: #93aba3; /* second ton des titres sur fond sapin */
+  --color-filet: #d5deda; /* tous les filets et bordures */
+  --color-voile: #f6f9f7; /* fonds de cellules alternés */
+  --color-menthe: #e3f5ea; /* carte LEX Europe */
+  --color-ciel: #e5eefb; /* carte Conférences */
+  --color-lavande: #eeeafb; /* carte Hackathon */
+  --color-citron: #e4fa9b; /* surlignage ponctuel d'un mot */
+
+  --radius-bouton: 6px;
+}
+
+/* Polices chargées dans layout.tsx avec next/font/google */
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-titre: var(--font-inter-tight), var(--font-inter), ui-sans-serif, sans-serif;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    background: var(--color-white);
+    color: var(--color-ardoise);
+    scroll-behavior: smooth;
+    /* laisse de la place au header collant quand on suit une ancre */
+    scroll-padding-top: 88px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-titre);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--color-sapin);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Focus visible partout, au clavier uniquement */
+  :focus-visible {
+    outline: 2px solid var(--couleur-focus, var(--color-sapin));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-citron);
+    color: var(--color-sapin);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Petits composants typographiques
+   ------------------------------------------------------------------ */
+@layer components {
+  .titre-h1 {
+    font-size: clamp(40px, 5vw, 60px);
+    line-height: 1.04;
+  }
+
+  .titre-h2 {
+    font-size: clamp(36px, 1.6rem + 1.4vw, 44px);
+    line-height: 1.1;
+  }
+
+  .surtitre {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-brume);
+  }
+
+  /* Dans une section sombre, le focus et les surtitres s'éclaircissent */
+  .section-sombre {
+    --couleur-focus: var(--color-vif);
+  }
+  .section-sombre .surtitre {
+    color: var(--color-lichen);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Animations discrètes : fondu à l'apparition au scroll.
+   Sans JavaScript (CSS scroll-driven animations). Les navigateurs qui
+   ne le gèrent pas affichent simplement le contenu.
+   ------------------------------------------------------------------ */
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .apparition {
+      animation: apparition linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
