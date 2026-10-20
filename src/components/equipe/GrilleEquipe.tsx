@@ -3,7 +3,7 @@ import { UserRound } from 'lucide-react';
 import { Grille } from '@/components/ui/Grille';
 import { IconeLinkedin } from '@/components/ui/IconesReseaux';
 import { equipe, pages, type Membre } from '@/content/site';
-import { estPlaceholder, typo } from '@/lib/utils';
+import { estPlaceholder } from '@/lib/utils';
 
 function FicheMembre({ membre }: { membre: Membre }) {
   const nomComplet = `${membre.prenom} ${membre.nom}`;
@@ -44,7 +44,6 @@ function FicheMembre({ membre }: { membre: Membre }) {
       </div>
       <p className="mt-1 text-sm leading-snug text-brume sm:text-[15px]">{membre.role}</p>
 
-      {membre.phrase && <p className="mt-3 text-sm leading-relaxed sm:text-[15px]">{typo(membre.phrase)}</p>}
     </article>
   );
 }

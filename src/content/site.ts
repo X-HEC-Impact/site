@@ -283,7 +283,6 @@ export const partenaires: { nom: string; logo?: string }[] = [
      puis indiquez son chemin, par exemple '/images/team/prenom-nom.jpg'.
    - linkedin : l'adresse complète du profil (https://www.linkedin.com/in/…).
      Tant que c'est un placeholder entre crochets, l'icône ne s'affiche pas.
-   - phrase : une ligne personnelle (facultatif).
    ------------------------------------------------------------------ */
 
 export type Membre = {
@@ -291,7 +290,6 @@ export type Membre = {
   nom: string;
   role: string;
   photo?: string;
-  phrase?: string;
   linkedin?: string;
 };
 
@@ -301,7 +299,6 @@ export const equipe: Membre[] = [
     nom: 'Honoré',
     role: 'Co-président',
     photo: '/images/team/louis-honore.webp',
-    phrase: '[PHRASE PERSO]',
     linkedin: 'https://www.linkedin.com/in/louis-honor%C3%A9-764974292/',
   },
   {
@@ -309,7 +306,6 @@ export const equipe: Membre[] = [
     nom: 'Corvaisier',
     role: 'Co-président',
     photo: '/images/team/thomas-corvaisier.webp',
-    phrase: '[PHRASE PERSO]',
     linkedin: 'https://www.linkedin.com/in/tcorvaisier/',
   },
   {
@@ -317,7 +313,6 @@ export const equipe: Membre[] = [
     nom: 'Chauveau',
     role: 'Trésorier',
     photo: '/images/team/renan-chauveau.webp',
-    phrase: '[PHRASE PERSO]',
     linkedin: 'https://www.linkedin.com/in/renan-chauveau/',
   },
   {
@@ -325,7 +320,6 @@ export const equipe: Membre[] = [
     nom: 'Rapoport',
     role: 'Responsable LEX',
     photo: '/images/team/thomas-rapoport.webp',
-    phrase: '[PHRASE PERSO]',
     linkedin: 'https://www.linkedin.com/in/thomas-rapoport-420944248/',
   },
   {
@@ -333,7 +327,6 @@ export const equipe: Membre[] = [
     nom: 'Pelissier',
     role: 'Responsable Hackathon et LEX',
     photo: '/images/team/simon-pelissier.webp',
-    phrase: '[PHRASE PERSO]',
     linkedin: 'https://www.linkedin.com/in/simon-pelissier-76b001178/',
   },
   {
@@ -341,7 +334,6 @@ export const equipe: Membre[] = [
     nom: 'Gosselin',
     role: 'Éco-terroriste, supporter actif de Total et Emirates',
     photo: '/images/team/mateo-gosselin.webp',
-    phrase: '[PHRASE PERSO]',
     linkedin: 'https://www.linkedin.com/in/mateo-gosselin/',
   },
 ];
