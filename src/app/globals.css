@@ -98,6 +98,22 @@
     color: var(--color-brume);
   }
 
+  /* Coup de marqueur vert citron sur un mot (balise <mark>) */
+  .surlignage {
+    color: var(--color-sapin);
+    background: linear-gradient(
+      transparent 14%,
+      var(--color-citron) 14%,
+      var(--color-citron) 92%,
+      transparent 92%
+    );
+    padding-inline: 0.08em;
+    margin-inline: -0.04em;
+    border-radius: 4px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
   /* Dans une section sombre, le focus et les surtitres s'éclaircissent */
   .section-sombre {
     --couleur-focus: var(--color-vif);

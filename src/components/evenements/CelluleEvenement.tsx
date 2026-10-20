@@ -3,7 +3,7 @@ import { MapPin } from 'lucide-react';
 import { LienFleche } from '@/components/ui/LienFleche';
 import { EtiquetteFormat } from './EtiquetteFormat';
 import type { Evenement } from '@/content/site';
-import { dateCourte, dateEstFixee } from '@/lib/evenements';
+import { dateCourte } from '@/lib/evenements';
 
 type Props = {
   evenement: Evenement;
@@ -14,22 +14,26 @@ type Props = {
 /** Case d'une grille d'événements : grande date, titre, lieu, format, inscription. */
 export function CelluleEvenement({ evenement, passe }: Props) {
   const { slug, type, titre, lieu, inscriptionsOuvertes } = evenement;
-  const { principal, annee } = dateCourte(evenement);
+  const { principal, annee, fixee } = dateCourte(evenement);
   const page = `/evenements/${slug}`;
 
   return (
     <article className="group relative flex h-full flex-col p-6 transition-colors duration-200 hover:bg-voile md:p-8">
       <EtiquetteFormat type={type} className="self-start" />
 
-      <p className="mt-7 flex items-baseline gap-2 font-titre text-vif-texte">
-        {dateEstFixee(evenement.date) ? (
-          <time dateTime={evenement.date} className="text-[40px] leading-none tracking-[-0.03em]">
-            {principal}
-          </time>
+      {/* Hauteur fixe : les cases restent alignées, date connue ou non. */}
+      <p className="mt-7 flex h-10 items-end gap-2 font-titre">
+        {fixee ? (
+          <>
+            <time dateTime={evenement.date} className="text-[40px] leading-none tracking-[-0.03em] text-vif-texte">
+              {principal}
+            </time>
+            <span className="text-base leading-6 text-brume">{annee}</span>
+          </>
         ) : (
-          <span className="text-[40px] leading-none tracking-[-0.03em]">{principal}</span>
+          // Date pas encore fixée : en gris, plus discret.
+          <span className="text-2xl leading-none tracking-[-0.02em] text-brume">{principal}</span>
         )}
-        {annee && <span className="text-base text-brume">{annee}</span>}
       </p>
 
       <h3 className="mt-5 text-xl leading-snug">

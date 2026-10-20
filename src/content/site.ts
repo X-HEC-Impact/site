@@ -95,6 +95,8 @@ export const accueil = {
     surtitre: 'Association du Master Entrepreneurs X-HEC',
     titre: 'Entreprendre',
     titreSuite: "pour l’impact",
+    /** Mot surligné en vert citron dans le titre (laisser vide pour aucun). */
+    titreSurligne: 'impact',
     texte:
       "X-HEC Impact rassemble, accompagne et connecte les porteurs de projets à impact social et environnemental. Learning expedition, conférences, hackathon : on crée les occasions de passer de l’idée à l’action.",
     image: '/images/textures/hero.webp',
@@ -114,15 +116,20 @@ export const accueil = {
     titre: 'Prochains',
     titreSuite: 'événements',
   },
-  president: {
-    surtitre: 'Mot du président',
+  /** Bloc « Mot de l’équipe » : le texte ici, les portraits viennent de la liste `equipe` plus bas. */
+  motEquipe: {
+    surtitre: 'Mot de l’équipe',
     titre: 'Pourquoi',
     titreSuite: 'X-HEC Impact ?',
-    citation: '[CITATION]',
-    nom: '[NOM]',
-    role: '[RÔLE]',
-    /** Chemin de la photo, par exemple '/images/team/prenom-nom.jpg'. Vide = pictogramme. */
-    photo: '',
+    citation: '[MOT DE L’ÉQUIPE]',
+    signature: 'L’équipe X-HEC Impact',
+  },
+  /** Bloc « Retour sur… » : l’événement mis en avant et ses photos (dans public/images/events/). */
+  retour: {
+    surtitre: 'Retour sur',
+    evenement: 'hackathon-impact-2025',
+    /** Ajouter les photos ainsi : { src: '/images/events/hackathon-1.jpg', alt: 'Description de la photo' } */
+    photos: [] as { src: string; alt: string }[],
   },
   cta: {
     titre: 'Un projet, un partenariat ?',
@@ -226,8 +233,6 @@ export const partenaires: { nom: string; logo?: string }[] = [
 export type Membre = { prenom: string; nom: string; role: string; photo?: string };
 
 export const equipe: Membre[] = [
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
   { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
   { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
   { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },

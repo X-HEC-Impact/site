@@ -16,7 +16,14 @@ export async function Hero() {
     <section aria-labelledby="hero-titre" className="grid border-b border-filet md:grid-cols-2">
       <div className={cx(marges, 'flex flex-col justify-center py-14 md:py-24')}>
         <Surtitre>{hero.surtitre}</Surtitre>
-        <Titre id="hero-titre" niveau="h1" debut={hero.titre} suite={hero.titreSuite} className="mt-5" />
+        <Titre
+          id="hero-titre"
+          niveau="h1"
+          debut={hero.titre}
+          suite={hero.titreSuite}
+          surligne={hero.titreSurligne}
+          className="mt-5"
+        />
         <p className="mt-6 max-w-[34rem] text-[17px]">{typo(hero.texte)}</p>
         <div className="mt-9 flex flex-wrap gap-3">
           <Bouton href="/evenements">Voir nos événements</Bouton>
@@ -37,17 +44,16 @@ export async function Hero() {
             className="object-cover"
           />
 
-          {/* Petite carte posée sur le visuel : le prochain rendez-vous. */}
+          {/* Petite carte discrète posée sur le visuel : le prochain rendez-vous. */}
           {prochain && (
-            <div className="absolute inset-x-3 bottom-3 rounded-bouton border border-white/60 bg-white/90 p-4 backdrop-blur-md sm:inset-x-auto sm:left-4 sm:bottom-4 sm:w-72 md:p-5">
-              <p className="surtitre">Prochain rendez-vous</p>
-              <p className="mt-2 font-titre text-xl leading-tight font-medium tracking-[-0.02em] text-sapin">
-                {prochain.titre}
+            <div className="absolute bottom-3 left-3 w-fit max-w-[calc(100%-1.5rem)] rounded-bouton border border-white/60 bg-white/85 px-3.5 py-3 backdrop-blur-md sm:bottom-4 sm:left-4">
+              <p className="text-[11px] leading-4 font-medium tracking-[0.06em] text-brume uppercase">
+                Prochain rendez-vous
               </p>
-              <p className="mt-1 text-sm font-medium text-vif-texte">{dateLongue(prochain)}</p>
-              <LienFleche href={`/evenements/${prochain.slug}`} className="mt-3 text-sm">
-                Découvrir
+              <LienFleche href={`/evenements/${prochain.slug}`} className="mt-1 text-[15px]">
+                {prochain.titre}
               </LienFleche>
+              <p className="text-[13px] text-ardoise">{dateLongue(prochain)}</p>
             </div>
           )}
         </div>

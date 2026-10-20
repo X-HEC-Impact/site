@@ -64,6 +64,11 @@ export function getEvenement(slug: string) {
    Affichage des dates
    ------------------------------------------------------------------ */
 
+/** Ce qu'on affiche tant que la date n'est pas fixée : « Dates à venir » ou « Date à venir ». */
+function libelleAVenir(placeholder: string) {
+  return /DATES/i.test(placeholder) ? 'Dates à venir' : 'Date à venir';
+}
+
 function versDate(iso: string) {
   return new Date(`${iso}T12:00:00Z`);
 }
@@ -75,26 +80,26 @@ function format(iso: string, options: Intl.DateTimeFormatOptions) {
 /**
  * Date courte en deux morceaux pour les grilles :
  * { principal: '13 déc.', annee: '2025' } ou { principal: '12–15 mars', annee: '2027' }.
- * Une date non fixée est affichée telle quelle : { principal: '[DATES]' }.
+ * Une date non fixée devient { principal: 'Dates à venir', fixee: false }.
  */
 export function dateCourte({ date, dateFin }: Pick<Evenement, 'date' | 'dateFin'>) {
-  if (!dateEstFixee(date)) return { principal: date, annee: '' };
+  if (!dateEstFixee(date)) return { principal: libelleAVenir(date), annee: '', fixee: false };
 
   const annee = date.slice(0, 4);
   if (!dateEstFixee(dateFin) || dateFin === date) {
-    return { principal: format(date, { day: 'numeric', month: 'short' }), annee };
+    return { principal: format(date, { day: 'numeric', month: 'short' }), annee, fixee: true };
   }
 
   const memeMois = date.slice(0, 7) === dateFin.slice(0, 7);
   const principal = memeMois
     ? `${format(date, { day: 'numeric' })}–${format(dateFin, { day: 'numeric', month: 'short' })}`
     : `${format(date, { day: 'numeric', month: 'short' })} – ${format(dateFin, { day: 'numeric', month: 'short' })}`;
-  return { principal, annee: dateFin.slice(0, 4) };
+  return { principal, annee: dateFin.slice(0, 4), fixee: true };
 }
 
-/** Date complète : « samedi 13 décembre 2025 », ou « du … au … ». */
+/** Date complète : « samedi 13 décembre 2025 », « du … au … », ou « Dates à venir ». */
 export function dateLongue({ date, dateFin }: Pick<Evenement, 'date' | 'dateFin'>) {
-  if (!dateEstFixee(date)) return date;
+  if (!dateEstFixee(date)) return libelleAVenir(date);
   const longue = (iso: string) =>
     format(iso, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   if (!dateEstFixee(dateFin) || dateFin === date) return longue(date);
