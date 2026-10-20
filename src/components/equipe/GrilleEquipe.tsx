@@ -44,11 +44,6 @@ function FicheMembre({ membre }: { membre: Membre }) {
       </div>
       <p className="mt-1 text-sm leading-snug text-brume sm:text-[15px]">{membre.role}</p>
 
-      {membre.ecole && (
-        <p className="mt-3 self-start rounded-full bg-voile px-2.5 py-1 text-xs leading-none font-medium text-sapin ring-1 ring-filet ring-inset">
-          {membre.ecole}
-        </p>
-      )}
       {membre.phrase && <p className="mt-3 text-sm leading-relaxed sm:text-[15px]">{typo(membre.phrase)}</p>}
     </article>
   );
