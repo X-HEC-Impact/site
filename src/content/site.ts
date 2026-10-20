@@ -117,14 +117,6 @@ export const accueil = {
     titre: 'Prochains',
     titreSuite: 'événements',
   },
-  /** Bloc « Mot de l’équipe » : le texte ici, les portraits viennent de la liste `equipe` plus bas. */
-  motEquipe: {
-    surtitre: 'Mot de l’équipe',
-    titre: 'Pourquoi',
-    titreSuite: 'X-HEC Impact ?',
-    citation: '[MOT DE L’ÉQUIPE]',
-    signature: 'L’équipe X-HEC Impact',
-  },
   /** Bloc « Retour sur… » : l’événement mis en avant et ses photos (dans public/images/events/). */
   retour: {
     surtitre: 'Retour sur',
@@ -264,7 +256,17 @@ export const pages = {
     surtitre: "L’équipe",
     titre: 'Les visages',
     titreSuite: 'de X-HEC Impact.',
-    description: "Les étudiantes et étudiants du Master Entrepreneurs X-HEC qui font vivre l’association.",
+    description: 'Les étudiants du Master Entrepreneurs X-HEC qui font vivre l’association.',
+    /** Surtitre au-dessus de la grille des portraits (les membres sont dans la liste `equipe`). */
+    grille: 'Les membres',
+    /** Bloc « Mot de l’équipe » (section sombre). */
+    mot: {
+      surtitre: 'Mot de l’équipe',
+      titre: 'Pourquoi',
+      titreSuite: 'X-HEC Impact ?',
+      citation: '[MOT DE L’ÉQUIPE]',
+      signature: 'L’équipe X-HEC Impact',
+    },
   },
   contact: {
     surtitre: 'Contact',
