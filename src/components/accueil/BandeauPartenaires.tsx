@@ -17,14 +17,14 @@ export function BandeauPartenaires() {
               className="group flex h-24 items-center justify-center px-4 text-center md:h-32"
             >
               {partenaire.logo ? (
-                // Logo en niveaux de gris, qui reprend ses couleurs au survol.
+                // Logo en couleur, qui grossit légèrement au survol.
                 <div className="relative h-11 w-[72%] md:h-14 md:w-[64%]">
                   <Image
                     src={partenaire.logo}
                     alt={partenaire.nom}
                     fill
                     sizes="200px"
-                    className="object-contain opacity-70 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                    className="object-contain transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
               ) : (
