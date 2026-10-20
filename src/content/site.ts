@@ -240,7 +240,12 @@ export const equipe: Membre[] = [
   { prenom: 'Simon', nom: 'Pelissier', role: '[RÔLE]', photo: '/images/team/simon-pelissier.webp' },
   { prenom: 'Thomas', nom: 'Corvaisier', role: '[RÔLE]', photo: '/images/team/thomas-corvaisier.webp' },
   { prenom: 'Thomas', nom: 'Rapoport', role: '[RÔLE]', photo: '/images/team/thomas-rapoport.webp' },
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]', photo: '/images/team/membre-6.webp' },
+  {
+    prenom: 'Matéo',
+    nom: 'Gosselin',
+    role: 'Éco-terroriste, supporter actif de Total et Emirates',
+    photo: '/images/team/mateo-gosselin.webp',
+  },
 ];
 
 /* ------------------------------------------------------------------
