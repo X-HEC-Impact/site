@@ -44,7 +44,7 @@ export function MotEquipe() {
                       alt={alt}
                       fill
                       sizes="(min-width: 1024px) 180px, (min-width: 640px) 30vw, 45vw"
-                      className="object-cover grayscale transition duration-500 group-hover:grayscale-0"
+                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center text-filet">
