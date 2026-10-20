@@ -220,23 +220,77 @@ export const partenaires: { nom: string; logo?: string }[] = [
 
 /* ------------------------------------------------------------------
    Équipe
-   Photo : déposez-la dans public/images/team/ (format carré conseillé)
-   puis indiquez son chemin, par exemple '/images/team/prenom-nom.jpg'.
+   - photo : déposez-la dans public/images/team/ (format carré conseillé)
+     puis indiquez son chemin, par exemple '/images/team/prenom-nom.jpg'.
+   - linkedin : l'adresse complète du profil (https://www.linkedin.com/in/…).
+     Tant que c'est un placeholder entre crochets, l'icône ne s'affiche pas.
+   - ecole : école d'origine, phrase : une ligne personnelle.
    ------------------------------------------------------------------ */
 
-export type Membre = { prenom: string; nom: string; role: string; photo?: string };
+export type Membre = {
+  prenom: string;
+  nom: string;
+  role: string;
+  photo?: string;
+  ecole?: string;
+  phrase?: string;
+  linkedin?: string;
+};
 
 export const equipe: Membre[] = [
-  { prenom: 'Louis', nom: 'Honore', role: '[RÔLE]', photo: '/images/team/louis-honore.webp' },
-  { prenom: 'Renan', nom: 'Chauveau', role: '[RÔLE]', photo: '/images/team/renan-chauveau.webp' },
-  { prenom: 'Simon', nom: 'Pelissier', role: '[RÔLE]', photo: '/images/team/simon-pelissier.webp' },
-  { prenom: 'Thomas', nom: 'Corvaisier', role: '[RÔLE]', photo: '/images/team/thomas-corvaisier.webp' },
-  { prenom: 'Thomas', nom: 'Rapoport', role: '[RÔLE]', photo: '/images/team/thomas-rapoport.webp' },
+  {
+    prenom: 'Louis',
+    nom: 'Honore',
+    role: '[RÔLE]',
+    photo: '/images/team/louis-honore.webp',
+    ecole: '[ÉCOLE]',
+    phrase: '[PHRASE PERSO]',
+    linkedin: '[URL LINKEDIN]',
+  },
+  {
+    prenom: 'Renan',
+    nom: 'Chauveau',
+    role: '[RÔLE]',
+    photo: '/images/team/renan-chauveau.webp',
+    ecole: '[ÉCOLE]',
+    phrase: '[PHRASE PERSO]',
+    linkedin: '[URL LINKEDIN]',
+  },
+  {
+    prenom: 'Simon',
+    nom: 'Pelissier',
+    role: '[RÔLE]',
+    photo: '/images/team/simon-pelissier.webp',
+    ecole: '[ÉCOLE]',
+    phrase: '[PHRASE PERSO]',
+    linkedin: '[URL LINKEDIN]',
+  },
+  {
+    prenom: 'Thomas',
+    nom: 'Corvaisier',
+    role: '[RÔLE]',
+    photo: '/images/team/thomas-corvaisier.webp',
+    ecole: '[ÉCOLE]',
+    phrase: '[PHRASE PERSO]',
+    linkedin: '[URL LINKEDIN]',
+  },
+  {
+    prenom: 'Thomas',
+    nom: 'Rapoport',
+    role: '[RÔLE]',
+    photo: '/images/team/thomas-rapoport.webp',
+    ecole: '[ÉCOLE]',
+    phrase: '[PHRASE PERSO]',
+    linkedin: '[URL LINKEDIN]',
+  },
   {
     prenom: 'Matéo',
     nom: 'Gosselin',
     role: 'Éco-terroriste, supporter actif de Total et Emirates',
     photo: '/images/team/mateo-gosselin.webp',
+    ecole: '[ÉCOLE]',
+    phrase: '[PHRASE PERSO]',
+    linkedin: '[URL LINKEDIN]',
   },
 ];
 
@@ -259,6 +313,40 @@ export const pages = {
     description: 'Les étudiants du Master Entrepreneurs X-HEC qui font vivre l’association.',
     /** Surtitre au-dessus de la grille des portraits (les membres sont dans la liste `equipe`). */
     grille: 'Les membres',
+    /** Photo de groupe sous le titre. Tant que src est vide, un emplacement « Photo à venir » s'affiche. */
+    photoGroupe: { src: '', alt: 'L’équipe X-HEC Impact' },
+    /** Bloc « Nos pôles » : ajoutez ou retirez des pôles librement. */
+    poles: {
+      surtitre: 'Nos pôles',
+      titre: 'Comment',
+      titreSuite: 'on s’organise.',
+      liste: [
+        { nom: '[PÔLE]', description: '[DESCRIPTION DU PÔLE]', membres: '[MEMBRES]' },
+        { nom: '[PÔLE]', description: '[DESCRIPTION DU PÔLE]', membres: '[MEMBRES]' },
+        { nom: '[PÔLE]', description: '[DESCRIPTION DU PÔLE]', membres: '[MEMBRES]' },
+      ],
+    },
+    /** Bloc « Éditions précédentes » : les équipes qui ont organisé les éditions passées. */
+    editions: {
+      surtitre: 'Les éditions précédentes',
+      titre: 'Avant nous,',
+      titreSuite: 'ils ont ouvert la voie.',
+      liste: [
+        {
+          libelle: 'Hackathon Impact, 1re édition',
+          date: 'Décembre 2025',
+          organisation: [
+            'Adama Kanate',
+            'Amélie Prudhomme',
+            'Aymeric Desbazeille',
+            'Marie-Lou Gosselet',
+            'Marc-Florent Touati',
+            'Florentin Koch',
+            'Edgar de Turckheim',
+          ],
+        },
+      ],
+    },
     /** Bloc « Mot de l’équipe » (section sombre). */
     mot: {
       surtitre: 'Mot de l’équipe',
