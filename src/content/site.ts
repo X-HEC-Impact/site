@@ -23,9 +23,11 @@ export const association = {
   /** Phrase courte du pied de page. */
   accroche:
     'Rassembler, accompagner et connecter les porteurs de projets à impact social et environnemental.',
+  /** Adresse e-mail de contact : remplacer [EMAIL] dès que l'adresse est créée. */
   email: '[EMAIL]',
-  linkedin: '[URL LINKEDIN]',
-  instagram: '[URL INSTAGRAM]',
+  linkedin: 'https://www.linkedin.com/company/x-hec-impact/',
+  /** Laisser vide ('') pour masquer Instagram partout sur le site. */
+  instagram: '',
 };
 
 /* ------------------------------------------------------------------
@@ -384,8 +386,18 @@ export const pages = {
     titre: 'Un projet, une question ?',
     titreSuite: 'Écrivez-nous.',
     description:
-      'Une question sur nos événements, une envie de participer ou de nous soutenir ? Écrivez-nous.',
-    partenariats:
-      'Entreprise, fondation, école : soutenez la LEX Europe ou un de nos événements. [MODALITÉS DE PARTENARIAT]',
+      'Une question sur nos événements, une envie de participer ou de nous soutenir ? Voici comment nous joindre.',
+    email: {
+      surtitre: 'Par e-mail',
+      texte: 'Pour toute question sur l’association et ses événements.',
+    },
+    linkedin: 'Suivez nos actualités et nos prochains événements.',
+    instagram: 'Les coulisses de nos événements.',
+    partenariats: {
+      titre: 'Partenariats',
+      texte: 'Entreprise, fondation, école : soutenez la LEX Europe ou l’un de nos événements.',
+      /** Objet pré-rempli de l'e-mail envoyé depuis la case « Partenariats ». */
+      objet: 'Partenariat avec X-HEC Impact',
+    },
   },
 };

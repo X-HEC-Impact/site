@@ -38,6 +38,12 @@ function LienReseau({ href, libelle, icone }: { href: string; libelle: string; i
 }
 
 export function PiedDePage() {
+  // Un réseau laissé vide ('') dans site.ts n'apparaît pas.
+  const reseaux = [
+    { href: association.linkedin, libelle: 'LinkedIn', icone: <IconeLinkedin className="size-4" /> },
+    { href: association.instagram, libelle: 'Instagram', icone: <IconeInstagram className="size-4" /> },
+  ].filter((reseau) => reseau.href !== '');
+
   return (
     <footer className="text-[15px]">
       <div className={cx(marges, 'grid gap-12 py-14 md:grid-cols-12 md:py-16')}>
@@ -83,22 +89,15 @@ export function PiedDePage() {
             ))}
           </Colonne>
 
-          <Colonne titre="Réseaux">
-            <li>
-              <LienReseau
-                href={association.linkedin}
-                libelle="LinkedIn"
-                icone={<IconeLinkedin className="size-4" />}
-              />
-            </li>
-            <li>
-              <LienReseau
-                href={association.instagram}
-                libelle="Instagram"
-                icone={<IconeInstagram className="size-4" />}
-              />
-            </li>
-          </Colonne>
+          {reseaux.length > 0 && (
+            <Colonne titre="Réseaux">
+              {reseaux.map((reseau) => (
+                <li key={reseau.libelle}>
+                  <LienReseau {...reseau} />
+                </li>
+              ))}
+            </Colonne>
+          )}
         </nav>
       </div>
 
