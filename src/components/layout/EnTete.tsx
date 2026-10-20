@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { Bouton } from '@/components/ui/Bouton';
-import { annonce, navigation } from '@/content/site';
+import { boutonInscription, navigation } from '@/content/site';
 import { cx } from '@/lib/utils';
 
 function estActif(pathname: string, href: string) {
@@ -64,8 +64,8 @@ export function EnTete() {
               Contact
             </Bouton>
           </span>
-          <Bouton href={annonce.lien} variante="noir" taille="petit">
-            S’inscrire
+          <Bouton href={boutonInscription.href} variante="noir" taille="petit">
+            {boutonInscription.libelle}
           </Bouton>
         </div>
 
@@ -115,8 +115,8 @@ export function EnTete() {
           <Bouton href="/contact" variante="contour" onClick={fermer}>
             Contact
           </Bouton>
-          <Bouton href={annonce.lien} variante="noir" onClick={fermer}>
-            S’inscrire
+          <Bouton href={boutonInscription.href} variante="noir" onClick={fermer}>
+            {boutonInscription.libelle}
           </Bouton>
         </div>
       </div>

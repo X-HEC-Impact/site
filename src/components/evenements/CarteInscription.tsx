@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { CalendarDays, Clock, MapPin, Tag } from 'lucide-react';
+import { CalendarDays, Clock, LockKeyhole, MapPin, Tag } from 'lucide-react';
 import { FormulaireInscription } from '@/components/evenements/FormulaireInscription';
 import { formats, type Evenement } from '@/content/site';
 import { dateLongue } from '@/lib/dates';
@@ -33,9 +33,16 @@ export function CarteInscription({ evenement, passe }: { evenement: Evenement; p
       </dl>
 
       <div id="inscription" className="pt-6">
-        <h2 className="font-titre text-xl font-medium tracking-[-0.02em] text-sapin">Inscription</h2>
+        <h2 className="font-titre text-xl font-medium tracking-[-0.02em] text-sapin">
+          {evenement.reserveA ? 'Participation' : 'Inscription'}
+        </h2>
 
-        {passe ? (
+        {evenement.reserveA ? (
+          <p className="mt-3 flex items-start gap-2 rounded-bouton bg-voile p-4 text-[15px]">
+            <LockKeyhole aria-hidden className="mt-0.5 size-4 shrink-0 text-brume" />
+            {evenement.reserveA}
+          </p>
+        ) : passe ? (
           <p className="mt-3 flex items-center gap-2 rounded-bouton bg-voile p-4 text-[15px]">
             <Clock aria-hidden className="size-4 shrink-0 text-brume" />
             Cet événement est terminé.

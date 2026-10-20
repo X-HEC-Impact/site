@@ -65,14 +65,19 @@ export const formats: Record<
 
 /* ------------------------------------------------------------------
    Barre d'annonce (tout en haut du site)
-   Le bouton noir « S'inscrire » du menu pointe vers le même lien.
    ------------------------------------------------------------------ */
 
 export const annonce = {
   afficher: true,
   texte: 'Prochain événement : LEX Europe, [DATES].',
-  libelleLien: "S’inscrire",
-  lien: '/evenements/lex-europe#inscription',
+  libelleLien: 'Découvrir',
+  lien: '/evenements/lex-europe',
+};
+
+/** Bouton noir à droite du menu. */
+export const boutonInscription = {
+  libelle: 'S’inscrire',
+  href: '/evenements',
 };
 
 /* ------------------------------------------------------------------
@@ -147,6 +152,12 @@ export const accueil = {
    - Un événement passe automatiquement dans « Événements passés »
      le lendemain de sa date (ou de sa date de fin).
    - image : facultatif, par exemple '/images/events/mon-slug.jpg'.
+   - inscriptionsOuvertes : true affiche le formulaire d'inscription.
+   - reserveA : facultatif. Pour un événement interne, sans inscription
+     publique (ex. la LEX) : le texte remplace le formulaire.
+   - Blocs facultatifs pour une page plus riche : accroche (sous le
+     titre), chiffres (chiffres clés), etapes (itinéraire), rencontres
+     (cartes « Le programme ») et secteurs.
    ------------------------------------------------------------------ */
 
 export type Evenement = {
@@ -160,23 +171,51 @@ export type Evenement = {
   programme?: { quand: string; quoi: string }[];
   image?: string;
   inscriptionsOuvertes: boolean;
+  reserveA?: string;
+  accroche?: string;
+  chiffres?: { valeur: string; libelle: string }[];
+  etapes?: { ville: string; texte: string }[];
+  rencontres?: { titre: string; texte: string }[];
+  secteurs?: string;
 };
 
 export const evenements: Evenement[] = [
   {
+    // Contenu tiré du dossier de partenariat « Learning Expedition en Europe ».
     slug: 'lex-europe',
     type: 'lex',
     titre: 'LEX Europe',
     date: '[DATES]',
-    lieu: '[VILLES ÉTAPES]',
-    description:
-      "Une learning expedition à travers l’Europe, pensée comme une alternative à la LEX San Francisco, à la rencontre des entreprises et des acteurs qui font l’impact. [PRÉSENTATION DÉTAILLÉE]",
-    programme: [
-      { quand: '[JOUR 1]', quoi: '[ÉTAPE ET VISITES]' },
-      { quand: '[JOUR 2]', quoi: '[ÉTAPE ET VISITES]' },
-      { quand: '[JOUR 3]', quoi: '[ÉTAPE ET VISITES]' },
+    lieu: 'Lille · Amsterdam · Munich · Zurich · Milan',
+    accroche:
+      '5 pays · 10 jours · 10 étudiants du Master X-HEC Entrepreneurs, en train au départ de Paris.',
+    description: `Une Learning Expedition organisée de A à Z par les étudiants du Master X-HEC Entrepreneurs, à la découverte de l’écosystème startup européen et à la rencontre de ses acteurs majeurs. Un projet entrepreneurial en soi : on démarche, on négocie, on s’adapte.
+
+Pourquoi l’Europe ? L’Union européenne fait de l’innovation et de la compétitivité la clé de son indépendance. Avec le Pacte vert et la neutralité carbone visée en 2050, elle fait naître les startups de demain. Talents, grandes écoles, fonds et industriels : chaque pays apporte ses atouts, à quelques heures de train.
+
+Un voyage à faible impact carbone : 19,3 kg de CO2e par étudiant pour 10 jours en train, contre plus de 3 000 kg pour un vol transatlantique.`,
+    chiffres: [
+      { valeur: '10', libelle: 'étudiants X-HEC Entrepreneurs' },
+      { valeur: '5', libelle: 'pays traversés' },
+      { valeur: '10', libelle: 'jours de rencontres' },
+      { valeur: '100 %', libelle: 'en train, au départ de Paris' },
     ],
-    inscriptionsOuvertes: true,
+    etapes: [
+      { ville: 'Lille', texte: 'EuraTechnologies, incubateur majeur de la tech en France.' },
+      { ville: 'Amsterdam', texte: 'Entreprises et ONG à impact : Fairphone, The Ocean Cleanup et d’autres.' },
+      { ville: 'Munich', texte: 'UnternehmerTUM, incubateur allemand de renommée mondiale.' },
+      { ville: 'Zurich', texte: 'ETH Zurich, l’école polytechnique fédérale suisse.' },
+      { ville: 'Milan', texte: 'PoliHub, pôle d’innovation du Politecnico di Milano.' },
+    ],
+    rencontres: [
+      { titre: 'Incubateurs', texte: 'Comment chaque pays fait-il naître ses startups ?' },
+      { titre: 'Fonds d’investissement', texte: 'Comment s’organisent les financements à l’échelle européenne ?' },
+      { titre: 'Entreprises et startups', texte: 'Des visites dans les secteurs dynamiques et stratégiques.' },
+      { titre: 'Entrepreneurs', texte: 'Échanger avec des fondateurs et des repreneurs inspirants.' },
+    ],
+    secteurs: 'impact, tech, food, retail, logistique, mode, santé, défense…',
+    inscriptionsOuvertes: false,
+    reserveA: 'Ce voyage est réservé aux étudiants du Master X-HEC Entrepreneurs.',
   },
   {
     slug: 'conference-1',

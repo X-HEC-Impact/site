@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { AppelFinal } from '@/components/AppelFinal';
+import { ChiffresCles, Itineraire, Rencontres } from '@/components/evenements/BlocsEvenement';
 import { CarteInscription } from '@/components/evenements/CarteInscription';
 import { EtiquetteFormat } from '@/components/evenements/EtiquetteFormat';
 import { marges } from '@/components/ui/Section';
@@ -51,6 +52,7 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
           {passe && <span className="text-sm text-brume">Événement passé</span>}
         </div>
         <Titre niveau="h1" debut={debut} suite={suite} className="mt-5 max-w-3xl" />
+        {evenement.accroche && <p className="mt-5 max-w-2xl text-[17px] md:text-lg">{typo(evenement.accroche)}</p>}
       </header>
 
       {/* Visuel : la photo de l'événement, sinon la texture de son format */}
@@ -67,6 +69,8 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
         </div>
       </div>
 
+      {evenement.chiffres && evenement.chiffres.length > 0 && <ChiffresCles chiffres={evenement.chiffres} />}
+
       {/* Deux colonnes : contenu à gauche, carte collante à droite */}
       <div className="grid border-b border-filet md:grid-cols-12">
         <div className={cx(marges, 'py-14 md:col-span-7 md:py-20')}>
@@ -80,6 +84,16 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
               ))}
             </div>
           </section>
+
+          {evenement.etapes && evenement.etapes.length > 0 && <Itineraire etapes={evenement.etapes} />}
+
+          {evenement.rencontres && evenement.rencontres.length > 0 && (
+            <Rencontres
+              rencontres={evenement.rencontres}
+              secteurs={evenement.secteurs}
+              avecAncre={!evenement.programme?.length}
+            />
+          )}
 
           {evenement.programme && evenement.programme.length > 0 && (
             <section id="programme" aria-labelledby="programme-titre" className="mt-14">

@@ -13,7 +13,7 @@ type Props = {
 
 /** Case d'une grille d'événements : grande date, titre, lieu, format, inscription. */
 export function CelluleEvenement({ evenement, passe }: Props) {
-  const { slug, type, titre, lieu, inscriptionsOuvertes } = evenement;
+  const { slug, type, titre, lieu, inscriptionsOuvertes, reserveA } = evenement;
   const { principal, annee, fixee } = dateCourte(evenement);
   const page = `/evenements/${slug}`;
 
@@ -51,6 +51,8 @@ export function CelluleEvenement({ evenement, passe }: Props) {
       <div className="relative mt-auto pt-8 text-[15px]">
         {passe ? (
           <LienFleche href={page}>Revoir l’événement</LienFleche>
+        ) : reserveA ? (
+          <LienFleche href={page}>Découvrir</LienFleche>
         ) : inscriptionsOuvertes ? (
           <LienFleche href={`${page}#inscription`}>S’inscrire</LienFleche>
         ) : (

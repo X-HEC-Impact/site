@@ -19,16 +19,23 @@ export async function SectionFormats() {
   const { aVenir } = await getEvenements();
 
   // Chaque carte pointe vers le prochain événement du format, sinon vers l'agenda filtré.
-  const liens = (type: FormatEvenement) => {
+  // Pour un événement interne (ex. la LEX), « S'inscrire » devient « Découvrir ».
+  const puces = (type: FormatEvenement) => {
     const prochain = aVenir.find((e) => e.type === type);
     if (!prochain) {
       const agenda = `/evenements?format=${type}`;
-      return { programme: agenda, inscription: agenda };
+      return [
+        { libelle: 'Programme', href: agenda },
+        { libelle: 'S’inscrire', href: agenda },
+      ];
     }
-    return {
-      programme: `/evenements/${prochain.slug}#programme`,
-      inscription: `/evenements/${prochain.slug}#inscription`,
-    };
+    const page = `/evenements/${prochain.slug}`;
+    return [
+      { libelle: 'Programme', href: `${page}#programme` },
+      prochain.reserveA
+        ? { libelle: 'Découvrir', href: page }
+        : { libelle: 'S’inscrire', href: `${page}#inscription` },
+    ];
   };
 
   return (
@@ -55,7 +62,6 @@ export async function SectionFormats() {
         {(Object.keys(formats) as FormatEvenement[]).map((type) => {
           const format = formats[type];
           const Icone = icones[type];
-          const { programme, inscription } = liens(type);
 
           return (
             <li
@@ -73,10 +79,7 @@ export async function SectionFormats() {
               <p className="mt-2">{typo(format.texte)}</p>
 
               <ul className="mt-6 self-start border-t border-sapin/15">
-                {[
-                  { libelle: 'Programme', href: programme },
-                  { libelle: 'S’inscrire', href: inscription },
-                ].map((puce) => (
+                {puces(type).map((puce) => (
                   <li key={puce.libelle} className="border-b border-sapin/15">
                     <Lien
                       href={puce.href}

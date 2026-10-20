@@ -20,7 +20,12 @@ export async function inscrire(_etat: EtatInscription, formData: FormData): Prom
   const donnees = resultat.data;
 
   const evenement = getEvenement(donnees.event_slug);
-  if (!evenement || !evenement.inscriptionsOuvertes || (await evenementEstPasse(evenement.slug))) {
+  if (
+    !evenement ||
+    !evenement.inscriptionsOuvertes ||
+    evenement.reserveA ||
+    (await evenementEstPasse(evenement.slug))
+  ) {
     return { statut: 'erreur', message: 'Les inscriptions à cet événement ne sont pas ouvertes.' };
   }
 
