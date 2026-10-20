@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Grille } from '@/components/ui/Grille';
 import { accueil, partenaires } from '@/content/site';
 
 export function BandeauPartenaires() {
@@ -9,33 +8,38 @@ export function BandeauPartenaires() {
         {accueil.partenaires.surtitre}
       </h2>
 
-      <div className="border-t border-filet">
-        <Grille colonnes="grid-cols-2 md:grid-cols-4">
-          {partenaires.map((partenaire) => (
-            <li
-              key={partenaire.nom}
-              className="group flex h-24 items-center justify-center px-4 text-center md:h-32"
+      {/* Les logos défilent en boucle : la liste est affichée deux fois,
+          et la piste recule de la moitié de sa largeur avant de recommencer. */}
+      <div className="overflow-hidden pb-10 md:pb-14">
+        <div className="defilement-piste flex w-max">
+          {[0, 1].map((copie) => (
+            <ul
+              key={copie}
+              aria-hidden={copie === 1 || undefined}
+              className="defilement-liste flex shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24"
             >
-              {partenaire.logo ? (
-                // Logo en couleur, qui grossit légèrement au survol.
-                <div className="relative h-11 w-[72%] md:h-14 md:w-[64%]">
-                  <Image
-                    src={partenaire.logo}
-                    alt={partenaire.nom}
-                    fill
-                    sizes="200px"
-                    className="object-contain transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-              ) : (
-                // Sans logo : le nom, en gris, en attendant le fichier.
-                <span className="font-titre text-lg font-medium tracking-[-0.02em] text-brume transition-colors duration-300 group-hover:text-sapin md:text-xl">
-                  {partenaire.nom}
-                </span>
-              )}
-            </li>
+              {partenaires.map((partenaire) => (
+                <li key={partenaire.nom} className="flex h-16 shrink-0 items-center md:h-24">
+                  {partenaire.logo ? (
+                    <Image
+                      src={partenaire.logo}
+                      alt={partenaire.nom}
+                      width={0}
+                      height={0}
+                      sizes="480px"
+                      className="h-full w-auto object-contain"
+                    />
+                  ) : (
+                    // Sans logo : le nom, en gris, en attendant le fichier.
+                    <span className="font-titre text-lg font-medium tracking-[-0.02em] whitespace-nowrap text-brume md:text-xl">
+                      {partenaire.nom}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
           ))}
-        </Grille>
+        </div>
       </div>
     </section>
   );

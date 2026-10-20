@@ -149,6 +149,37 @@
   }
 }
 
+/* ------------------------------------------------------------------
+   Bandeau de logos qui défile (accueil). Si l'utilisateur limite les
+   animations, les logos s'affichent une seule fois, centrés, sans bouger.
+   ------------------------------------------------------------------ */
+@keyframes defilement {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .defilement-piste {
+    animation: defilement 50s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .defilement-piste {
+    width: auto;
+  }
+  .defilement-liste {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding-inline: 20px;
+  }
+  .defilement-liste[aria-hidden] {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

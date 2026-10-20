@@ -111,7 +111,7 @@ export const accueil = {
     imageAlt: '',
   },
   partenaires: {
-    surtitre: 'Écoles et partenaires qui nous accompagnent',
+    surtitre: 'Partenaires qui nous accompagnent',
   },
   formats: {
     surtitre: "Ce qu’on fait",
@@ -332,7 +332,7 @@ export const equipe: Membre[] = [
   {
     prenom: 'Matéo',
     nom: 'Gosselin',
-    role: 'Éco-terroriste, supporter actif de Total et Emirates',
+    role: 'Responsable conférences',
     photo: '/images/team/mateo-gosselin.webp',
     linkedin: 'https://www.linkedin.com/in/mateo-gosselin/',
   },
