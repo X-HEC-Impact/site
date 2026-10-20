@@ -240,48 +240,48 @@ export type Membre = {
 export const equipe: Membre[] = [
   {
     prenom: 'Louis',
-    nom: 'Honore',
-    role: '[RÔLE]',
+    nom: 'Honoré',
+    role: 'Co-président',
     photo: '/images/team/louis-honore.webp',
     ecole: '[ÉCOLE]',
     phrase: '[PHRASE PERSO]',
-    linkedin: '[URL LINKEDIN]',
-  },
-  {
-    prenom: 'Renan',
-    nom: 'Chauveau',
-    role: '[RÔLE]',
-    photo: '/images/team/renan-chauveau.webp',
-    ecole: '[ÉCOLE]',
-    phrase: '[PHRASE PERSO]',
-    linkedin: '[URL LINKEDIN]',
-  },
-  {
-    prenom: 'Simon',
-    nom: 'Pelissier',
-    role: '[RÔLE]',
-    photo: '/images/team/simon-pelissier.webp',
-    ecole: '[ÉCOLE]',
-    phrase: '[PHRASE PERSO]',
-    linkedin: '[URL LINKEDIN]',
+    linkedin: 'https://www.linkedin.com/in/louis-honor%C3%A9-764974292/',
   },
   {
     prenom: 'Thomas',
     nom: 'Corvaisier',
-    role: '[RÔLE]',
+    role: 'Co-président',
     photo: '/images/team/thomas-corvaisier.webp',
     ecole: '[ÉCOLE]',
     phrase: '[PHRASE PERSO]',
-    linkedin: '[URL LINKEDIN]',
+    linkedin: 'https://www.linkedin.com/in/tcorvaisier/',
+  },
+  {
+    prenom: 'Renan',
+    nom: 'Chauveau',
+    role: 'Trésorier',
+    photo: '/images/team/renan-chauveau.webp',
+    ecole: '[ÉCOLE]',
+    phrase: '[PHRASE PERSO]',
+    linkedin: 'https://www.linkedin.com/in/renan-chauveau/',
   },
   {
     prenom: 'Thomas',
     nom: 'Rapoport',
-    role: '[RÔLE]',
+    role: 'Responsable LEX',
     photo: '/images/team/thomas-rapoport.webp',
     ecole: '[ÉCOLE]',
     phrase: '[PHRASE PERSO]',
-    linkedin: '[URL LINKEDIN]',
+    linkedin: 'https://www.linkedin.com/in/thomas-rapoport-420944248/',
+  },
+  {
+    prenom: 'Simon',
+    nom: 'Pelissier',
+    role: 'Responsable Hackathon et LEX',
+    photo: '/images/team/simon-pelissier.webp',
+    ecole: '[ÉCOLE]',
+    phrase: '[PHRASE PERSO]',
+    linkedin: 'https://www.linkedin.com/in/simon-pelissier-76b001178/',
   },
   {
     prenom: 'Matéo',
@@ -290,7 +290,7 @@ export const equipe: Membre[] = [
     photo: '/images/team/mateo-gosselin.webp',
     ecole: '[ÉCOLE]',
     phrase: '[PHRASE PERSO]',
-    linkedin: '[URL LINKEDIN]',
+    linkedin: 'https://www.linkedin.com/in/mateo-gosselin/',
   },
 ];
 
@@ -313,8 +313,6 @@ export const pages = {
     description: 'Les étudiants du Master Entrepreneurs X-HEC qui font vivre l’association.',
     /** Surtitre au-dessus de la grille des portraits (les membres sont dans la liste `equipe`). */
     grille: 'Les membres',
-    /** Photo de groupe sous le titre. Tant que src est vide, un emplacement « Photo à venir » s'affiche. */
-    photoGroupe: { src: '', alt: 'L’équipe X-HEC Impact' },
     /** Bloc « Nos pôles » : ajoutez ou retirez des pôles librement. */
     poles: {
       surtitre: 'Nos pôles',
