@@ -110,6 +110,7 @@ export const accueil = {
     surtitre: "Ce qu’on fait",
     titre: 'Trois formats.',
     titreSuite: 'Un même objectif.',
+    intro: 'Des rencontres pour apprendre, débattre et passer à l’action.',
   },
   agenda: {
     surtitre: 'Agenda',
@@ -201,7 +202,7 @@ export const evenements: Evenement[] = [
     date: '2025-12-13',
     lieu: 'Mouzaïa, Paris 19e',
     description:
-      "La première édition du Hackathon Impact : une journée pour imaginer des solutions autour d’un objectif de développement durable rarement abordé. [BILAN DE L’ÉDITION]",
+      'Un marathon de 12 h non-stop pour réinventer l’impact. Étudiants et jeunes actifs aux profils variés sont passés en une journée de l’exploration des problèmes à des solutions concrètes, accompagnés par des alumni X-HEC et des entrepreneurs expérimentés, jusqu’au pitch devant un jury exigeant.',
     inscriptionsOuvertes: false,
   },
 ];
@@ -209,19 +210,20 @@ export const evenements: Evenement[] = [
 /* ------------------------------------------------------------------
    Écoles et partenaires
    Pour afficher un logo, déposez le fichier dans public/images/partners/
-   et indiquez son chemin, par exemple logo: '/images/partners/hec.svg'.
+   et indiquez son chemin, par exemple logo: '/images/partners/hec-paris.png'.
+   Format conseillé : PNG à fond transparent ou SVG.
    Sans logo, le nom s'affiche à la place.
    ------------------------------------------------------------------ */
 
 export const partenaires: { nom: string; logo?: string }[] = [
-  { nom: 'HEC Paris' },
-  { nom: 'École polytechnique' },
-  { nom: 'AgroParisTech' },
-  { nom: 'ISAE-SUPAERO' },
-  { nom: 'INSA Lyon' },
-  { nom: 'UniLaSalle' },
-  { nom: 'Climate House' },
-  { nom: 'EFCI' },
+  { nom: 'HEC Paris', logo: '/images/partners/hec-paris.png' },
+  { nom: 'École polytechnique', logo: '/images/partners/ecole-polytechnique.png' },
+  { nom: 'AgroParisTech', logo: '/images/partners/agroparistech.png' },
+  { nom: 'ISAE-SUPAERO', logo: '/images/partners/isae-supaero.png' },
+  { nom: 'INSA Lyon', logo: '/images/partners/insa-lyon.png' },
+  { nom: 'UniLaSalle', logo: '/images/partners/unilasalle.png' },
+  { nom: 'Climate House', logo: '/images/partners/climate-house.png' },
+  { nom: 'EFCI', logo: '/images/partners/efci.png' },
 ];
 
 /* ------------------------------------------------------------------
@@ -233,12 +235,12 @@ export const partenaires: { nom: string; logo?: string }[] = [
 export type Membre = { prenom: string; nom: string; role: string; photo?: string };
 
 export const equipe: Membre[] = [
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
-  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]' },
+  { prenom: 'Louis', nom: 'Honore', role: '[RÔLE]', photo: '/images/team/louis-honore.webp' },
+  { prenom: 'Renan', nom: 'Chauveau', role: '[RÔLE]', photo: '/images/team/renan-chauveau.webp' },
+  { prenom: 'Simon', nom: 'Pelissier', role: '[RÔLE]', photo: '/images/team/simon-pelissier.webp' },
+  { prenom: 'Thomas', nom: 'Corvaisier', role: '[RÔLE]', photo: '/images/team/thomas-corvaisier.webp' },
+  { prenom: 'Thomas', nom: 'Rapoport', role: '[RÔLE]', photo: '/images/team/thomas-rapoport.webp' },
+  { prenom: '[PRÉNOM]', nom: '[NOM]', role: '[RÔLE]', photo: '/images/team/membre-6.webp' },
 ];
 
 /* ------------------------------------------------------------------

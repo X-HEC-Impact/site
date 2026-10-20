@@ -45,6 +45,9 @@ export async function SectionFormats() {
           suite={accueil.formats.titreSuite}
           className="mt-4"
         />
+        {accueil.formats.intro && (
+          <p className="mt-4 max-w-xl text-[17px] text-white/75">{typo(accueil.formats.intro)}</p>
+        )}
       </div>
 
       {/* grid-rows-subgrid : titres, textes, puces et visuels restent alignés d'une carte à l'autre. */}

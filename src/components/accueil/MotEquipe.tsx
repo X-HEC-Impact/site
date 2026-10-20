@@ -5,7 +5,7 @@ import { LienFleche } from '@/components/ui/LienFleche';
 import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
 import { accueil, equipe } from '@/content/site';
-import { cx, typo } from '@/lib/utils';
+import { cx, estPlaceholder, typo } from '@/lib/utils';
 
 /** Bloc « Mot de l'équipe » : un texte commun à gauche, les portraits de l'équipe à droite. */
 export function MotEquipe() {
@@ -34,13 +34,14 @@ export function MotEquipe() {
         <Grille colonnes="grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" ariaLabel="L’équipe">
           {equipe.map((membre, index) => {
             const nomComplet = `${membre.prenom} ${membre.nom}`;
+            const alt = estPlaceholder(membre.prenom) ? 'Portrait d’un membre de l’équipe' : `Portrait de ${nomComplet}`;
             return (
               <li key={index} className="group p-4 lg:p-5">
                 <div className="relative aspect-square overflow-hidden rounded-bouton border border-filet bg-white">
                   {membre.photo ? (
                     <Image
                       src={membre.photo}
-                      alt={`Portrait de ${nomComplet}`}
+                      alt={alt}
                       fill
                       sizes="(min-width: 1024px) 180px, (min-width: 640px) 30vw, 45vw"
                       className="object-cover grayscale transition duration-500 group-hover:grayscale-0"
