@@ -96,7 +96,7 @@
 
   .titre-h1 {
     font-size: clamp(40px, 5vw, 60px);
-    line-height: 1.04;
+    line-height: 1.08;
   }
 
   .titre-h2 {

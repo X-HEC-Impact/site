@@ -5,6 +5,7 @@ import { CopierEmail } from "@/components/contact/CopierEmail";
 import { Bouton } from "@/components/ui/Bouton";
 import { IconeInstagram, IconeLinkedin } from "@/components/ui/IconesReseaux";
 import { Lien } from "@/components/ui/Lien";
+import { PhotoFond } from "@/components/ui/PhotoFond";
 import { marges } from "@/components/ui/Section";
 import { EnTetePage } from "@/components/ui/EnTetePage";
 import { association, pages } from "@/content/site";
@@ -23,12 +24,15 @@ function Reseau({
   texte,
   href,
   libelleLien,
+  fond,
 }: {
   icone: ReactNode;
   titre: string;
   texte: string;
   href?: string;
   libelleLien?: string;
+  /** Couleur pastel de la carte. */
+  fond: string;
 }) {
   const contenu = (
     <>
@@ -55,18 +59,18 @@ function Reseau({
     </>
   );
   const classes =
-    "flex items-start gap-5 rounded-bouton border border-filet bg-voile p-5 md:p-6";
+    "flex items-start gap-5 rounded-bouton p-5 text-ardoise md:p-6";
   return (
     <li>
       {href ? (
         <Lien
           href={href}
-          className={cx(classes, "group transition-colors hover:bg-white")}
+          className={cx(classes, fond, "group transition-[filter] hover:brightness-[0.97]")}
         >
           {contenu}
         </Lien>
       ) : (
-        <div className={classes}>{contenu}</div>
+        <div className={cx(classes, fond)}>{contenu}</div>
       )}
     </li>
   );
@@ -80,6 +84,7 @@ export default function PageContact() {
 
   const reseaux = [
     linkedin && {
+      fond: "bg-menthe",
       icone: <IconeLinkedin className="size-5" />,
       titre: "LinkedIn",
       texte: pages.contact.linkedin,
@@ -87,6 +92,7 @@ export default function PageContact() {
       libelleLien: "Voir la page X-HEC Impact",
     },
     instagram && {
+      fond: "bg-ciel",
       icone: <IconeInstagram className="size-5" />,
       titre: "Instagram",
       texte: pages.contact.instagram,
@@ -104,11 +110,10 @@ export default function PageContact() {
         description={description}
         photo="50% 45%"
         photoSrc="/images/contact/vallee.webp"
-        fonduBas={false}
       />
 
       {/* L'e-mail, en grand, et les réseaux à côté */}
-      <div className="border-b border-filet">
+      <div>
         <div
           className={cx(
             marges,
@@ -157,21 +162,32 @@ export default function PageContact() {
         </div>
       </div>
 
-      {/* Partenariats : bandeau pleine largeur */}
+      {/* Partenariats : bandeau photo pleine largeur, comme la bannière finale des autres pages */}
       <section
         aria-labelledby="partenariats-titre"
-        className={cx(marges, "border-b border-filet bg-menthe py-14 md:py-16")}
+        className={cx(marges, "section-sombre relative isolate overflow-hidden py-20 md:py-28")}
       >
+        <PhotoFond
+          src="/images/contact/vallee.webp"
+          position="70% 92%"
+          voile="fort"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-sapin to-transparent"
+        />
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex items-start gap-5">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-bouton bg-white text-sapin ring-1 ring-filet">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-bouton bg-white text-sapin">
               <Handshake aria-hidden className="size-5" strokeWidth={1.75} />
             </span>
             <div>
-              <h2 id="partenariats-titre" className="text-2xl">
+              <h2 id="partenariats-titre" className="text-3xl text-white md:text-4xl">
                 {partenariats.titre}
               </h2>
-              <p className="mt-2 max-w-xl">{typo(partenariats.texte)}</p>
+              <p className="mt-3 max-w-xl text-[17px] text-white/90">
+                {typo(partenariats.texte)}
+              </p>
             </div>
           </div>
           <Bouton
