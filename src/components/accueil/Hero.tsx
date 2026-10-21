@@ -36,14 +36,14 @@ export function Hero() {
             ) : (
               <>
                 {suite.slice(0, position)}
-                <span className="relative inline-block text-sapin">
+                <span className="relative isolate inline-block text-sapin">
                   {mot}
                   {/* Trait tracé à la main sous le mot */}
                   <svg
                     aria-hidden
                     viewBox="0 0 300 24"
                     preserveAspectRatio="none"
-                    className="absolute -bottom-[0.08em] left-[-1%] h-[0.14em] w-[102%] text-vif"
+                    className="absolute -bottom-[0.06em] left-[-1%] -z-10 h-[0.14em] w-[102%] text-vif"
                   >
                     <path
                       d="M3 15 C 60 6, 130 4, 190 9 S 270 16, 297 8"
@@ -63,7 +63,7 @@ export function Hero() {
       </div>
 
       {/* À droite, calé sur le bas du titre : le texte et les boutons */}
-      <div className="max-w-xl lg:col-span-5 lg:max-w-none lg:pb-1">
+      <div className="max-w-xl lg:col-span-5 lg:max-w-none lg:pb-[0.9rem]">
         <p className="text-[17px] leading-relaxed">{typo(hero.texte)}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Bouton href="/evenements">Voir nos événements</Bouton>

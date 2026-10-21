@@ -10,10 +10,10 @@ export function AppelFinal() {
 
   return (
     <section aria-labelledby="cta-titre" className="relative overflow-hidden border-b border-filet">
-      {/* Texture floue en fond, à droite, qui s'estompe vers le texte. */}
+      {/* Le dessin de la ligne de train, discret, qui s'estompe vers le texte. */}
       <div
         aria-hidden
-        className="absolute inset-y-0 right-0 hidden w-1/2 [mask-image:linear-gradient(to_left,black_20%,transparent)] md:block"
+        className="absolute inset-y-0 right-0 hidden w-[45%] opacity-60 [mask-image:linear-gradient(to_left,black_10%,transparent_85%)] md:block"
       >
         <Motif type="lex" />
       </div>

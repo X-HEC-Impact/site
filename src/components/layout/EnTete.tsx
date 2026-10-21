@@ -34,7 +34,7 @@ export function EnTete({ inscription }: Props) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-filet bg-white/90 backdrop-blur-md">
-      <div className="flex h-[68px] items-center justify-between gap-6 px-5 md:px-8">
+      <div className="flex h-[68px] items-center justify-between gap-6 px-5 md:grid md:grid-cols-[1fr_auto_1fr] md:px-8">
         <Logo />
 
         {/* Menu bureau (768 px et plus) */}
@@ -62,13 +62,7 @@ export function EnTete({ inscription }: Props) {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-2.5 md:flex">
-          {/* Entre 768 et 1024 px, on garde la place pour le menu : « Contact » y est déjà. */}
-          <span className="hidden lg:block">
-            <Bouton href="/contact" variante="contour" taille="petit">
-              Contact
-            </Bouton>
-          </span>
+        <div className="hidden items-center gap-2.5 justify-self-end md:flex">
           {inscription && (
             <Bouton href={inscription.href} variante="noir" taille="petit">
               {inscription.libelle}

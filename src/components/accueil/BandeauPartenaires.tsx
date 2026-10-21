@@ -9,28 +9,32 @@ import { accueil, partenaires } from '@/content/site';
 export function BandeauPartenaires() {
   return (
     <section aria-labelledby="partenaires-titre" className="border-b border-filet py-16 md:py-20">
-      <h2 id="partenaires-titre" className="surtitre px-5 text-center">
+      <h2
+        id="partenaires-titre"
+        className="flex items-center justify-center gap-2.5 px-5 font-sans text-sm font-medium tracking-normal text-ardoise"
+      >
+        <span aria-hidden className="size-2 rounded-full bg-vif" />
         {accueil.partenaires.surtitre}
       </h2>
 
       {/* La liste est affichée deux fois ; la piste recule de la moitié de sa
           largeur (= une liste) puis recommence, sans coupure visible. */}
-      <div className="mt-10 overflow-hidden md:mt-12">
+      <div className="mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] md:mt-12">
         <div className="defilement-piste flex w-max">
           {[0, 1].map((copie) => (
             <ul
               key={copie}
               aria-hidden={copie === 1 || undefined}
-              className="defilement-liste flex shrink-0 items-center gap-14 pr-14 md:gap-20 md:pr-20"
+              className="defilement-liste flex shrink-0 items-center gap-12 pr-12 md:gap-16 md:pr-16"
             >
               {partenaires.map((partenaire) => (
-                <li key={partenaire.nom} className="relative h-14 w-40 shrink-0 md:h-20 md:w-56">
+                <li key={partenaire.nom} className="relative h-12 w-36 shrink-0 md:h-14 md:w-44">
                   {partenaire.logo ? (
                     <Image
                       src={partenaire.logo}
                       alt={partenaire.nom}
                       fill
-                      sizes="(min-width: 768px) 224px, 160px"
+                      sizes="(min-width: 768px) 176px, 144px"
                       loading="eager"
                       className="object-contain"
                     />

@@ -45,7 +45,15 @@ export function CelluleEvenement({ evenement, passe }: Props) {
 
       <p className="mt-2 flex items-start gap-1.5 text-[15px]">
         <MapPin aria-hidden className="mt-1 size-4 shrink-0 text-brume" />
-        {lieu}
+        {/* Chaque lieu reste entier : les « · » ne se retrouvent jamais en début de ligne. */}
+        <span>
+          {lieu.split(' · ').map((morceau, i) => (
+            <span key={morceau} className="whitespace-nowrap">
+              {i > 0 && ' · '}
+              {morceau}
+            </span>
+          ))}
+        </span>
       </p>
 
       <div className="relative mt-auto pt-8 text-[15px]">

@@ -5,6 +5,7 @@ import { LienFleche } from '@/components/ui/LienFleche';
 import { EnTeteSection, Section, ecart } from '@/components/ui/Section';
 import { accueil } from '@/content/site';
 import { getEvenements } from '@/lib/evenements';
+import { cx } from '@/lib/utils';
 
 const NOMBRE_MAX = 3;
 
@@ -30,7 +31,7 @@ export async function ProchainsEvenements() {
 
         {/* S'il reste de la place, une case renvoie vers l'agenda complet. */}
         {affiches.length < NOMBRE_MAX && (
-          <li className="bg-voile">
+          <li className={cx('bg-voile', affiches.length === 1 && 'md:col-span-2', affiches.length === 0 && 'md:col-span-3')}>
             <div className="flex h-full flex-col p-6 md:p-8">
               <CalendarDays aria-hidden className="size-6 text-brume" strokeWidth={1.5} />
               <p className="mt-6 font-titre text-xl leading-snug font-medium tracking-[-0.02em] text-sapin">
