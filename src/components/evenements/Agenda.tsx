@@ -232,13 +232,24 @@ function CartePassee({ evenement }: { evenement: Evenement }) {
     >
       <div className="relative aspect-[16/9] overflow-hidden">
         {photo ? (
-          <Image
-            src={photo}
-            alt=""
-            fill
-            sizes="(min-width: 1200px) 560px, (min-width: 768px) 45vw, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          />
+          <>
+            {/* Photo passée en noir et blanc puis teintée de vert sapin : toutes les cartes partagent la même ambiance. */}
+            <Image
+              src={photo}
+              alt=""
+              fill
+              sizes="(min-width: 1200px) 560px, (min-width: 768px) 45vw, 100vw"
+              className="object-cover grayscale transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-vif/35 mix-blend-multiply"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-sapin/10"
+            />
+          </>
         ) : (
           <Motif type={evenement.type} />
         )}
