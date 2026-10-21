@@ -8,9 +8,9 @@ export default function Accueil() {
   return (
     <>
       <Hero />
-      <BandeauPartenaires />
       <SectionFormats />
       <ProchainsEvenements />
+      <BandeauPartenaires />
       <AppelFinal />
     </>
   );
