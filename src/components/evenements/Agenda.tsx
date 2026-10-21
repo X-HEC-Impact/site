@@ -6,7 +6,6 @@ import { Motif } from "@/components/ui/Motif";
 import { CelluleEvenement } from "@/components/evenements/CelluleEvenement";
 import {
   EtiquetteFormat,
-  fondFormat,
 } from "@/components/evenements/EtiquetteFormat";
 import { Grille } from "@/components/ui/Grille";
 import { LienFleche } from "@/components/ui/LienFleche";
@@ -119,11 +118,11 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
         </div>
       </section>
 
-      {/* Passés : cartes avec photo, sur fond doux pour se distinguer de « À venir » */}
+      {/* Passés : cartes à grande photo, sur fond blanc */}
       {passesFiltres.length > 0 && (
         <section
           aria-labelledby="passes-titre"
-          className={cx("border-b border-filet bg-voile", marges, rythme)}
+          className={cx("bg-white", marges, rythme)}
         >
           <h2
             id="passes-titre"
@@ -219,7 +218,7 @@ function EvenementEnVedette({ evenement }: { evenement: Evenement }) {
   );
 }
 
-/** Un événement passé : photo (ou visuel du format), date, titre, lieu. Toute la carte est cliquable. */
+/** Un événement passé : grande photo (ou visuel du format) avec la date posée dessus, puis titre et lieu. Toute la carte est cliquable. */
 function CartePassee({ evenement }: { evenement: Evenement }) {
   const { principal, annee } = dateCourte(evenement);
   const photo = evenement.image ?? evenement.photos?.[0]?.src;
@@ -229,30 +228,27 @@ function CartePassee({ evenement }: { evenement: Evenement }) {
       href={`/evenements/${evenement.slug}`}
       className="group block overflow-hidden rounded-bouton border border-filet bg-white transition-shadow duration-200 hover:shadow-[0_16px_40px_-20px_rgb(6_42_33/0.3)]"
     >
-      <div className={cx("p-3 md:p-4", fondFormat[evenement.type])}>
-        <div className="relative aspect-[16/9] overflow-hidden rounded-bouton">
-          {photo ? (
-            <Image
-              src={photo}
-              alt=""
-              fill
-              sizes="(min-width: 1200px) 520px, (min-width: 768px) 42vw, 90vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-          ) : (
-            <Motif type={evenement.type} />
-          )}
-        </div>
+      <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[3/2]">
+        {photo ? (
+          <Image
+            src={photo}
+            alt=""
+            fill
+            sizes="(min-width: 1200px) 560px, (min-width: 768px) 46vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <Motif type={evenement.type} />
+        )}
+        {/* La date, posée sur la photo */}
+        <p className="absolute top-4 left-4 rounded-bouton bg-white px-3.5 py-2 font-titre text-vif-texte shadow-[0_8px_24px_-8px_rgb(6_42_33/0.4)]">
+          <span className="text-2xl tracking-[-0.02em]">{principal}</span>{" "}
+          <span className="text-[15px] text-brume">{annee}</span>
+        </p>
       </div>
       <div className="p-6 md:p-7">
-        <div className="flex items-center justify-between gap-4">
-          <p className="font-titre text-vif-texte">
-            <span className="text-2xl tracking-[-0.02em]">{principal}</span>{" "}
-            <span className="text-[15px] text-brume">{annee}</span>
-          </p>
-          <EtiquetteFormat type={evenement.type} />
-        </div>
-        <h3 className="mt-3 text-xl leading-snug group-hover:underline group-hover:underline-offset-4">
+        <EtiquetteFormat type={evenement.type} />
+        <h3 className="mt-4 text-xl leading-snug group-hover:underline group-hover:underline-offset-4">
           {evenement.titre}
         </h3>
         <p className="mt-2 flex items-center gap-1.5 text-[15px]">
