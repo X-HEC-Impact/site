@@ -30,7 +30,7 @@ export async function SectionFormats() {
   return (
     <section
       aria-labelledby="formats-titre"
-      className={cx('section-sombre border-b border-filet bg-sapin text-white/80', marges, rythme)}
+      className={cx('section-sombre bg-sapin text-white/80', marges, rythme)}
     >
       <EnTeteSection
         id="formats-titre"

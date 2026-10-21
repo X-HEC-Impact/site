@@ -14,7 +14,7 @@ export default function PageEquipe() {
 
   return (
     <>
-      <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} position="50% 78%" />
+      <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} />
       <GrilleEquipe />
       <MotEquipe />
       <EditionsPrecedentes />

@@ -17,7 +17,6 @@ import { CarteInscription } from "@/components/evenements/CarteInscription";
 import { ParcoursLex } from "@/components/evenements/ParcoursLex";
 import { Soutien } from "@/components/evenements/Soutien";
 import { Bouton } from "@/components/ui/Bouton";
-import { PhotoFond } from "@/components/ui/PhotoFond";
 import { Motif } from "@/components/ui/Motif";
 import { EtiquetteFormat } from "@/components/evenements/EtiquetteFormat";
 import { marges } from "@/components/ui/Section";
@@ -61,13 +60,12 @@ export default async function PageEvenement({
       <header
         className={cx(
           marges,
-          "section-sombre relative isolate overflow-hidden border-b border-filet pt-12 pb-16 md:pt-16 md:pb-24",
+          "border-b border-filet pt-12 pb-16 md:pt-16 md:pb-24",
         )}
       >
-        <PhotoFond position="50% 85%" voile="fort" />
         <Link
           href="/evenements"
-          className="group inline-flex items-center gap-1.5 text-sm font-medium text-white/80 hover:text-white"
+          className="group inline-flex items-center gap-1.5 text-sm font-medium text-ardoise hover:text-sapin"
         >
           <ArrowLeft
             aria-hidden
@@ -77,19 +75,16 @@ export default async function PageEvenement({
         </Link>
         <div className="mt-12 flex flex-wrap items-center gap-3 md:mt-16">
           <EtiquetteFormat type={evenement.type} />
-          {passe && (
-            <span className="text-sm text-lichen">Événement passé</span>
-          )}
+          {passe && <span className="text-sm text-brume">Événement passé</span>}
         </div>
         <Titre
           niveau="h1"
-          sombre
           debut={debut}
           suite={suite}
           className="mt-6 max-w-3xl"
         />
         {evenement.accroche && (
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-white/90 md:text-lg">
+          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed md:text-lg">
             {typo(evenement.accroche)}
           </p>
         )}
@@ -100,7 +95,7 @@ export default async function PageEvenement({
             {evenement.etapes && evenement.etapes.length > 0 && (
               <Link
                 href="#itineraire"
-                className="font-medium text-white underline-offset-4 hover:underline"
+                className="font-medium text-sapin underline-offset-4 hover:underline"
               >
                 Voir l’itinéraire
               </Link>
