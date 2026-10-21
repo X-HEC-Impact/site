@@ -14,14 +14,18 @@ export function AppelFinal({ photo = false }: { photo?: boolean }) {
     <section
       aria-labelledby="cta-titre"
       className={cx(
-        "relative overflow-hidden border-b border-filet",
-        photo ? "section-sombre isolate" : "bg-menthe",
+        "relative overflow-hidden",
+        photo ? "section-sombre isolate" : "border-b border-filet bg-menthe",
       )}
     >
       {photo ? (
         <>
           <PhotoFond position="50% 100%" voile="fort" />
-          {/* Fondu depuis la section sombre du dessus, sans arête */}
+          {/* Fondu depuis la section sombre du dessus et vers celle du dessous, sans arête */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-sapin to-transparent"
+          />
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-sapin to-transparent"
