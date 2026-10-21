@@ -1,9 +1,9 @@
 import { Bouton } from '@/components/ui/Bouton';
-import { LienFleche } from '@/components/ui/LienFleche';
-import { MosaiqueFormats } from '@/components/ui/Motif';
+import { Lien } from '@/components/ui/Lien';
+import { Pictogramme } from '@/components/ui/Pictogramme';
 import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
-import { accueil } from '@/content/site';
+import { accueil, formats, type FormatEvenement } from '@/content/site';
 import { dateLongue } from '@/lib/dates';
 import { getEvenements } from '@/lib/evenements';
 import { cx, typo } from '@/lib/utils';
@@ -35,28 +35,55 @@ export async function Hero() {
       </div>
 
       <div className="border-t border-filet p-5 sm:p-8 md:border-t-0 md:border-l lg:p-10">
-        <div className="relative aspect-square overflow-hidden sm:aspect-[4/3] rounded-bouton md:aspect-auto md:h-full md:min-h-[520px]">
-          <MosaiqueFormats />
+        {/* Le panneau : les trois formats et le prochain rendez-vous, dans la grille 2 × 2 du logo. */}
+        <div className="grid h-full grid-cols-2 auto-rows-[minmax(168px,auto)] overflow-hidden rounded-bouton border border-filet bg-filet gap-px md:min-h-[520px] md:grid-rows-2">
+          <CaseFormat type="lex" />
 
-          {/* Petite carte discrète posée sur le visuel : le prochain rendez-vous. */}
-          {prochain && (
-            <div className="absolute bottom-3 left-3 w-fit max-w-[calc(100%-1.5rem)] rounded-bouton border border-white/60 bg-white/85 px-3.5 py-3 backdrop-blur-md sm:bottom-4 sm:left-4">
-              <p className="text-[11px] leading-4 font-medium tracking-[0.06em] text-brume uppercase">
-                Prochain rendez-vous
-              </p>
-              <LienFleche href={`/evenements/${prochain.slug}`} className="mt-1 text-[15px]">
-                {prochain.titre}
-              </LienFleche>
-              <p className="text-[13px] text-ardoise first-letter:uppercase">{dateLongue(prochain)}</p>
-              {prochain.soutien && (
-                <Bouton href={`/evenements/${prochain.slug}#soutenir`} taille="petit" className="mt-3">
-                  Soutenir le projet
-                </Bouton>
-              )}
-            </div>
-          )}
+          <div className="flex flex-col justify-between bg-vif p-4 text-sapin sm:p-6 lg:p-7">
+            {prochain ? (
+              <>
+                <div>
+                  <p className="text-[13px] font-semibold text-sapin">Prochain rendez-vous</p>
+                  <Lien
+                    href={`/evenements/${prochain.slug}`}
+                    className="mt-2 block font-titre text-xl leading-tight font-semibold tracking-[-0.02em] hover:underline hover:underline-offset-4 sm:text-2xl"
+                  >
+                    {prochain.titre}
+                  </Lien>
+                  <p className="mt-1 text-[15px] first-letter:uppercase">{dateLongue(prochain)}</p>
+                </div>
+                {prochain.soutien && (
+                  <Bouton href={`/evenements/${prochain.slug}#soutenir`} variante="noir" taille="petit" className="mt-4 self-start">
+                    Soutenir le projet
+                  </Bouton>
+                )}
+              </>
+            ) : (
+              <Lien href="/evenements" className="font-titre text-xl font-semibold">
+                Voir l’agenda
+              </Lien>
+            )}
+          </div>
+
+          <CaseFormat type="conference" />
+          <CaseFormat type="hackathon" />
         </div>
       </div>
     </section>
+  );
+}
+
+/** Une case du panneau : le pictogramme du format et son nom, qui mène à l'agenda filtré. */
+function CaseFormat({ type }: { type: FormatEvenement }) {
+  return (
+    <Lien
+      href={`/evenements?format=${type}`}
+      className="group flex flex-col justify-between bg-white p-4 transition-colors duration-200 hover:bg-voile sm:p-6 lg:p-7"
+    >
+      <Pictogramme type={type} className="size-9 text-sapin sm:size-10" />
+      <span className="mt-6 font-titre text-[17px] leading-snug font-semibold tracking-[-0.01em] text-sapin sm:text-xl">
+        {formats[type].nom}
+      </span>
+    </Lien>
   );
 }

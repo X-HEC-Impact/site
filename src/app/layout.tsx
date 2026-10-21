@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Funnel_Display, Funnel_Sans } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { BarreAnnonce } from '@/components/layout/BarreAnnonce';
 import { EnTete } from '@/components/layout/EnTete';
 import { PiedDePage } from '@/components/layout/PiedDePage';
@@ -9,9 +9,8 @@ import { urlSite } from '@/lib/url';
 import './globals.css';
 
 // Les polices sont téléchargées au build et servies par le site (aucun appel à Google côté visiteur).
-// Funnel Display pour les titres, Funnel Sans pour le texte : une même famille, plus de caractère qu'Inter.
-const funnelSans = Funnel_Sans({ subsets: ['latin'], variable: '--font-funnel-sans', display: 'swap' });
-const funnelDisplay = Funnel_Display({ subsets: ['latin'], variable: '--font-funnel-display', display: 'swap' });
+// Plus Jakarta Sans, pour les titres comme pour le texte.
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(urlSite),
@@ -43,7 +42,7 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
     : null;
 
   return (
-    <html lang="fr" className={`${funnelSans.variable} ${funnelDisplay.variable}`}>
+    <html lang="fr" className={jakarta.variable}>
       <body>
         <a
           href="#contenu"

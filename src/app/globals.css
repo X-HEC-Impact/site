@@ -22,8 +22,8 @@
 
 /* Polices chargées dans layout.tsx avec next/font/google */
 @theme inline {
-  --font-sans: var(--font-funnel-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-titre: var(--font-funnel-display), var(--font-funnel-sans), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-titre: var(--font-jakarta), ui-sans-serif, sans-serif;
 }
 
 /* ------------------------------------------------------------------

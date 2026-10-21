@@ -106,26 +106,3 @@ export function Grain() {
     />
   );
 }
-
-/**
- * Le visuel du haut de l'accueil : les trois formats dans une grille de 2 × 2,
- * comme le logo, avec la case vert vif en haut à droite.
- */
-export function MosaiqueFormats({ className }: { className?: string }) {
-  return (
-    <div aria-hidden className={cx('absolute inset-0 grid grid-cols-2 grid-rows-2 gap-px bg-sapin/15', className)}>
-      <div className="relative">
-        <Motif type="lex" />
-      </div>
-      <div className="relative bg-vif">
-        <Grain />
-      </div>
-      <div className="relative">
-        <Motif type="conference" />
-      </div>
-      <div className="relative">
-        <Motif type="hackathon" />
-      </div>
-    </div>
-  );
-}
