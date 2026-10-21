@@ -108,8 +108,8 @@ export default function PageContact() {
         titre={titre}
         titreSuite={titreSuite}
         description={description}
-        photo="50% 45%"
-        photoSrc="/images/contact/vallee.webp"
+        photo="50% 24%"
+        photoSrc="/images/contact/cascade.webp"
       />
 
       {/* L'e-mail, en grand, et les réseaux à côté */}
@@ -168,8 +168,8 @@ export default function PageContact() {
         className={cx(marges, "section-sombre relative isolate overflow-hidden py-20 md:py-28")}
       >
         <PhotoFond
-          src="/images/contact/vallee.webp"
-          position="70% 92%"
+          src="/images/contact/cascade.webp"
+          position="45% 96%"
           voile="fort"
         />
         <div

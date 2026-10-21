@@ -19,7 +19,7 @@ export default function PageEquipe() {
         titre={titre}
         titreSuite={titreSuite}
         description={description}
-        photo="50% 30%"
+        photo="50% 38%"
         photoSrc="/images/equipe/seceda.webp"
         fonduBas={false}
       />
