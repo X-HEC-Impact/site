@@ -127,8 +127,8 @@ export default function PageContact() {
             icone={<Handshake className="size-5" strokeWidth={1.75} />}
             titre={partenariats.titre}
             texte={partenariats.texte}
-            href={emailPret ? `mailto:${email}?subject=${encodeURIComponent(partenariats.objet)}` : undefined}
-            libelleLien="Nous écrire"
+            href={partenariats.lien.href}
+            libelleLien={partenariats.lien.libelle}
             className="bg-menthe"
           />
         </ul>

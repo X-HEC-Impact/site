@@ -539,8 +539,8 @@ export const pages = {
     partenariats: {
       titre: 'Partenariats',
       texte: 'Entreprise, fondation, école : soutenez la LEX Europe ou l’un de nos événements.',
-      /** Objet pré-rempli de l'e-mail envoyé depuis la case « Partenariats ». */
-      objet: 'Partenariat avec X-HEC Impact',
+      /** Lien de la case « Partenariats ». */
+      lien: { libelle: 'Soutenir la LEX Europe', href: '/evenements/lex-europe#soutenir' },
     },
   },
 };
