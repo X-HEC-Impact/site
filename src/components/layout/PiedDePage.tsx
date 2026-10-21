@@ -1,31 +1,47 @@
-import type { ReactNode } from 'react';
-import { Mail } from 'lucide-react';
-import { Logo } from '@/components/Logo';
-import { Lien } from '@/components/ui/Lien';
-import { IconeInstagram, IconeLinkedin } from '@/components/ui/IconesReseaux';
-import { marges } from '@/components/ui/Section';
-import { association, formats, navigation, type FormatEvenement } from '@/content/site';
-import { cx, estPlaceholder } from '@/lib/utils';
+import type { ReactNode } from "react";
+import { Mail } from "lucide-react";
+import { Logo } from "@/components/Logo";
+import { Lien } from "@/components/ui/Lien";
+import { IconeInstagram, IconeLinkedin } from "@/components/ui/IconesReseaux";
+import { marges } from "@/components/ui/Section";
+import {
+  association,
+  formats,
+  navigation,
+  type FormatEvenement,
+} from "@/content/site";
+import { cx, estPlaceholder } from "@/lib/utils";
 
 function Colonne({ titre, children }: { titre: string; children: ReactNode }) {
   return (
     <div>
-      <p className="surtitre">{titre}</p>
+      <p className="text-base font-semibold text-sapin">{titre}</p>
       <ul className="mt-4 space-y-2.5">{children}</ul>
     </div>
   );
 }
 
-const classeLien = 'inline-flex items-center gap-2 text-ardoise transition-colors hover:text-sapin';
+const classeLien =
+  "inline-flex items-center gap-2 text-ardoise transition-colors hover:text-sapin";
 
 /** Lien vers un réseau social, ou placeholder visible tant que l'URL manque. */
-function LienReseau({ href, libelle, icone }: { href: string; libelle: string; icone: ReactNode }) {
+function LienReseau({
+  href,
+  libelle,
+  icone,
+}: {
+  href: string;
+  libelle: string;
+  icone: ReactNode;
+}) {
   if (estPlaceholder(href)) {
     return (
       <span className="flex flex-wrap items-center gap-x-2 text-ardoise">
         {icone}
         {libelle}
-        <span className="text-xs whitespace-nowrap text-brume">[lien à venir]</span>
+        <span className="text-xs whitespace-nowrap text-brume">
+          [lien à venir]
+        </span>
       </span>
     );
   }
@@ -40,13 +56,41 @@ function LienReseau({ href, libelle, icone }: { href: string; libelle: string; i
 export function PiedDePage() {
   // Un réseau laissé vide ('') dans site.ts n'apparaît pas.
   const reseaux = [
-    { href: association.linkedin, libelle: 'LinkedIn', icone: <IconeLinkedin className="size-4" /> },
-    { href: association.instagram, libelle: 'Instagram', icone: <IconeInstagram className="size-4" /> },
-  ].filter((reseau) => reseau.href !== '');
+    {
+      href: association.linkedin,
+      libelle: "LinkedIn",
+      icone: <IconeLinkedin className="size-4" />,
+    },
+    {
+      href: association.instagram,
+      libelle: "Instagram",
+      icone: <IconeInstagram className="size-4" />,
+    },
+  ].filter((reseau) => reseau.href !== "");
 
   return (
-    <footer className="text-[15px]">
-      <div className={cx(marges, 'grid gap-12 py-16 md:grid-cols-12 md:py-20')}>
+    <footer className="relative isolate overflow-hidden bg-voile text-[15px]">
+      {/* Les ondes du logo, en grand et très discrètes, dans le coin du pied de page */}
+      <svg
+        aria-hidden
+        viewBox="0 0 800 500"
+        preserveAspectRatio="xMaxYMax slice"
+        className="pointer-events-none absolute inset-0 -z-10 hidden size-full md:block [mask-image:linear-gradient(to_right,transparent_55%,black_90%)] [&_*]:[vector-effect:non-scaling-stroke]"
+      >
+        <g transform="translate(800 500)" fill="none">
+          {[120, 200, 280, 360, 440, 520, 600, 680].map((r) => (
+            <circle
+              key={r}
+              r={r}
+              stroke="#062a21"
+              strokeOpacity="0.08"
+              strokeWidth="1.5"
+            />
+          ))}
+          <circle r="22" fill="#2ec27e" />
+        </g>
+      </svg>
+      <div className={cx(marges, "grid gap-12 py-16 md:grid-cols-12 md:py-20")}>
         <div className="md:col-span-5">
           <Logo />
           <p className="mt-4 max-w-sm">{association.accroche}</p>
@@ -57,7 +101,10 @@ export function PiedDePage() {
                 {association.email}
               </span>
             ) : (
-              <Lien href={`mailto:${association.email}`} className={cx(classeLien, 'font-medium text-sapin')}>
+              <Lien
+                href={`mailto:${association.email}`}
+                className={cx(classeLien, "font-medium text-sapin")}
+              >
                 <Mail className="size-4" aria-hidden />
                 {association.email}
               </Lien>
@@ -104,7 +151,7 @@ export function PiedDePage() {
       <div
         className={cx(
           marges,
-          'flex flex-col gap-1 border-t border-filet py-6 text-[13px] text-brume sm:flex-row sm:justify-between',
+          "flex flex-col gap-1 border-t border-filet py-6 text-[13px] text-brume sm:flex-row sm:justify-between",
         )}
       >
         <p>© {association.nom}</p>

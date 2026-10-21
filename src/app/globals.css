@@ -106,10 +106,10 @@
 
   .surtitre {
     font-family: var(--font-sans);
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 600;
     line-height: 1.4;
-    color: var(--color-ardoise);
+    color: var(--color-vif-texte);
   }
 
   /* Coup de marqueur vert citron sur un mot (balise <mark>) */
@@ -157,7 +157,7 @@
     --couleur-focus: var(--color-vif);
   }
   .section-sombre .surtitre {
-    color: var(--color-lichen);
+    color: var(--color-vif);
   }
 }
 
@@ -174,7 +174,27 @@
   }
 }
 
+/* Les ondes du haut d'accueil apparaissent du centre vers l'extérieur, une seule fois au chargement. */
+@keyframes onde {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
+  .onde {
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    animation: onde 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 110ms + 150ms);
+  }
+
   .defilement-piste {
     animation: defilement 50s linear infinite;
     /* Calque dédié : évite que Safari « oublie » de peindre des morceaux de logos. */

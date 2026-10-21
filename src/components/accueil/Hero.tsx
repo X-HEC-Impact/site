@@ -1,7 +1,8 @@
-import { Bouton } from '@/components/ui/Bouton';
-import { marges } from '@/components/ui/Section';
-import { accueil } from '@/content/site';
-import { cx, typo } from '@/lib/utils';
+import type { CSSProperties } from "react";
+import { Bouton } from "@/components/ui/Bouton";
+import { marges } from "@/components/ui/Section";
+import { accueil } from "@/content/site";
+import { cx, typo } from "@/lib/utils";
 
 /**
  * Haut de l'accueil, sans image : le titre fait le visuel.
@@ -19,7 +20,7 @@ export function Hero() {
       aria-labelledby="hero-titre"
       className={cx(
         marges,
-        'relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden border-b border-filet py-16 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-12',
+        "relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden border-b border-filet py-16 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-12",
       )}
     >
       {/* Les ondes du logo, tracées fin et très discrètes, qui partent du bord droit (comme les visuels des formats) */}
@@ -30,15 +31,45 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 hidden size-full lg:block [&_*]:[vector-effect:non-scaling-stroke]"
       >
         <g transform="translate(1110 400)" fill="none">
-          {[130, 210, 290, 370, 450, 530, 610, 690].map((r) => (
-            <circle key={r} r={r} stroke="#062a21" strokeOpacity="0.09" strokeWidth="1.5" />
+          {[130, 210, 290, 370, 450, 530, 610, 690].map((r, i) => (
+            <circle
+              key={r}
+              r={r}
+              stroke="#062a21"
+              strokeOpacity="0.09"
+              strokeWidth="1.5"
+              className="onde"
+              style={{ "--i": i + 1 } as CSSProperties}
+            />
           ))}
           <g strokeLinecap="round" strokeWidth="3">
-            <path d="M-92 -92A130 130 0 0 0 -92 92" stroke="#2ec27e" />
-            <path d="M-148 -148A210 210 0 0 0 -148 148" stroke="#5aa469" strokeOpacity="0.7" />
-            <path d="M-205 -205A290 290 0 0 0 -205 205" stroke="#3e7750" strokeOpacity="0.5" />
+            <path
+              d="M-92 -92A130 130 0 0 0 -92 92"
+              stroke="#2ec27e"
+              className="onde"
+              style={{ "--i": 1 } as CSSProperties}
+            />
+            <path
+              d="M-148 -148A210 210 0 0 0 -148 148"
+              stroke="#5aa469"
+              strokeOpacity="0.7"
+              className="onde"
+              style={{ "--i": 2 } as CSSProperties}
+            />
+            <path
+              d="M-205 -205A290 290 0 0 0 -205 205"
+              stroke="#3e7750"
+              strokeOpacity="0.5"
+              className="onde"
+              style={{ "--i": 3 } as CSSProperties}
+            />
           </g>
-          <circle r="26" fill="#2ec27e" />
+          <circle
+            r="26"
+            fill="#2ec27e"
+            className="onde"
+            style={{ "--i": 0 } as CSSProperties}
+          />
         </g>
       </svg>
 
@@ -78,7 +109,9 @@ export function Hero() {
             )}
           </span>
         </h1>
-        <p className="mt-6 text-base font-medium text-ardoise">{hero.surtitre}</p>
+        <p className="mt-6 text-base font-medium text-ardoise">
+          {hero.surtitre}
+        </p>
       </div>
 
       <div className="relative max-w-xl before:absolute before:-inset-y-8 before:right-0 before:-left-10 before:-z-10 before:rounded-[3rem] before:bg-white/90 before:blur-xl lg:col-span-5 lg:max-w-[28rem] lg:justify-self-end">

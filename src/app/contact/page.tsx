@@ -113,7 +113,7 @@ export default function PageContact() {
           )}
         >
           <section aria-labelledby="email-titre" className="md:col-span-7">
-            <h2 id="email-titre" className="text-base font-medium text-ardoise">
+            <h2 id="email-titre" className="surtitre">
               {pages.contact.email.surtitre}
             </h2>
             <p className="mt-3 max-w-xl text-[17px]">

@@ -36,7 +36,7 @@ export function EnTetePage({ surtitre, titre, titreSuite, description }: Props) 
       </svg>
 
       <div className="md:col-span-7">
-        <p className="text-base font-medium text-ardoise">{surtitre}</p>
+        <p className="surtitre">{surtitre}</p>
         <Titre niveau="h1" debut={titre} suite={titreSuite} className="mt-5" />
       </div>
       {description && (
