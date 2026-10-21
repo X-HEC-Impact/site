@@ -19,9 +19,32 @@ export function Soutien({ soutien }: { soutien: DonneesSoutien }) {
         intro={soutien.intro}
       />
 
-      {/* Budget prévisionnel */}
-      <div className={cx('overflow-x-auto rounded-bouton border border-filet', ecart)}>
-        <table className="w-full min-w-[560px] border-collapse text-left text-[15px]">
+      {/* Budget prévisionnel, sur mobile : une carte par poste, le total en dernier */}
+      <div className={cx('md:hidden', ecart)}>
+        <p className="sr-only">Budget prévisionnel</p>
+        <ul className="overflow-hidden rounded-bouton border border-filet text-[15px]">
+          {budget.map((ligne) => (
+            <li key={ligne.poste} className="border-b border-filet px-5 py-4">
+              <div className="flex items-baseline justify-between gap-4">
+                <p className="font-medium text-sapin">{ligne.poste}</p>
+                <p className="whitespace-nowrap text-sapin tabular-nums">{ligne.montant}</p>
+              </div>
+              <div className="mt-1 flex items-baseline justify-between gap-4">
+                <p>{ligne.couvre}</p>
+                <p className="whitespace-nowrap tabular-nums text-brume">{ligne.part}</p>
+              </div>
+            </li>
+          ))}
+          <li className="section-sombre flex items-baseline justify-between gap-4 bg-sapin px-5 py-4 text-white">
+            <p className="font-medium">Total</p>
+            <p className="font-medium whitespace-nowrap text-vif tabular-nums">{total.montant}</p>
+          </li>
+        </ul>
+      </div>
+
+      {/* Budget prévisionnel, à partir de 768 px : le tableau */}
+      <div className={cx('hidden overflow-hidden rounded-bouton border border-filet md:block', ecart)}>
+        <table className="w-full border-collapse text-left text-[15px]">
           <caption className="sr-only">Budget prévisionnel</caption>
           <thead className="bg-voile text-sapin">
             <tr className="border-b border-filet">
