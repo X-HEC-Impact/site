@@ -10,8 +10,8 @@ export default function Accueil() {
       <Hero />
       <SectionFormats />
       <ProchainsEvenements />
-      <BandeauPartenaires />
       <AppelFinal />
+      <BandeauPartenaires />
     </>
   );
 }
