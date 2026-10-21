@@ -7,7 +7,17 @@ import { accueil } from "@/content/site";
 import { cx, typo } from "@/lib/utils";
 
 /** Bannière finale. `photo` : sur l'accueil, elle reprend la photo (le lac) comme le haut de la page. */
-export function AppelFinal({ photo = false, fonduHaut = true }: { photo?: boolean; fonduHaut?: boolean }) {
+export function AppelFinal({
+  photo = false,
+  fonduHaut = true,
+  photoSrc,
+  photoPosition = "50% 100%",
+}: {
+  photo?: boolean;
+  fonduHaut?: boolean;
+  photoSrc?: string;
+  photoPosition?: string;
+}) {
   const { cta } = accueil;
 
   return (
@@ -20,7 +30,7 @@ export function AppelFinal({ photo = false, fonduHaut = true }: { photo?: boolea
     >
       {photo ? (
         <>
-          <PhotoFond position="50% 100%" voile="fort" />
+          <PhotoFond src={photoSrc} position={photoPosition} voile="fort" />
           {/* Fondu depuis la section sombre du dessus et vers celle du dessous, sans arête */}
           <div
             aria-hidden

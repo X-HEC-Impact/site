@@ -2,6 +2,8 @@ import Image from "next/image";
 import { cx } from "@/lib/utils";
 
 type Props = {
+  /** Autre photo que le paysage de l'accueil (chemin dans public/). */
+  src?: string;
   /** Partie de la photo à montrer, en pourcentages (x y) : « 50% 100% » = le bas (le lac). */
   position?: string;
   /** Voile vert sapin plus ou moins foncé, pour que le texte blanc reste lisible. */
@@ -16,6 +18,7 @@ type Props = {
  * La même photo sert partout, avec un cadrage différent selon la page.
  */
 export function PhotoFond({
+  src = "/images/accueil/paysage.webp",
   position = "50% 58%",
   voile = "normal",
   priority,
@@ -30,7 +33,7 @@ export function PhotoFond({
       )}
     >
       <Image
-        src="/images/accueil/paysage.webp"
+        src={src}
         alt=""
         fill
         priority={priority}

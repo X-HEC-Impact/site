@@ -10,6 +10,8 @@ type Props = {
   description?: string;
   /** Photo de paysage en fond (même photo que l'accueil, autre cadrage : « 50% 20% » = les sommets). */
   photo?: string;
+  /** Autre photo que le paysage de l'accueil (chemin dans public/). */
+  photoSrc?: string;
 };
 
 /**
@@ -17,7 +19,7 @@ type Props = {
  * surtitre, grand titre en deux tons à gauche, phrase d'introduction à droite,
  * et les ondes du logo, très discrètes, qui partent du bord droit (comme sur l'accueil).
  */
-export function EnTetePage({ surtitre, titre, titreSuite, description, photo }: Props) {
+export function EnTetePage({ surtitre, titre, titreSuite, description, photo, photoSrc }: Props) {
   return (
     <header
       className={cx(
@@ -28,7 +30,7 @@ export function EnTetePage({ surtitre, titre, titreSuite, description, photo }: 
     >
       {photo && (
         <>
-          <PhotoFond position={photo} voile="fort" priority />
+          <PhotoFond src={photoSrc} position={photo} voile="fort" priority />
           {/* Fondu vers la section sombre qui suit */}
           <div
             aria-hidden
