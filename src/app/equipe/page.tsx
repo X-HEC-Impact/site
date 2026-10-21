@@ -3,7 +3,6 @@ import { AppelFinal } from '@/components/AppelFinal';
 import { EditionsPrecedentes } from '@/components/equipe/EditionsPrecedentes';
 import { GrilleEquipe } from '@/components/equipe/GrilleEquipe';
 import { MotEquipe } from '@/components/equipe/MotEquipe';
-import { NosPoles } from '@/components/equipe/NosPoles';
 import { EnTetePage } from '@/components/ui/EnTetePage';
 import { pages } from '@/content/site';
 
@@ -19,7 +18,6 @@ export default function PageEquipe() {
     <>
       <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} />
       <GrilleEquipe />
-      <NosPoles />
       <MotEquipe />
       <EditionsPrecedentes />
       <AppelFinal />

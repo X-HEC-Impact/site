@@ -18,7 +18,7 @@ export async function SectionFormats() {
   const { aVenir } = await getEvenements();
 
   // Chaque carte pointe vers le prochain événement du format, sinon vers l'agenda filtré.
-  // Pour un événement interne (ex. la LEX), « S'inscrire » devient « Découvrir ».
+  // Événement à soutenir (ex. la LEX) : « Soutenir le projet » ; événement interne : « Découvrir ».
   const puces = (type: FormatEvenement) => {
     const prochain = aVenir.find((e) => e.type === type);
     if (!prochain) {
@@ -31,9 +31,11 @@ export async function SectionFormats() {
     const page = `/evenements/${prochain.slug}`;
     return [
       { libelle: 'Programme', href: `${page}#programme` },
-      prochain.reserveA
-        ? { libelle: 'Découvrir', href: page }
-        : { libelle: 'S’inscrire', href: `${page}#inscription` },
+      prochain.soutien
+        ? { libelle: 'Soutenir le projet', href: `${page}#soutenir` }
+        : prochain.reserveA
+          ? { libelle: 'Découvrir', href: page }
+          : { libelle: 'S’inscrire', href: `${page}#inscription` },
     ];
   };
 

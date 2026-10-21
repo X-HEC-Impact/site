@@ -433,34 +433,6 @@ export const pages = {
     description: 'Les étudiants du Master Entrepreneurs X-HEC qui font vivre l’association.',
     /** Surtitre au-dessus de la grille des portraits (les membres sont dans la liste `equipe`). */
     grille: 'Les membres',
-    /** Bloc « Nos pôles » : ajoutez ou retirez des pôles librement. */
-    poles: {
-      surtitre: 'Nos pôles',
-      titre: 'Comment',
-      titreSuite: 'on s’organise.',
-      liste: [
-        {
-          nom: 'Bureau',
-          description: 'Pilote l’association, ses partenariats et son budget.',
-          membres: 'Louis Honoré, Thomas Corvaisier, Renan Chauveau',
-        },
-        {
-          nom: 'LEX Europe',
-          description: 'Organise la learning expedition en train : itinéraire, visites et partenaires.',
-          membres: 'Thomas Rapoport, Simon Pelissier',
-        },
-        {
-          nom: 'Hackathon Impact',
-          description: 'Prépare le hackathon : sujet, mentors, jury et partenaires.',
-          membres: 'Simon Pelissier',
-        },
-        {
-          nom: 'Conférences & tables rondes',
-          description: 'Invite fondateurs, chercheurs et décideurs à partager leur expérience.',
-          membres: 'Matéo Gosselin',
-        },
-      ],
-    },
     /** Bloc « Éditions précédentes » : les équipes qui ont organisé les éditions passées. */
     editions: {
       surtitre: 'Les éditions précédentes',

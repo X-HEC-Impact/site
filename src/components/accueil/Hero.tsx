@@ -54,7 +54,12 @@ export async function Hero() {
               <LienFleche href={`/evenements/${prochain.slug}`} className="mt-1 text-[15px]">
                 {prochain.titre}
               </LienFleche>
-              <p className="text-[13px] text-ardoise">{dateLongue(prochain)}</p>
+              <p className="text-[13px] text-ardoise first-letter:uppercase">{dateLongue(prochain)}</p>
+              {prochain.soutien && (
+                <Bouton href={`/evenements/${prochain.slug}#soutenir`} taille="petit" className="mt-3">
+                  Soutenir le projet
+                </Bouton>
+              )}
             </div>
           )}
         </div>
