@@ -46,7 +46,7 @@ export const formats: Record<
     nom: 'LEX Europe',
     etiquette: 'LEX Europe',
     texte:
-      'Une learning expedition à travers l’Europe, alternative à la LEX San Francisco.',
+      'Une Learning Expedition à travers l’Europe, alternative à la LEX San Francisco.',
   },
   conference: {
     nom: 'Conférences & tables rondes',
@@ -106,7 +106,7 @@ export const accueil = {
     /** Mot surligné en vert citron dans le titre (laisser vide pour aucun). */
     titreSurligne: 'impact',
     texte:
-      "X-HEC Impact rassemble, accompagne et connecte les porteurs de projets à impact social et environnemental. Learning expedition, conférences, hackathon : on crée les occasions de passer de l’idée à l’action.",
+      "X-HEC Impact rassemble, accompagne et connecte les porteurs de projets à impact social et environnemental. Learning Expedition, conférences, hackathon : on crée les occasions de passer de l’idée à l’action.",
   },
   partenaires: {
     surtitre: 'Partenaires qui nous accompagnent',
@@ -216,7 +216,7 @@ export const evenements: Evenement[] = [
 
 Pourquoi l’Europe ? L’Union européenne fait de l’innovation et de la compétitivité la clé de son indépendance. Avec le Pacte vert et la neutralité carbone visée en 2050, elle fait naître les startups de demain. Talents, grandes écoles, fonds et industriels : chaque pays apporte ses atouts, à quelques heures de train.
 
-Un voyage à faible impact carbone : 19,3 kg de CO2e par étudiant pour 10 jours en train, contre plus de 3 000 kg pour un vol transatlantique.`,
+Un voyage à faible impact carbone : 19,3 kg de CO₂e par étudiant pour 10 jours en train, contre plus de 3 000 kg pour un vol transatlantique.`,
     chiffres: [
       { valeur: '10', libelle: 'étudiants X-HEC Entrepreneurs' },
       { valeur: '5', libelle: 'pays traversés' },
@@ -469,7 +469,7 @@ export const equipe: Membre[] = [
     linkedin: 'https://www.linkedin.com/in/mateo-gosselin/',
   },
   {
-    prenom: 'Eléonore',
+    prenom: 'Éléonore',
     nom: 'de Lambertye',
     role: '[RÔLE]',
     photo: '/images/team/eleonore-de-lambertye.webp',

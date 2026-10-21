@@ -1,27 +1,48 @@
-import type { ReactNode } from 'react';
-import { CalendarDays, Clock, LockKeyhole, MapPin, Tag } from 'lucide-react';
-import { FormulaireInscription } from '@/components/evenements/FormulaireInscription';
-import { formats, type Evenement } from '@/content/site';
-import { dateLongue } from '@/lib/dates';
+import type { ReactNode } from "react";
+import { CalendarDays, Clock, LockKeyhole, MapPin, Tag } from "lucide-react";
+import { FormulaireInscription } from "@/components/evenements/FormulaireInscription";
+import { formats, type Evenement } from "@/content/site";
+import { dateLongue } from "@/lib/dates";
 
-function Info({ icone, libelle, children }: { icone: ReactNode; libelle: string; children: ReactNode }) {
+function Info({
+  icone,
+  libelle,
+  children,
+}: {
+  icone: ReactNode;
+  libelle: string;
+  children: ReactNode;
+}) {
   return (
-    <div className="flex items-start gap-3 border-b border-filet py-3.5 first:pt-0">
-      <span className="mt-0.5 text-brume">{icone}</span>
-      <div>
-        <dt className="surtitre">{libelle}</dt>
-        <dd className="mt-0.5 text-[15px] text-sapin first-letter:uppercase">{children}</dd>
-      </div>
+    <div className="border-b border-filet py-3.5 first:pt-0">
+      <dt className="flex items-center gap-3 text-sm font-medium text-ardoise">
+        <span aria-hidden className="text-brume">
+          {icone}
+        </span>
+        {libelle}
+      </dt>
+      <dd className="mt-1 pl-7 text-[15px] text-sapin first-letter:uppercase">
+        {children}
+      </dd>
     </div>
   );
 }
 
 /** Carte collante de la page événement : infos pratiques + inscription. */
-export function CarteInscription({ evenement, passe }: { evenement: Evenement; passe: boolean }) {
+export function CarteInscription({
+  evenement,
+  passe,
+}: {
+  evenement: Evenement;
+  passe: boolean;
+}) {
   return (
     <div className="rounded-bouton border border-filet bg-white p-5 md:p-6">
       <dl>
-        <Info icone={<CalendarDays className="size-4" aria-hidden />} libelle="Date">
+        <Info
+          icone={<CalendarDays className="size-4" aria-hidden />}
+          libelle="Date"
+        >
           {dateLongue(evenement)}
         </Info>
         <Info icone={<MapPin className="size-4" aria-hidden />} libelle="Lieu">
@@ -34,12 +55,15 @@ export function CarteInscription({ evenement, passe }: { evenement: Evenement; p
 
       <div id="inscription" className="pt-6">
         <h2 className="font-titre text-xl font-medium tracking-[-0.02em] text-sapin">
-          {evenement.reserveA ? 'Participation' : 'Inscription'}
+          {evenement.reserveA ? "Participation" : "Inscription"}
         </h2>
 
         {evenement.reserveA ? (
           <p className="mt-3 flex items-start gap-2 rounded-bouton bg-voile p-4 text-[15px]">
-            <LockKeyhole aria-hidden className="mt-0.5 size-4 shrink-0 text-brume" />
+            <LockKeyhole
+              aria-hidden
+              className="mt-0.5 size-4 shrink-0 text-brume"
+            />
             {evenement.reserveA}
           </p>
         ) : passe ? (
@@ -49,7 +73,10 @@ export function CarteInscription({ evenement, passe }: { evenement: Evenement; p
           </p>
         ) : evenement.inscriptionsOuvertes ? (
           <div className="mt-4">
-            <FormulaireInscription slug={evenement.slug} titre={evenement.titre} />
+            <FormulaireInscription
+              slug={evenement.slug}
+              titre={evenement.titre}
+            />
           </div>
         ) : (
           <p className="mt-3 flex items-center gap-2 rounded-bouton bg-voile p-4 text-[15px]">
