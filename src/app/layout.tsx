@@ -42,7 +42,7 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
     : null;
 
   return (
-    <html lang="fr" className={jakarta.variable}>
+    <html lang="fr" className={jakarta.variable} data-scroll-behavior="smooth">
       <body>
         <a
           href="#contenu"

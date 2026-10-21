@@ -33,6 +33,10 @@ export function EnTete({ inscription }: Props) {
   }, [ouvert]);
 
   const fermer = () => setOuvert(false);
+  // Cliquer sur la page où l'on est déjà ramène tout en haut, sans glisser.
+  const versLeHaut = (actif: boolean) => {
+    if (actif) window.scrollTo({ top: 0, behavior: 'instant' });
+  };
 
   return (
     <header
@@ -54,6 +58,7 @@ export function EnTete({ inscription }: Props) {
                   <Link
                     href={lien.href}
                     aria-current={actif ? 'page' : undefined}
+                    onClick={() => versLeHaut(actif)}
                     className={cx(
                       'transition-colors',
                       sombre ? 'hover:text-white' : 'hover:text-sapin',
@@ -116,7 +121,10 @@ export function EnTete({ inscription }: Props) {
                 <li key={lien.href} className={cx('border-b', sombre ? 'border-white/10' : 'border-filet')}>
                   <Link
                     href={lien.href}
-                    onClick={fermer}
+                    onClick={() => {
+                      fermer();
+                      versLeHaut(actif);
+                    }}
                     aria-current={actif ? 'page' : undefined}
                     className={cx(
                       'flex items-center justify-between px-5 py-4 font-titre text-xl tracking-[-0.02em]',
