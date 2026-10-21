@@ -14,11 +14,19 @@ export default function PageEquipe() {
 
   return (
     <>
-      <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} />
+      <EnTetePage
+        surtitre={surtitre}
+        titre={titre}
+        titreSuite={titreSuite}
+        description={description}
+        photo="50% 45%"
+        photoSrc="/images/equipe/vallee.webp"
+        fonduBas={false}
+      />
       <GrilleEquipe />
       <MotEquipe />
       <EditionsPrecedentes />
-      <AppelFinal />
+      <AppelFinal photo fonduHaut={false} photoSrc="/images/equipe/vallee.webp" photoPosition="50% 62%" />
     </>
   );
 }
