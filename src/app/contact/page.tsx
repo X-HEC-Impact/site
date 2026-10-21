@@ -102,6 +102,9 @@ export default function PageContact() {
         titre={titre}
         titreSuite={titreSuite}
         description={description}
+        photo="50% 45%"
+        photoSrc="/images/contact/vallee.webp"
+        fonduBas={false}
       />
 
       {/* L'e-mail, en grand, et les réseaux à côté */}

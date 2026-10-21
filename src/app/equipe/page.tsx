@@ -19,14 +19,14 @@ export default function PageEquipe() {
         titre={titre}
         titreSuite={titreSuite}
         description={description}
-        photo="50% 45%"
-        photoSrc="/images/equipe/vallee.webp"
+        photo="50% 30%"
+        photoSrc="/images/equipe/seceda.webp"
         fonduBas={false}
       />
       <GrilleEquipe />
       <MotEquipe />
       <EditionsPrecedentes />
-      <AppelFinal photo fonduHaut={false} photoSrc="/images/equipe/vallee.webp" photoPosition="50% 62%" />
+      <AppelFinal photo fonduHaut={false} photoSrc="/images/equipe/seceda.webp" photoPosition="50% 85%" />
     </>
   );
 }
