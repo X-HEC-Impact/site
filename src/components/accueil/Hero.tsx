@@ -21,13 +21,13 @@ export function Hero() {
       aria-labelledby="hero-titre"
       className={cx(
         marges,
-        "relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden border-b border-filet pt-16 pb-36 md:pt-20 md:pb-40 lg:grid-cols-12 lg:items-center lg:gap-12",
+        "relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden border-b border-filet py-16 md:py-24 lg:grid-cols-12 lg:items-center lg:gap-12",
       )}
     >
-      {/* Photo de paysage au pied de la page : elle se fond dans le blanc vers le haut, le texte reste lisible */}
+      {/* Photo de paysage sur tout le haut de page, teintée de vert sapin pour que le texte blanc reste lisible */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[46%]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-sapin"
       >
         <Image
           src="/images/accueil/paysage.webp"
@@ -35,8 +35,10 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[50%_88%] [mask-image:linear-gradient(to_bottom,transparent,black_70%)]"
+          className="object-cover object-[50%_58%]"
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-sapin/85 via-sapin/60 to-sapin/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-sapin/50 via-transparent to-transparent" />
       </div>
 
       {/* Les ondes du logo, tracées fin et très discrètes, qui partent du bord droit (comme les visuels des formats) */}
@@ -51,8 +53,8 @@ export function Hero() {
             <circle
               key={r}
               r={r}
-              stroke="#062a21"
-              strokeOpacity="0.09"
+              stroke="#ffffff"
+              strokeOpacity="0.22"
               strokeWidth="1.5"
               className="onde"
               style={{ "--i": i + 1 } as CSSProperties}
@@ -67,14 +69,14 @@ export function Hero() {
             />
             <path
               d="M-148 -148A210 210 0 0 0 -148 148"
-              stroke="#5aa469"
+              stroke="#9be0a8"
               strokeOpacity="0.7"
               className="onde"
               style={{ "--i": 2 } as CSSProperties}
             />
             <path
               d="M-205 -205A290 290 0 0 0 -205 205"
-              stroke="#3e7750"
+              stroke="#7fd28a"
               strokeOpacity="0.5"
               className="onde"
               style={{ "--i": 3 } as CSSProperties}
@@ -94,14 +96,14 @@ export function Hero() {
           id="hero-titre"
           className="-ml-[0.05em] text-[clamp(46px,9vw,76px)] leading-[1.02] font-medium tracking-[-0.04em] lg:text-[min(6.4vw,92px)]"
         >
-          <span className="block">{typo(hero.titre)}</span>
-          <span className="block text-brume">
+          <span className="block text-white">{typo(hero.titre)}</span>
+          <span className="block text-white/75">
             {position === -1 ? (
               suite
             ) : (
               <>
                 {suite.slice(0, position)}
-                <span className="relative isolate inline-block text-sapin">
+                <span className="relative isolate inline-block text-white">
                   {mot}
                   {/* Trait tracé à la main sous le mot */}
                   <svg
@@ -125,13 +127,15 @@ export function Hero() {
             )}
           </span>
         </h1>
-        <p className="mt-6 text-base font-medium text-ardoise">
+        <p className="mt-6 text-base font-medium text-white/85">
           {hero.surtitre}
         </p>
       </div>
 
-      <div className="relative max-w-xl before:absolute before:-inset-y-8 before:right-0 before:-left-10 before:-z-10 before:rounded-[3rem] before:bg-white/90 before:blur-xl lg:col-span-5 lg:max-w-[28rem] lg:justify-self-end">
-        <p className="text-[17px] leading-relaxed">{typo(hero.texte)}</p>
+      <div className="relative max-w-xl before:absolute before:-inset-y-8 before:right-0 before:-left-10 before:-z-10 before:rounded-[3rem] before:bg-sapin/35 before:blur-xl lg:col-span-5 lg:max-w-[28rem] lg:justify-self-end">
+        <p className="text-[17px] leading-relaxed text-white/90">
+          {typo(hero.texte)}
+        </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Bouton href="/evenements">Voir nos événements</Bouton>
           <Bouton href="/equipe" variante="contour">
