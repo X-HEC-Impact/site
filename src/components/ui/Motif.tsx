@@ -12,7 +12,7 @@ import { cx } from '@/lib/utils';
 const fonds: Record<FormatEvenement, string> = {
   lex: 'bg-menthe',
   conference: 'bg-ciel',
-  hackathon: 'bg-lavande',
+  hackathon: 'bg-prairie',
 };
 
 const trait = { stroke: 'var(--color-sapin)', strokeOpacity: 0.16, strokeWidth: 1.5, fill: 'none' } as const;
@@ -68,7 +68,7 @@ function DessinHackathon() {
         );
       } else if (poses.has(cle)) {
         cases.push(
-          <rect key={cle} x={x} y={y} width={cote} height={cote} rx={8} fill="#ddd5f6" stroke="var(--color-sapin)" strokeWidth={2} />,
+          <rect key={cle} x={x} y={y} width={cote} height={cote} rx={8} fill="#d8e0a4" stroke="var(--color-sapin)" strokeWidth={2} />,
         );
       } else {
         cases.push(<rect key={cle} x={x} y={y} width={cote} height={cote} rx={8} {...trait} />);

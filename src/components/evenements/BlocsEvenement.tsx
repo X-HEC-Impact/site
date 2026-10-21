@@ -212,7 +212,7 @@ export function Galerie({
   );
 }
 
-const teintes = ["bg-menthe", "bg-ciel", "bg-lavande", "bg-citron/50"];
+const teintes = ["bg-menthe", "bg-ciel", "bg-prairie", "bg-citron/50"];
 
 /** Thématiques : cartes pastel dans la colonne de gauche. */
 export function Thematiques({

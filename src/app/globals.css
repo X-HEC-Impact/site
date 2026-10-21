@@ -14,7 +14,8 @@
   --color-voile: #f6f9f7; /* fonds de cellules alternés */
   --color-menthe: #e3f5ea; /* carte LEX Europe */
   --color-ciel: #e5eefb; /* carte Conférences */
-  --color-lavande: #eeeafb; /* carte Hackathon */
+  --color-glacier: #e5f0f0; /* fond de l'agenda de l'accueil : le bleu-vert du glacier et du lac, très pâle */
+  --color-prairie: #eef1d6; /* carte Hackathon : le vert-jaune des prairies de la photo */
   --color-citron: #e4fa9b; /* surlignage ponctuel d'un mot */
 
   --radius-bouton: 6px;

@@ -41,7 +41,7 @@ export function PhotoFond({
       <div
         className={cx(
           "absolute inset-0 bg-gradient-to-r from-sapin/85 via-sapin/60",
-          voile === "fort" ? "to-sapin/65" : "to-sapin/40",
+          voile === "fort" ? "to-sapin/65 max-md:bg-sapin/30" : "to-sapin/40",
         )}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-sapin/50 via-transparent to-transparent" />

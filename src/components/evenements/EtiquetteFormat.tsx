@@ -5,7 +5,7 @@ import { cx } from '@/lib/utils';
 export const fondFormat: Record<FormatEvenement, string> = {
   lex: 'bg-menthe',
   conference: 'bg-ciel',
-  hackathon: 'bg-lavande',
+  hackathon: 'bg-prairie',
 };
 
 export function EtiquetteFormat({ type, className }: { type: FormatEvenement; className?: string }) {
