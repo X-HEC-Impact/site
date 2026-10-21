@@ -141,10 +141,6 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
   );
 }
 
-function visuel(evenement: Evenement) {
-  return evenement.image ?? evenement.photos?.[0]?.src;
-}
-
 /** Le prochain événement, en grand : visuel du format à gauche, infos et bouton à droite. */
 function EvenementEnVedette({ evenement }: { evenement: Evenement }) {
   const { slug, type, titre, lieu, accroche, inscriptionsOuvertes, reserveA } =
@@ -223,7 +219,6 @@ function EvenementEnVedette({ evenement }: { evenement: Evenement }) {
 /** Un événement passé : photo (ou visuel du format), date, titre, lieu. Toute la carte est cliquable. */
 function CartePassee({ evenement }: { evenement: Evenement }) {
   const { principal, annee } = dateCourte(evenement);
-  const photo = visuel(evenement);
 
   return (
     <Link
@@ -231,27 +226,20 @@ function CartePassee({ evenement }: { evenement: Evenement }) {
       className="group block overflow-hidden rounded-bouton border border-filet bg-white transition-shadow duration-200 hover:shadow-[0_16px_40px_-20px_rgb(6_42_33/0.3)]"
     >
       <div className="relative aspect-[16/9] overflow-hidden">
-        {photo ? (
-          <>
-            {/* Photo passée en noir et blanc puis teintée de vert sapin : toutes les cartes partagent la même ambiance. */}
-            <Image
-              src={photo}
-              alt=""
-              fill
-              sizes="(min-width: 1200px) 560px, (min-width: 768px) 45vw, 100vw"
-              className="object-cover grayscale transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-vif/35 mix-blend-multiply"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-sapin/10"
-            />
-          </>
-        ) : (
-          <Motif type={evenement.type} />
+        <Motif type={evenement.type} />
+        {evenement.logo && (
+          <div className="absolute inset-0 flex items-center justify-center p-6">
+            <div className="w-[min(60%,16rem)] rounded-bouton bg-white px-5 py-5 shadow-[0_1px_2px_rgb(6_42_33/0.06),0_12px_32px_-12px_rgb(6_42_33/0.25)]">
+              <Image
+                src={evenement.logo.src}
+                alt=""
+                width={965}
+                height={296}
+                sizes="256px"
+                className="h-auto w-full"
+              />
+            </div>
+          </div>
         )}
       </div>
       <div className="p-6 md:p-7">
