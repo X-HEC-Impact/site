@@ -14,7 +14,7 @@ export async function ProchainsEvenements() {
   const affiches = aVenir.slice(0, NOMBRE_MAX);
 
   return (
-    <Section titreId="agenda-titre">
+    <Section titreId="agenda-titre" className="bg-ciel">
       <EnTeteSection
         id="agenda-titre"
         titre={accueil.agenda.titre}
@@ -22,7 +22,7 @@ export async function ProchainsEvenements() {
         lien={{ href: '/evenements', libelle: 'Tous les événements' }}
       />
 
-      <Grille colonnes="md:grid-cols-3" cadre className={ecart}>
+      <Grille colonnes="md:grid-cols-3" cadre className={cx(ecart, 'bg-white')}>
         {affiches.map((evenement) => (
           <li key={evenement.slug}>
             <CelluleEvenement evenement={evenement} />

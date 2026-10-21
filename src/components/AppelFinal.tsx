@@ -9,7 +9,7 @@ export function AppelFinal() {
   const { cta } = accueil;
 
   return (
-    <section aria-labelledby="cta-titre" className="relative overflow-hidden border-b border-filet">
+    <section aria-labelledby="cta-titre" className="relative overflow-hidden border-b border-filet bg-menthe">
       {/* Le dessin de la ligne de train, discret, qui s'estompe vers le texte. */}
       <div
         aria-hidden
