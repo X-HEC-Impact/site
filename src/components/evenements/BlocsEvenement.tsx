@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Building2, HandCoins, Rocket, UserRound, type LucideIcon } from 'lucide-react';
 import { Grille } from '@/components/ui/Grille';
-import { marges, rythme } from '@/components/ui/Section';
+import { Section, marges, rythme } from '@/components/ui/Section';
 import { Surtitre } from '@/components/ui/Titre';
 import type { Evenement } from '@/content/site';
 import { cx, typo } from '@/lib/utils';
@@ -130,5 +130,78 @@ export function Galerie({ photos }: { photos: NonNullable<Evenement['photos']> }
         ))}
       </ul>
     </section>
+  );
+}
+
+const teintes = ['bg-menthe', 'bg-ciel', 'bg-lavande', 'bg-citron/50'];
+
+/** Thématiques : cartes pastel dans la colonne de gauche. */
+export function Thematiques({ thematiques }: { thematiques: NonNullable<Evenement['thematiques']> }) {
+  return (
+    <section aria-labelledby="thematiques-titre" className="mt-16 md:mt-20">
+      <Surtitre>
+        <span id="thematiques-titre">Les thématiques</span>
+      </Surtitre>
+      <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+        {thematiques.map((theme, i) => (
+          <li key={theme.titre} className={cx('rounded-bouton p-5 md:p-6', teintes[i % teintes.length])}>
+            <p className="font-titre text-xl leading-snug font-medium tracking-[-0.02em] text-sapin">{theme.titre}</p>
+            {theme.texte && <p className="mt-1 text-[15px]">{typo(theme.texte)}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/** Intervenants et jury : cases bordurées avec nom et rôle. */
+export function Intervenants({
+  intervenants,
+  note,
+}: {
+  intervenants: NonNullable<Evenement['intervenants']>;
+  note?: string;
+}) {
+  return (
+    <Section titreId="intervenants-titre">
+      <h2 id="intervenants-titre" className="text-[28px] leading-tight md:text-[32px]">
+        Intervenants et jury
+      </h2>
+      <Grille colonnes="sm:grid-cols-2 lg:grid-cols-3" cadre className="mt-8">
+        {intervenants.map((personne) => (
+          <li key={personne.nom} className="px-6 py-6 md:px-7">
+            <p className="font-titre text-xl font-medium tracking-[-0.02em] text-sapin">{personne.nom}</p>
+            {personne.role && <p className="mt-1 text-[15px] text-brume">{personne.role}</p>}
+          </li>
+        ))}
+      </Grille>
+      {note && <p className="mt-5 text-[15px]">{typo(note)}</p>}
+    </Section>
+  );
+}
+
+/** Partenaires de l'événement : logo si disponible, sinon le nom. */
+export function PartenairesEvenement({ partenaires }: { partenaires: NonNullable<Evenement['partenaires']> }) {
+  return (
+    <Section titreId="partenaires-evenement-titre">
+      <h2 id="partenaires-evenement-titre" className="text-[28px] leading-tight md:text-[32px]">
+        Partenaires
+      </h2>
+      <Grille colonnes="grid-cols-2 md:grid-cols-3" cadre className="mt-8">
+        {partenaires.map((partenaire) => (
+          <li key={partenaire.nom} className="flex h-28 items-center justify-center px-5 text-center md:h-32">
+            {partenaire.logo ? (
+              <div className="relative h-12 w-[70%] md:h-14">
+                <Image src={partenaire.logo} alt={partenaire.nom} fill sizes="220px" className="object-contain" />
+              </div>
+            ) : (
+              <span className="font-titre text-xl font-medium tracking-[-0.02em] text-sapin md:text-2xl">
+                {partenaire.nom}
+              </span>
+            )}
+          </li>
+        ))}
+      </Grille>
+    </Section>
   );
 }

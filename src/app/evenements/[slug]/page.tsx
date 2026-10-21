@@ -4,7 +4,15 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { AppelFinal } from '@/components/AppelFinal';
-import { ChiffresCles, Galerie, Itineraire, Rencontres } from '@/components/evenements/BlocsEvenement';
+import {
+  ChiffresCles,
+  Galerie,
+  Intervenants,
+  Itineraire,
+  PartenairesEvenement,
+  Rencontres,
+  Thematiques,
+} from '@/components/evenements/BlocsEvenement';
 import { CarteInscription } from '@/components/evenements/CarteInscription';
 import { Soutien } from '@/components/evenements/Soutien';
 import { EtiquetteFormat } from '@/components/evenements/EtiquetteFormat';
@@ -88,6 +96,10 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
 
           {evenement.etapes && evenement.etapes.length > 0 && <Itineraire etapes={evenement.etapes} />}
 
+          {evenement.thematiques && evenement.thematiques.length > 0 && (
+            <Thematiques thematiques={evenement.thematiques} />
+          )}
+
           {evenement.rencontres && evenement.rencontres.length > 0 && (
             <Rencontres
               rencontres={evenement.rencontres}
@@ -125,6 +137,14 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
           </div>
         </aside>
       </div>
+
+      {evenement.intervenants && evenement.intervenants.length > 0 && (
+        <Intervenants intervenants={evenement.intervenants} note={evenement.intervenantsNote} />
+      )}
+
+      {evenement.partenaires && evenement.partenaires.length > 0 && (
+        <PartenairesEvenement partenaires={evenement.partenaires} />
+      )}
 
       {evenement.soutien && <Soutien soutien={evenement.soutien} />}
 

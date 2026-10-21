@@ -156,7 +156,8 @@ export const accueil = {
      publique (ex. la LEX) : le texte remplace le formulaire.
    - Blocs facultatifs pour une page plus riche : accroche (sous le
      titre), chiffres (chiffres clés), etapes (itinéraire), rencontres
-     (cartes « Le programme ») et secteurs.
+     (cartes « Le programme »), secteurs, thematiques, intervenants,
+     partenaires et soutien.
    ------------------------------------------------------------------ */
 
 export type Evenement = {
@@ -179,6 +180,14 @@ export type Evenement = {
   rencontres?: { titre: string; texte: string }[];
   secteurs?: string;
   soutien?: Soutien;
+  /** Thématiques de l'événement (cartes pastel). */
+  thematiques?: { titre: string; texte?: string }[];
+  /** Intervenants et membres du jury. */
+  intervenants?: { nom: string; role?: string }[];
+  /** Note sous la liste des intervenants. */
+  intervenantsNote?: string;
+  /** Partenaires de l'événement ; logo facultatif (dans public/images/partners/). */
+  partenaires?: { nom: string; logo?: string }[];
 };
 
 /** Bloc « Soutenir le projet » d'un événement (budget, niveaux de partenariat, contact). */
@@ -301,6 +310,46 @@ Un voyage à faible impact carbone : 19,3 kg de CO2e par étudiant pour 10 jours
         telephone: '07 81 61 65 85',
       },
     },
+  },
+  {
+    slug: 'hackathon-impact-2026',
+    type: 'hackathon',
+    titre: 'Hackathon Impact 2026',
+    date: '2026-10-16',
+    lieu: 'Eurazeo · 50 Partners',
+    accroche: '121 participants, 24 équipes, 2 sites et 4 thématiques au service de l’impact.',
+    description: `Le Hackathon Impact a réuni 121 participants, répartis en 24 équipes, autour de l’impact et de quatre thématiques : économie circulaire, agriculture et souveraineté, ressources critiques (eau et énergie), éducation et inclusion.
+
+L’événement s’est tenu sur deux sites, chez Eurazeo et chez 50 Partners, avec des partenaires de renom et des intervenants et jurys venus de l’impact, de l’investissement et de l’entreprise.
+
+Voir plus de 120 personnes travailler ensemble sur l’impact est une formidable opportunité : nous espérons que de vrais projets en émergeront.`,
+    chiffres: [
+      { valeur: '121', libelle: 'participants' },
+      { valeur: '24', libelle: 'équipes' },
+      { valeur: '4', libelle: 'thématiques' },
+      { valeur: '2', libelle: 'sites : Eurazeo et 50 Partners' },
+    ],
+    thematiques: [
+      { titre: 'Économie circulaire' },
+      { titre: 'Agriculture et souveraineté' },
+      { titre: 'Ressources critiques', texte: 'Eau et énergie' },
+      { titre: 'Éducation et inclusion' },
+    ],
+    intervenants: [
+      { nom: 'Céline Rémy', role: 'Co-fondatrice de la Climate House' },
+      { nom: 'Alexandre Mars' },
+      { nom: 'Émilie Garcia', role: 'Responsable RSE de Bpifrance' },
+    ],
+    intervenantsNote: 'Ainsi que des experts de l’impact venus du capital-risque, d’Eurazeo et de 50 Partners.',
+    partenaires: [
+      { nom: 'Climate House', logo: '/images/partners/climate-house.png' },
+      { nom: 'Lovable' },
+      { nom: 'Eurazeo' },
+      { nom: 'Bpifrance' },
+      { nom: '50 Partners' },
+      { nom: 'Lingueo' },
+    ],
+    inscriptionsOuvertes: false,
   },
   {
     slug: 'hackathon-impact-2025',
