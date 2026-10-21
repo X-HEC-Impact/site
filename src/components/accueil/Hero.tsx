@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { Bouton } from "@/components/ui/Bouton";
+import { Grain } from "@/components/ui/Motif";
 import { marges } from "@/components/ui/Section";
 import { accueil } from "@/content/site";
 import { cx, typo } from "@/lib/utils";
@@ -20,7 +21,7 @@ export function Hero() {
       aria-labelledby="hero-titre"
       className={cx(
         marges,
-        "relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden border-b border-filet py-16 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-12",
+        "relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden border-b border-filet pt-16 pb-44 md:pt-20 md:pb-52 lg:grid-cols-12 lg:items-center lg:gap-12",
       )}
     >
       {/* Les ondes du logo, tracées fin et très discrètes, qui partent du bord droit (comme les visuels des formats) */}
@@ -72,6 +73,32 @@ export function Hero() {
           />
         </g>
       </svg>
+
+      {/* Un paysage dessiné au pied de la page : les ondes se lèvent derrière les collines */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 md:h-52"
+      >
+        <svg
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="xMidYMax slice"
+          className="absolute inset-0 size-full"
+        >
+          <path
+            d="M0 190 L120 125 L210 170 L330 92 L470 180 L560 142 L700 210 L820 112 L950 175 L1080 102 L1200 170 L1320 132 L1440 182 V320 H0 Z"
+            fill="#e1eaf8"
+          />
+          <path
+            d="M0 232 C180 172 340 192 520 226 C700 260 820 172 1020 192 C1200 208 1320 242 1440 216 V320 H0 Z"
+            fill="#d3eadb"
+          />
+          <path
+            d="M0 272 C220 232 420 282 640 267 C860 252 1040 218 1240 247 C1340 262 1400 272 1440 264 V320 H0 Z"
+            fill="#bfe3cc"
+          />
+        </svg>
+        <Grain />
+      </div>
 
       <div className="lg:col-span-7">
         <h1
