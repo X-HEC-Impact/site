@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { ArrowRight, CalendarDays, MapPin } from 'lucide-react';
 import { CelluleEvenement } from '@/components/evenements/CelluleEvenement';
-import { EtiquetteFormat } from '@/components/evenements/EtiquetteFormat';
+import { EtiquetteFormat, fondFormat } from '@/components/evenements/EtiquetteFormat';
 import { Grille } from '@/components/ui/Grille';
 import { LienFleche } from '@/components/ui/LienFleche';
+import { Pictogramme } from '@/components/ui/Pictogramme';
 import { marges, rythme } from '@/components/ui/Section';
 import { formats, type Evenement, type FormatEvenement } from '@/content/site';
 import { dateCourte } from '@/lib/dates';
@@ -50,9 +51,12 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
                     aria-current={actif ? 'true' : undefined}
                     className={cx(
                       'inline-flex h-10 items-center rounded-bouton px-4 text-sm font-medium whitespace-nowrap transition-colors',
-                      actif ? 'bg-sapin text-white' : 'border border-filet text-ardoise hover:border-brume hover:text-sapin',
+                      actif
+                        ? 'bg-sapin text-white'
+                        : 'border border-filet text-ardoise hover:border-brume hover:text-sapin',
                     )}
                   >
+                    {cle !== 'tous' && <Pictogramme type={cle} className="mr-2 -ml-1 size-5" />}
                     {libelle}
                   </Link>
                 </li>
@@ -75,7 +79,12 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
               ))}
               {/* Sur ordinateur, une case complète la dernière ligne de la grille. */}
               {aVenirFiltres.length % 3 !== 0 && (
-                <li className="hidden bg-voile md:block">
+                <li
+                  className={cx(
+                    'hidden bg-voile md:block',
+                    aVenirFiltres.length % 3 === 1 ? 'md:col-span-2' : 'md:col-span-1',
+                  )}
+                >
                   <div className="flex h-full flex-col p-8">
                     <CalendarDays aria-hidden className="size-6 text-brume" strokeWidth={1.5} />
                     <p className="mt-6 font-titre text-xl leading-snug font-medium tracking-[-0.02em] text-sapin">
@@ -130,14 +139,24 @@ function LignePassee({ evenement }: { evenement: Evenement }) {
         <span className="text-2xl tracking-[-0.02em]">{principal}</span>{' '}
         <span className="text-[15px] text-brume">{annee}</span>
       </p>
-      <p className="font-titre text-xl leading-snug font-medium tracking-[-0.02em] text-sapin group-hover:underline group-hover:underline-offset-4 md:col-span-4">
-        {evenement.titre}
-      </p>
+      <div className="flex items-center gap-4 md:col-span-5">
+        <span
+          className={cx(
+            'flex size-10 shrink-0 items-center justify-center rounded-bouton text-sapin',
+            fondFormat[evenement.type],
+          )}
+        >
+          <Pictogramme type={evenement.type} className="size-6" />
+        </span>
+        <p className="font-titre text-xl leading-snug font-medium tracking-[-0.02em] text-sapin group-hover:underline group-hover:underline-offset-4">
+          {evenement.titre}
+        </p>
+      </div>
       <p className="flex items-center gap-1.5 text-[15px] md:col-span-3">
         <MapPin aria-hidden className="size-4 shrink-0 text-brume" />
         {evenement.lieu}
       </p>
-      <div className="flex items-center justify-between gap-4 md:col-span-3">
+      <div className="flex items-center justify-between gap-4 md:col-span-2">
         <EtiquetteFormat type={evenement.type} />
         <ArrowRight
           aria-hidden
