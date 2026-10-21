@@ -1,13 +1,15 @@
-import Image from 'next/image';
-import { UserRound } from 'lucide-react';
-import { IconeLinkedin } from '@/components/ui/IconesReseaux';
-import { Section } from '@/components/ui/Section';
-import { equipe, pages, type Membre } from '@/content/site';
-import { estPlaceholder } from '@/lib/utils';
+import Image from "next/image";
+import { UserRound } from "lucide-react";
+import { IconeLinkedin } from "@/components/ui/IconesReseaux";
+import { Section } from "@/components/ui/Section";
+import { equipe, pages, type Membre } from "@/content/site";
+import { estPlaceholder } from "@/lib/utils";
 
 function FicheMembre({ membre }: { membre: Membre }) {
   const nomComplet = `${membre.prenom} ${membre.nom}`;
-  const alt = estPlaceholder(membre.prenom) ? 'Portrait d’un membre de l’équipe' : `Portrait de ${nomComplet}`;
+  const alt = estPlaceholder(membre.prenom)
+    ? "Portrait d’un membre de l’équipe"
+    : `Portrait de ${nomComplet}`;
   const aLinkedin = membre.linkedin && !estPlaceholder(membre.linkedin);
 
   return (
@@ -42,7 +44,9 @@ function FicheMembre({ membre }: { membre: Membre }) {
           </a>
         )}
       </div>
-      <p className="mt-1 text-sm leading-snug text-brume sm:text-[15px]">{membre.role}</p>
+      <p className="mt-1 text-sm leading-snug text-brume sm:text-[15px]">
+        {membre.role}
+      </p>
     </article>
   );
 }
@@ -51,7 +55,10 @@ function FicheMembre({ membre }: { membre: Membre }) {
 export function GrilleEquipe() {
   return (
     <Section titreId="membres-titre">
-      <h2 id="membres-titre" className="text-[28px] leading-tight md:text-[32px]">
+      <h2
+        id="membres-titre"
+        className="text-[28px] leading-tight md:text-[32px]"
+      >
         {pages.equipe.grille}
       </h2>
 
@@ -61,6 +68,31 @@ export function GrilleEquipe() {
             <FicheMembre membre={membre} />
           </li>
         ))}
+        {/* Dernière case de la rangée (grand écran) : les ondes du logo, sans texte */}
+        {equipe.length % 4 !== 0 && (
+          <li
+            aria-hidden
+            className="relative hidden aspect-square overflow-hidden rounded-bouton bg-voile lg:block"
+          >
+            <svg
+              viewBox="0 0 200 200"
+              className="absolute inset-0 size-full [&_*]:[vector-effect:non-scaling-stroke]"
+            >
+              <g transform="translate(165 165)" fill="none">
+                {[50, 80, 110, 140, 170, 200, 230].map((r) => (
+                  <circle
+                    key={r}
+                    r={r}
+                    stroke="#062a21"
+                    strokeOpacity="0.12"
+                    strokeWidth="1.5"
+                  />
+                ))}
+                <circle r="16" fill="#2ec27e" />
+              </g>
+            </svg>
+          </li>
+        )}
       </ul>
     </Section>
   );

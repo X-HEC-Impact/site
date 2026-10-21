@@ -1,8 +1,8 @@
-import { Quote } from 'lucide-react';
-import { marges, rythme } from '@/components/ui/Section';
-import { Surtitre, Titre } from '@/components/ui/Titre';
-import { pages } from '@/content/site';
-import { cx, typo } from '@/lib/utils';
+import { Quote } from "lucide-react";
+import { marges, rythme } from "@/components/ui/Section";
+import { Surtitre, Titre } from "@/components/ui/Titre";
+import { pages } from "@/content/site";
+import { cx, typo } from "@/lib/utils";
 
 /** Section sombre « Mot de l'équipe » : titre à gauche, citation à droite. */
 export function MotEquipe() {
@@ -12,14 +12,20 @@ export function MotEquipe() {
     <section
       aria-labelledby="mot-titre"
       className={cx(
-        'section-sombre grid gap-10 border-b border-filet bg-sapin md:grid-cols-12 md:gap-12',
+        "section-sombre grid gap-10 border-b border-filet bg-sapin md:grid-cols-12 md:gap-12",
         marges,
         rythme,
       )}
     >
       <div className="md:col-span-5">
         <Surtitre>{mot.surtitre}</Surtitre>
-        <Titre id="mot-titre" sombre debut={mot.titre} suite={mot.titreSuite} className="mt-5" />
+        <Titre
+          id="mot-titre"
+          sombre
+          debut={mot.titre}
+          suite={mot.titreSuite}
+          className="mt-5"
+        />
       </div>
 
       <figure className="md:col-span-7">
@@ -27,7 +33,9 @@ export function MotEquipe() {
         <blockquote className="mt-5 font-titre text-[26px] leading-snug tracking-[-0.01em] text-white md:text-[30px]">
           <p>{typo(`« ${mot.citation} »`)}</p>
         </blockquote>
-        <figcaption className="mt-6 text-[15px] text-lichen">{typo(mot.signature)}</figcaption>
+        <figcaption className="mt-6 text-[15px] text-lichen">
+          {typo(mot.signature)}
+        </figcaption>
       </figure>
     </section>
   );

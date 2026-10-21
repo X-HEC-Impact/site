@@ -106,12 +106,10 @@
 
   .surtitre {
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.4;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-brume);
+    color: var(--color-ardoise);
   }
 
   /* Coup de marqueur vert citron sur un mot (balise <mark>) */
