@@ -18,7 +18,7 @@ function FicheMembre({ membre }: { membre: Membre }) {
             src={membre.photo}
             alt={alt}
             fill
-            sizes="(min-width: 1200px) 350px, (min-width: 1024px) 30vw, 48vw"
+            sizes="(min-width: 1200px) 260px, (min-width: 768px) 30vw, 48vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (
@@ -55,7 +55,7 @@ export function GrilleEquipe() {
         {pages.equipe.grille}
       </h2>
 
-      <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 md:mt-12 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
+      <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-14">
         {equipe.map((membre, index) => (
           <li key={index} className="group">
             <FicheMembre membre={membre} />

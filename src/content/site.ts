@@ -465,6 +465,12 @@ export const equipe: Membre[] = [
     photo: '/images/team/mateo-gosselin.webp',
     linkedin: 'https://www.linkedin.com/in/mateo-gosselin/',
   },
+  {
+    prenom: 'Eléonore',
+    nom: 'de Lambertye',
+    role: '[RÔLE]',
+    photo: '/images/team/eleonore-de-lambertye.webp',
+  },
 ];
 
 /* ------------------------------------------------------------------
