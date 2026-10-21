@@ -176,6 +176,8 @@ export type Evenement = {
   image?: string;
   imageAlt?: string;
   photos?: { src: string; alt: string }[];
+  /** Logo propre à l'événement, affiché en haut de sa page sur la texture du format. */
+  logo?: { src: string; alt: string };
   inscriptionsOuvertes: boolean;
   reserveA?: string;
   accroche?: string;
@@ -316,13 +318,14 @@ Un voyage à faible impact carbone : 19,3 kg de CO2e par étudiant pour 10 jours
     },
   },
   {
-    slug: 'hackathon-impact-2026',
+    slug: 'hack-for-good-2026',
     type: 'hackathon',
-    titre: 'Hackathon Impact, 2e édition',
+    titre: 'Hack for Good, 2e édition du Hackathon Impact',
+    logo: { src: '/images/events/hack-for-good-2026/logo.webp', alt: 'Logo Hack for Good' },
     date: '2026-10-16',
     lieu: 'Eurazeo · 50 Partners',
     accroche: '120 participants, 24 équipes, 2 sites et 4 thématiques au service de l’impact.',
-    description: `Le Hackathon Impact a réuni 120 participants, répartis en 24 équipes, autour de l’impact et de quatre thématiques : économie circulaire, agriculture et souveraineté, ressources critiques (eau et énergie), éducation et inclusion.
+    description: `Le Hack for Good a réuni 120 participants, répartis en 24 équipes, autour de l’impact et de quatre thématiques : économie circulaire, agriculture et souveraineté, ressources critiques (eau et énergie), éducation et inclusion.
 
 L’événement s’est tenu sur deux sites, chez Eurazeo et chez 50 Partners, avec 70 personnes présentes sur chaque site, intervenants compris. Des partenaires de renom, des intervenants et des jurys venus de l’impact, de l’investissement et de l’entreprise l’ont accompagné.
 

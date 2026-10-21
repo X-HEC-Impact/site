@@ -62,7 +62,7 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
         {evenement.accroche && <p className="mt-6 max-w-2xl text-[17px] leading-relaxed md:text-lg">{typo(evenement.accroche)}</p>}
       </header>
 
-      {/* Visuel : la photo de l'événement, sinon la texture de son format */}
+      {/* Visuel : la photo de l'événement, sinon la texture de son format (avec le logo de l'événement s'il en a un) */}
       <div className="border-b border-filet p-5 sm:p-8 lg:p-10">
         <div className="relative aspect-[16/9] overflow-hidden rounded-bouton lg:aspect-[21/8]">
           <Image
@@ -73,6 +73,21 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
             sizes="(min-width: 1200px) 1136px, 100vw"
             className="object-cover"
           />
+          {evenement.logo && !evenement.image && (
+            <div className="absolute inset-0 flex items-center justify-center p-6">
+              <div className="w-[min(80%,30rem)] rounded-bouton bg-white px-6 py-7 shadow-[0_1px_2px_rgb(6_42_33/0.06),0_12px_32px_-12px_rgb(6_42_33/0.25)] sm:px-10 sm:py-10">
+                <Image
+                  src={evenement.logo.src}
+                  alt={evenement.logo.alt}
+                  width={965}
+                  height={296}
+                  priority
+                  sizes="(min-width: 640px) 400px, 70vw"
+                  className="h-auto w-full"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
