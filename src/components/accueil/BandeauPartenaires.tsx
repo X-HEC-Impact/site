@@ -8,10 +8,10 @@ import { accueil, partenaires } from '@/content/site';
  */
 export function BandeauPartenaires() {
   return (
-    <section aria-labelledby="partenaires-titre" className="section-sombre border-b border-white/10 bg-sapin py-14 md:py-16">
+    <section aria-labelledby="partenaires-titre" className="bg-pre py-14 md:py-16">
       <h2
         id="partenaires-titre"
-        className="px-5 text-center text-base font-medium text-white/70"
+        className="px-5 text-center text-base font-medium text-ardoise"
       >
         {accueil.partenaires.surtitre}
       </h2>
@@ -35,11 +35,11 @@ export function BandeauPartenaires() {
                       fill
                       sizes="(min-width: 768px) 176px, 144px"
                       loading="eager"
-                      className="object-contain opacity-85 brightness-0 invert"
+                      className="object-contain"
                     />
                   ) : (
                     // Sans logo : le nom, en gris, en attendant le fichier.
-                    <span className="flex h-full items-center justify-center text-center font-titre text-lg font-medium tracking-[-0.02em] text-lichen md:text-xl">
+                    <span className="flex h-full items-center justify-center text-center font-titre text-lg font-medium tracking-[-0.02em] text-brume md:text-xl">
                       {partenaire.nom}
                     </span>
                   )}
