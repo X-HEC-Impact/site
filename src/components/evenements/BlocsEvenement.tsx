@@ -117,8 +117,15 @@ export function Galerie({ photos }: { photos: NonNullable<Evenement['photos']> }
         En images
       </h2>
       <ul className="mt-8 grid gap-3 sm:grid-cols-2 md:gap-4">
-        {photos.map((photo) => (
-          <li key={photo.src} className="relative aspect-[3/2] overflow-hidden rounded-bouton bg-voile">
+        {photos.map((photo, i) => (
+          <li
+            key={photo.src}
+            className={cx(
+              'relative overflow-hidden rounded-bouton bg-voile',
+              // Nombre impair : la première photo prend toute la largeur, pour ne pas laisser de trou.
+              i === 0 && photos.length % 2 === 1 ? 'aspect-[3/2] sm:col-span-2 sm:aspect-[2/1]' : 'aspect-[3/2]',
+            )}
+          >
             <Image
               src={photo.src}
               alt={photo.alt}

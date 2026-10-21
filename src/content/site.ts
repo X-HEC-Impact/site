@@ -315,6 +315,13 @@ Un voyage à faible impact carbone : 19,3 kg de CO2e par étudiant pour 10 jours
     type: 'hackathon',
     titre: 'Hack for Good, 2e édition du Hackathon Impact',
     logo: { src: '/images/events/hack-for-good-2026/logo.webp', alt: 'Logo Hack for Good' },
+    photos: [
+      { src: '/images/events/hack-for-good-2026/photo-de-groupe.webp', alt: 'Les participants du Hack for Good réunis pour la photo de groupe' },
+      { src: '/images/events/hack-for-good-2026/prise-de-parole.webp', alt: 'Un intervenant prend la parole devant les participants assis' },
+      { src: '/images/events/hack-for-good-2026/presentation-hack-for-good.webp', alt: 'Deux intervenants devant l’écran d’ouverture du Hack for Good' },
+      { src: '/images/events/hack-for-good-2026/participants-vue-du-haut.webp', alt: 'Les participants posent pour la photo de groupe, vus depuis la mezzanine' },
+      { src: '/images/events/hack-for-good-2026/lieu-verriere.webp', alt: 'Le lieu de l’événement, sous sa verrière, avant l’arrivée des équipes' },
+    ],
     date: '2026-10-16',
     lieu: 'Eurazeo · 50 Partners',
     accroche: '120 participants, 24 équipes, 2 sites et 4 thématiques au service de l’impact.',
