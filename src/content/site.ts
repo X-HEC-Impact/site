@@ -163,8 +163,6 @@ export type Evenement = {
   titre: string;
   date: string;
   dateFin?: string;
-  /** Quelques mots après la date, dans le cadre « Prochain rendez-vous » de l'accueil. */
-  resume?: string;
   lieu: string;
   description: string;
   programme?: { quand: string; quoi: string }[];
@@ -211,7 +209,6 @@ export const evenements: Evenement[] = [
     type: 'lex',
     titre: 'LEX Europe',
     date: '2027-04',
-    resume: '10 jours en train',
     lieu: 'Lille · Amsterdam · Munich · Zurich · Milan',
     accroche:
       '5 pays · 10 jours · 10 étudiants du Master X-HEC Entrepreneurs, en train au départ de Paris.',
