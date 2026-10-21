@@ -314,17 +314,17 @@ Un voyage à faible impact carbone : 19,3 kg de CO2e par étudiant pour 10 jours
   {
     slug: 'hackathon-impact-2026',
     type: 'hackathon',
-    titre: 'Hackathon Impact 2026',
+    titre: 'Hackathon Impact, 2e édition',
     date: '2026-10-16',
     lieu: 'Eurazeo · 50 Partners',
-    accroche: '121 participants, 24 équipes, 2 sites et 4 thématiques au service de l’impact.',
-    description: `Le Hackathon Impact a réuni 121 participants, répartis en 24 équipes, autour de l’impact et de quatre thématiques : économie circulaire, agriculture et souveraineté, ressources critiques (eau et énergie), éducation et inclusion.
+    accroche: '120 participants, 24 équipes, 2 sites et 4 thématiques au service de l’impact.',
+    description: `Le Hackathon Impact a réuni 120 participants, répartis en 24 équipes, autour de l’impact et de quatre thématiques : économie circulaire, agriculture et souveraineté, ressources critiques (eau et énergie), éducation et inclusion.
 
-L’événement s’est tenu sur deux sites, chez Eurazeo et chez 50 Partners, avec des partenaires de renom et des intervenants et jurys venus de l’impact, de l’investissement et de l’entreprise.
+L’événement s’est tenu sur deux sites, chez Eurazeo et chez 50 Partners, avec 70 personnes présentes sur chaque site, intervenants compris. Des partenaires de renom, des intervenants et des jurys venus de l’impact, de l’investissement et de l’entreprise l’ont accompagné.
 
-Voir plus de 120 personnes travailler ensemble sur l’impact est une formidable opportunité : nous espérons que de vrais projets en émergeront.`,
+Voir 120 personnes travailler ensemble sur l’impact est une formidable opportunité : nous espérons que de vrais projets en émergeront.`,
     chiffres: [
-      { valeur: '121', libelle: 'participants' },
+      { valeur: '120', libelle: 'participants' },
       { valeur: '24', libelle: 'équipes' },
       { valeur: '4', libelle: 'thématiques' },
       { valeur: '2', libelle: 'sites : Eurazeo et 50 Partners' },
