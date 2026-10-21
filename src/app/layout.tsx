@@ -53,15 +53,13 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
 
         <BarreAnnonce />
 
-        {/* La colonne « cadrée » : 1200 px max, bordée de deux filets verticaux (dès 768 px). */}
-        <div className="md:px-6">
-          <div className="mx-auto flex min-h-screen max-w-[1200px] flex-col border-filet md:border-x">
-            <EnTete inscription={inscription} />
-            <main id="contenu" className="flex-1">
-              {children}
-            </main>
-            <PiedDePage />
-          </div>
+        {/* Pleine largeur : les fonds vont d'un bord à l'autre, le contenu reste centré (voir .marges). */}
+        <div className="flex min-h-screen flex-col overflow-x-clip">
+          <EnTete inscription={inscription} />
+          <main id="contenu" className="flex-1">
+            {children}
+          </main>
+          <PiedDePage />
         </div>
       </body>
     </html>

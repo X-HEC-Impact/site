@@ -76,62 +76,64 @@ export default function PageContact() {
     <>
       <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} />
 
-      <div className="grid border-b border-filet md:grid-cols-12">
-        {/* À gauche : l'e-mail */}
-        <section aria-labelledby="email-titre" className={cx(marges, 'py-16 md:col-span-7 md:py-24')}>
-          <Surtitre>
-            <span id="email-titre">{pages.contact.email.surtitre}</span>
-          </Surtitre>
-          <p className="mt-4 text-[17px]">{typo(pages.contact.email.texte)}</p>
+      <div className="border-b border-filet">
+        <div className="mx-auto grid max-w-[1200px] md:grid-cols-12">
+          {/* À gauche : l'e-mail */}
+          <section aria-labelledby="email-titre" className={cx(marges, 'py-16 md:col-span-7 md:py-24')}>
+            <Surtitre>
+              <span id="email-titre">{pages.contact.email.surtitre}</span>
+            </Surtitre>
+            <p className="mt-4 text-[17px]">{typo(pages.contact.email.texte)}</p>
 
-          <p className="mt-10 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-[36px]">
-            <Mail aria-hidden className="size-7 shrink-0 text-vif-texte" strokeWidth={1.75} />
-            {emailPret ? (
-              <a href={`mailto:${email}`} className="underline-offset-[6px] hover:underline">
-                {email}
-              </a>
-            ) : (
-              <span>{email}</span>
+            <p className="mt-10 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-[36px]">
+              <Mail aria-hidden className="size-7 shrink-0 text-vif-texte" strokeWidth={1.75} />
+              {emailPret ? (
+                <a href={`mailto:${email}`} className="underline-offset-[6px] hover:underline">
+                  {email}
+                </a>
+              ) : (
+                <span>{email}</span>
+              )}
+            </p>
+
+            {emailPret && (
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Bouton href={`mailto:${email}`}>Nous écrire</Bouton>
+                <CopierEmail email={email} />
+              </div>
             )}
-          </p>
+          </section>
 
-          {emailPret && (
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Bouton href={`mailto:${email}`}>Nous écrire</Bouton>
-              <CopierEmail email={email} />
-            </div>
-          )}
-        </section>
-
-        {/* À droite : réseaux et partenariats */}
-        <ul className="border-t border-filet md:col-span-5 md:border-t-0 md:border-l">
-          {linkedin && (
+          {/* À droite : réseaux et partenariats */}
+          <ul className="border-t border-filet md:col-span-5 md:border-t-0 md:border-l">
+            {linkedin && (
+              <Cellule
+                icone={<IconeLinkedin className="size-5" />}
+                titre="LinkedIn"
+                texte={pages.contact.linkedin}
+                href={estPlaceholder(linkedin) ? undefined : linkedin}
+                libelleLien="Voir la page X-HEC Impact"
+              />
+            )}
+            {instagram && (
+              <Cellule
+                icone={<IconeInstagram className="size-5" />}
+                titre="Instagram"
+                texte={pages.contact.instagram}
+                href={estPlaceholder(instagram) ? undefined : instagram}
+                libelleLien="Voir le compte"
+              />
+            )}
             <Cellule
-              icone={<IconeLinkedin className="size-5" />}
-              titre="LinkedIn"
-              texte={pages.contact.linkedin}
-              href={estPlaceholder(linkedin) ? undefined : linkedin}
-              libelleLien="Voir la page X-HEC Impact"
+              icone={<Handshake className="size-5" strokeWidth={1.75} />}
+              titre={partenariats.titre}
+              texte={partenariats.texte}
+              href={partenariats.lien.href}
+              libelleLien={partenariats.lien.libelle}
+              className="bg-menthe"
             />
-          )}
-          {instagram && (
-            <Cellule
-              icone={<IconeInstagram className="size-5" />}
-              titre="Instagram"
-              texte={pages.contact.instagram}
-              href={estPlaceholder(instagram) ? undefined : instagram}
-              libelleLien="Voir le compte"
-            />
-          )}
-          <Cellule
-            icone={<Handshake className="size-5" strokeWidth={1.75} />}
-            titre={partenariats.titre}
-            texte={partenariats.texte}
-            href={partenariats.lien.href}
-            libelleLien={partenariats.lien.libelle}
-            className="bg-menthe"
-          />
-        </ul>
+          </ul>
+        </div>
       </div>
     </>
   );

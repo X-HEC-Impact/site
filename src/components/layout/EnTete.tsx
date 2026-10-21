@@ -34,7 +34,7 @@ export function EnTete({ inscription }: Props) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-filet bg-white/90 backdrop-blur-md">
-      <div className="flex h-[68px] items-center justify-between gap-6 px-5 md:grid md:grid-cols-[1fr_auto_1fr] md:px-8">
+      <div className="marges flex h-[68px] items-center justify-between gap-6 md:grid md:grid-cols-[1fr_auto_1fr]">
         <Logo />
 
         {/* Menu bureau (768 px et plus) */}
@@ -112,7 +112,7 @@ export function EnTete({ inscription }: Props) {
             })}
           </ul>
         </nav>
-        <div className={cx("grid gap-2.5 p-5", inscription && "grid-cols-2")}>
+        <div className={cx('grid gap-2.5 p-5', inscription && 'grid-cols-2')}>
           <Bouton href="/contact" variante="contour" onClick={fermer}>
             Contact
           </Bouton>

@@ -9,7 +9,7 @@ import { cx, typo } from '@/lib/utils';
    ------------------------------------------------------------------ */
 
 /** Marges gauche/droite du contenu dans la colonne cadrée. */
-export const marges = 'px-5 sm:px-8 md:px-12 lg:px-16';
+export const marges = 'marges';
 
 /** Espace vertical d'une section (haut et bas). */
 export const rythme = 'py-20 md:py-28';

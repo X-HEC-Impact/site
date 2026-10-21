@@ -78,6 +78,22 @@
    Petits composants typographiques
    ------------------------------------------------------------------ */
 @layer components {
+  /* Marges latérales des bandes de page : le fond va d'un bord à l'autre de l'écran,
+     le contenu reste centré sur 1200 px au maximum. */
+  .marges {
+    --marge: 1.25rem;
+    padding-inline: max(var(--marge), calc((100% - 1200px) / 2 + var(--marge)));
+  }
+  @media (min-width: 40rem) {
+    .marges { --marge: 2rem; }
+  }
+  @media (min-width: 48rem) {
+    .marges { --marge: 3rem; }
+  }
+  @media (min-width: 64rem) {
+    .marges { --marge: 4rem; }
+  }
+
   .titre-h1 {
     font-size: clamp(40px, 5vw, 60px);
     line-height: 1.04;
