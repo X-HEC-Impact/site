@@ -17,9 +17,12 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-titre"
-      className={cx(marges, 'grid gap-10 border-b border-filet py-20 md:py-28 lg:grid-cols-12 lg:items-end lg:gap-12')}
+      className={cx(
+        marges,
+        'grid gap-10 border-b border-filet py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-12',
+      )}
     >
-      <div className="lg:col-span-7">
+      <div className="lg:col-span-6">
         <p className="flex items-center gap-2.5 text-sm font-medium text-ardoise">
           <span aria-hidden className="size-2 rounded-full bg-vif" />
           {hero.surtitre}
@@ -62,8 +65,8 @@ export function Hero() {
         </h1>
       </div>
 
-      {/* À droite, calé sur le bas du titre : le texte et les boutons */}
-      <div className="max-w-xl lg:col-span-5 lg:max-w-none lg:pb-[0.9rem]">
+      {/* À droite, centré en hauteur sur le titre : le texte et les boutons */}
+      <div className="max-w-xl lg:col-span-6 lg:w-full lg:max-w-[28rem] lg:justify-self-end">
         <p className="text-[17px] leading-relaxed">{typo(hero.texte)}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Bouton href="/evenements">Voir nos événements</Bouton>
