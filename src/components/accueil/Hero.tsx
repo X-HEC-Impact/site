@@ -19,7 +19,7 @@ export function Hero() {
       aria-labelledby="hero-titre"
       className={cx(
         marges,
-        'grid gap-10 border-b border-filet py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-12',
+        'grid min-h-[calc(100svh-108px)] content-center gap-10 border-b border-filet py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-12',
       )}
     >
       <div className="lg:col-span-6">
