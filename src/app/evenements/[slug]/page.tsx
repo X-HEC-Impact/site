@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 import { AppelFinal } from "@/components/AppelFinal";
 import {
   ChiffresCles,
@@ -16,15 +14,14 @@ import {
 import { CarteInscription } from "@/components/evenements/CarteInscription";
 import { ParcoursLex } from "@/components/evenements/ParcoursLex";
 import { Soutien } from "@/components/evenements/Soutien";
-import { Bouton } from "@/components/ui/Bouton";
 import { Motif } from "@/components/ui/Motif";
-import { EtiquetteFormat } from "@/components/evenements/EtiquetteFormat";
+import { EnTeteEvenement } from "@/components/evenements/EnTeteEvenement";
 import { marges } from "@/components/ui/Section";
-import { Surtitre, Titre } from "@/components/ui/Titre";
+import { Surtitre } from "@/components/ui/Titre";
 import { evenements } from "@/content/site";
 import { evenementEstPasse, getEvenement } from "@/lib/evenements";
 import { metaPage } from "@/lib/meta";
-import { cx, decouperTitre, typo } from "@/lib/utils";
+import { cx, typo } from "@/lib/utils";
 
 export function generateStaticParams() {
   return evenements.map((e) => ({ slug: e.slug }));
@@ -51,102 +48,58 @@ export default async function PageEvenement({
   if (!evenement) notFound();
 
   const passe = await evenementEstPasse(slug);
-  const { debut, suite } = decouperTitre(evenement.titre);
   const paragraphes = evenement.description.split(/\n\s*\n/);
 
   return (
     <>
-      {/* En-tête */}
-      <header
-        className={cx(
-          marges,
-          "section-sombre bg-sapin pt-12 pb-16 md:pt-16 md:pb-24",
-        )}
-      >
-        <Link
-          href="/evenements"
-          className="group inline-flex items-center gap-1.5 text-sm font-medium text-white/75 hover:text-white"
-        >
-          <ArrowLeft
-            aria-hidden
-            className="size-4 transition-transform group-hover:-translate-x-0.5"
-          />
-          Tous les événements
-        </Link>
-        <div className="mt-12 flex flex-wrap items-center gap-3 md:mt-16">
-          <EtiquetteFormat type={evenement.type} />
-          {passe && <span className="text-sm text-lichen">Événement passé</span>}
-        </div>
-        <Titre
-          niveau="h1"
-          sombre
-          debut={debut}
-          suite={suite}
-          className="mt-6 max-w-3xl"
-        />
-        {evenement.accroche && (
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-white/85 md:text-lg">
-            {typo(evenement.accroche)}
-          </p>
-        )}
-        {/* Pour un événement à soutenir : l'action des partenaires dès l'en-tête */}
-        {evenement.soutien && (
-          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <Bouton href="#soutenir">Soutenir le projet</Bouton>
-            {evenement.etapes && evenement.etapes.length > 0 && (
-              <Link
-                href="#itineraire"
-                className="font-medium text-white underline-offset-4 hover:underline"
-              >
-                Voir l’itinéraire
-              </Link>
+      <EnTeteEvenement evenement={evenement} passe={passe} />
+
+      {/* Bande sombre dans le prolongement de l'en-tête : le visuel de l'événement (sa photo, sinon la texture de son format, avec son logo ou son itinéraire), puis les chiffres clés */}
+      <div className="section-sombre bg-sapin">
+        <div className={cx(marges, "pb-8 md:pb-10")}>
+          <div className="relative aspect-[16/9] overflow-hidden rounded-bouton lg:aspect-[21/8]">
+            {evenement.image ? (
+              <Image
+                src={evenement.image}
+                alt={evenement.imageAlt ?? evenement.titre}
+                fill
+                priority
+                sizes="(min-width: 1200px) 1136px, 100vw"
+                className="object-cover"
+              />
+            ) : evenement.type === "lex" &&
+              evenement.etapes &&
+              evenement.etapes.length > 0 ? (
+              <ParcoursLex etapes={evenement.etapes} />
+            ) : (
+              <Motif type={evenement.type} />
+            )}
+            {evenement.logo && !evenement.image && (
+              <div className="absolute inset-0 flex items-center justify-center p-6">
+                <div className="w-[min(80%,30rem)] rounded-bouton bg-white px-6 py-7 shadow-[0_1px_2px_rgb(6_42_33/0.06),0_12px_32px_-12px_rgb(6_42_33/0.25)] sm:px-10 sm:py-10">
+                  <Image
+                    src={evenement.logo.src}
+                    alt={evenement.logo.alt}
+                    width={965}
+                    height={296}
+                    priority
+                    sizes="(min-width: 640px) 400px, 70vw"
+                    className="h-auto w-full"
+                  />
+                </div>
+              </div>
             )}
           </div>
-        )}
-      </header>
-
-      {/* Visuel : la photo de l'événement, sinon la texture de son format (avec le logo de l'événement s'il en a un) */}
-      <div
-        className={cx(marges, "border-b border-filet py-5 sm:py-8 lg:py-10")}
-      >
-        <div className="relative aspect-[16/9] overflow-hidden rounded-bouton lg:aspect-[21/8]">
-          {evenement.image ? (
-            <Image
-              src={evenement.image}
-              alt={evenement.imageAlt ?? evenement.titre}
-              fill
-              priority
-              sizes="(min-width: 1200px) 1136px, 100vw"
-              className="object-cover"
-            />
-          ) : evenement.type === "lex" &&
-            evenement.etapes &&
-            evenement.etapes.length > 0 ? (
-            <ParcoursLex etapes={evenement.etapes} />
-          ) : (
-            <Motif type={evenement.type} />
-          )}
-          {evenement.logo && !evenement.image && (
-            <div className="absolute inset-0 flex items-center justify-center p-6">
-              <div className="w-[min(80%,30rem)] rounded-bouton bg-white px-6 py-7 shadow-[0_1px_2px_rgb(6_42_33/0.06),0_12px_32px_-12px_rgb(6_42_33/0.25)] sm:px-10 sm:py-10">
-                <Image
-                  src={evenement.logo.src}
-                  alt={evenement.logo.alt}
-                  width={965}
-                  height={296}
-                  priority
-                  sizes="(min-width: 640px) 400px, 70vw"
-                  className="h-auto w-full"
-                />
-              </div>
-            </div>
-          )}
         </div>
-      </div>
 
-      {evenement.chiffres && evenement.chiffres.length > 0 && (
-        <ChiffresCles chiffres={evenement.chiffres} />
-      )}
+        {evenement.chiffres && evenement.chiffres.length > 0 ? (
+          <div className={cx(marges, "pb-16 md:pb-24")}>
+            <ChiffresCles chiffres={evenement.chiffres} />
+          </div>
+        ) : (
+          <div className="pb-8 md:pb-12" />
+        )}
+      </div>
 
       {/* Deux colonnes : contenu à gauche, carte collante à droite */}
       <div className="border-b border-filet">
@@ -233,7 +186,12 @@ export default async function PageEvenement({
         <Galerie photos={evenement.photos} />
       )}
 
-      <AppelFinal />
+      <AppelFinal
+        photo
+        fonduHaut={Boolean(evenement.photos?.length)}
+        photoSrc={evenement.entete?.src}
+        photoPosition="50% 85%"
+      />
     </>
   );
 }

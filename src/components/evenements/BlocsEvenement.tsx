@@ -18,49 +18,40 @@ import { cx, typo } from "@/lib/utils";
    que si les données correspondantes existent dans site.ts.
    ------------------------------------------------------------------ */
 
-/** Rangée de chiffres clés en cases bordurées. La dernière case est mise en avant. */
+const teintesChiffres = ["bg-menthe", "bg-ciel", "bg-prairie", "bg-citron"];
+
+/**
+ * Rangée de chiffres clés en cartes pastel, à poser sur une bande vert sapin
+ * (comme les formats de l'accueil). Elle ne dessine que ses cartes : la bande
+ * et ses marges sont celles de la page.
+ */
 export function ChiffresCles({
   chiffres,
 }: {
   chiffres: NonNullable<Evenement["chiffres"]>;
 }) {
   return (
-    <section
+    <ul
       aria-label="Chiffres clés"
-      className={cx("border-b border-filet py-12 md:py-16", marges)}
+      className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4"
     >
-      <Grille colonnes="grid-cols-2 md:grid-cols-4" cadre>
-        {chiffres.map((chiffre, i) => {
-          const enAvant = i === chiffres.length - 1;
-          return (
-            <li
-              key={i}
-              className={cx(
-                "px-5 py-8 md:px-7 md:py-9",
-                enAvant && "section-sombre bg-sapin",
-              )}
-            >
-              <p
-                className={cx(
-                  "font-titre text-[44px] leading-none font-medium tracking-[-0.03em] md:text-[52px]",
-                  enAvant ? "text-vif" : "text-vif-texte",
-                )}
-              >
-                {chiffre.valeur}
-              </p>
-              <p
-                className={cx(
-                  "mt-3 text-[15px] leading-snug",
-                  enAvant ? "text-white/80" : "text-ardoise",
-                )}
-              >
-                {chiffre.libelle}
-              </p>
-            </li>
-          );
-        })}
-      </Grille>
-    </section>
+      {chiffres.map((chiffre, i) => (
+        <li
+          key={i}
+          className={cx(
+            "rounded-bouton px-5 py-7 md:px-7 md:py-9",
+            teintesChiffres[i % teintesChiffres.length],
+          )}
+        >
+          <p className="font-titre text-[44px] leading-none font-medium tracking-[-0.03em] text-vif-texte md:text-[52px]">
+            {chiffre.valeur}
+          </p>
+          <p className="mt-3 text-[15px] leading-snug text-sapin/85">
+            {chiffre.libelle}
+          </p>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -169,7 +160,7 @@ export function Rencontres({
   );
 }
 
-/** Galerie « En images » : photos espacées, coins arrondis. */
+/** Galerie « En images » : photos espacées, coins arrondis, sur une bande vert sapin. */
 export function Galerie({
   photos,
 }: {
@@ -178,11 +169,11 @@ export function Galerie({
   return (
     <section
       aria-labelledby="galerie-titre"
-      className={cx("border-b border-filet", marges, rythme)}
+      className={cx("section-sombre bg-sapin", marges, rythme)}
     >
       <h2
         id="galerie-titre"
-        className="text-[28px] leading-tight md:text-[32px]"
+        className="text-[28px] leading-tight text-white md:text-[32px]"
       >
         En images
       </h2>
@@ -191,7 +182,7 @@ export function Galerie({
           <li
             key={photo.src}
             className={cx(
-              "relative overflow-hidden rounded-bouton bg-voile",
+              "relative overflow-hidden rounded-bouton bg-white/10",
               // Nombre impair : la première photo prend toute la largeur, pour ne pas laisser de trou.
               i === 0 && photos.length % 2 === 1
                 ? "aspect-[3/2] sm:col-span-2 sm:aspect-[2/1]"

@@ -171,6 +171,8 @@ export type Evenement = {
   photos?: { src: string; alt: string }[];
   /** Logo propre à l'événement, affiché en haut de sa page sur la texture du format. */
   logo?: { src: string; alt: string };
+  /** Photo de paysage de l'en-tête de la page (chemin dans public/) et cadrage « x y » en pourcentages. Sans elle : le paysage de l'accueil. */
+  entete?: { src: string; position?: string };
   inscriptionsOuvertes: boolean;
   reserveA?: string;
   accroche?: string;
@@ -208,6 +210,7 @@ export const evenements: Evenement[] = [
     slug: 'lex-europe',
     type: 'lex',
     titre: 'LEX Europe',
+    entete: { src: '/images/accueil/paysage.webp', position: '50% 22%' },
     date: '2027-04',
     lieu: 'Lille · Amsterdam · Munich · Zurich · Milan',
     accroche:
@@ -315,6 +318,7 @@ Un voyage à faible impact carbone : 19,3 kg de CO₂e par étudiant pour 10 jou
     type: 'hackathon',
     titre: 'Hack for Good, 2e édition du Hackathon Impact',
     logo: { src: '/images/events/hack-for-good-2026/logo.webp', alt: 'Logo Hack for Good' },
+    entete: { src: '/images/contact/cascade.webp', position: '50% 38%' },
     photos: [
       { src: '/images/events/hack-for-good-2026/photo-de-groupe.webp', alt: 'Les participants du Hack for Good réunis pour la photo de groupe' },
       { src: '/images/events/hack-for-good-2026/prise-de-parole.webp', alt: 'Un intervenant prend la parole devant les participants assis' },
@@ -362,6 +366,7 @@ Voir 120 personnes travailler ensemble sur l’impact est une formidable opportu
     slug: 'hackathon-impact-2025',
     type: 'hackathon',
     titre: 'Hackathon Impact, 1re édition',
+    entete: { src: '/images/evenements/lac-montagne.webp', position: '50% 40%' },
     date: '2025-12-13',
     lieu: 'Mouzaïa, Paris 19e',
     image: '/images/events/hackathon-impact-2025/banniere.jpg',
