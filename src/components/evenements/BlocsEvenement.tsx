@@ -191,7 +191,7 @@ export function PartenairesEvenement({ partenaires }: { partenaires: NonNullable
         {partenaires.map((partenaire) => (
           <li key={partenaire.nom} className="flex h-28 items-center justify-center px-5 text-center md:h-32">
             {partenaire.logo ? (
-              <div className="relative h-12 w-[70%] md:h-14">
+              <div className="relative h-14 w-[72%] md:h-16">
                 <Image src={partenaire.logo} alt={partenaire.nom} fill sizes="220px" className="object-contain" />
               </div>
             ) : (
