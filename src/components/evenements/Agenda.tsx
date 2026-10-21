@@ -45,7 +45,7 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
     <>
       <section
         aria-labelledby="a-venir-titre"
-        className={cx("border-b border-filet", marges, rythme)}
+        className={cx("section-sombre bg-sapin", marges, rythme)}
       >
         {/* Onglets de filtre */}
         <nav aria-label="Filtrer par format">
@@ -65,8 +65,8 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
                     className={cx(
                       "inline-flex h-10 items-center rounded-bouton px-4 text-sm font-medium whitespace-nowrap transition-colors",
                       actif
-                        ? "bg-sapin text-white"
-                        : "border border-filet text-ardoise hover:border-brume hover:text-sapin",
+                        ? "bg-white text-sapin"
+                        : "border border-white/25 text-white/80 hover:border-white hover:text-white",
                     )}
                   >
                     {cle !== "tous" && (
@@ -83,7 +83,7 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
         {/* À venir */}
         <h2
           id="a-venir-titre"
-          className="mt-14 text-[28px] leading-tight md:mt-16 md:text-[32px]"
+          className="mt-14 text-[28px] leading-tight text-white md:mt-16 md:text-[32px]"
         >
           À venir
         </h2>
@@ -102,13 +102,13 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
               )}
             </div>
           ) : (
-            <div className="flex flex-col items-start gap-4 rounded-bouton bg-voile p-8 md:p-10">
+            <div className="flex flex-col items-start gap-4 rounded-bouton bg-white/[0.06] p-8 md:p-10">
               <CalendarDays
                 aria-hidden
-                className="size-6 text-brume"
+                className="size-6 text-lichen"
                 strokeWidth={1.5}
               />
-              <p className="font-titre text-xl font-medium tracking-[-0.02em] text-sapin">
+              <p className="font-titre text-xl font-medium tracking-[-0.02em] text-white">
                 Aucun événement à venir dans ce format pour l’instant.
               </p>
               <LienFleche href="/evenements">

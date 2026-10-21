@@ -7,7 +7,7 @@ import { accueil } from "@/content/site";
 import { cx, typo } from "@/lib/utils";
 
 /** Bannière finale. `photo` : sur l'accueil, elle reprend la photo (le lac) comme le haut de la page. */
-export function AppelFinal({ photo = false }: { photo?: boolean }) {
+export function AppelFinal({ photo = false, fonduHaut = true }: { photo?: boolean; fonduHaut?: boolean }) {
   const { cta } = accueil;
 
   return (
@@ -26,10 +26,12 @@ export function AppelFinal({ photo = false }: { photo?: boolean }) {
             aria-hidden
             className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-sapin to-transparent"
           />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-sapin to-transparent"
-          />
+          {fonduHaut && (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-sapin to-transparent"
+            />
+          )}
         </>
       ) : (
         /* Le dessin de la ligne de train, discret, qui s'estompe vers le texte. */
