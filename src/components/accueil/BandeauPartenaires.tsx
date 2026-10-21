@@ -8,17 +8,17 @@ import { accueil, partenaires } from '@/content/site';
  */
 export function BandeauPartenaires() {
   return (
-    <section aria-labelledby="partenaires-titre" className="border-b border-filet py-16 md:py-20">
+    <section aria-labelledby="partenaires-titre" className="border-b border-filet py-14 md:py-16">
       <h2
         id="partenaires-titre"
-        className="px-5 text-center font-titre text-xl font-medium tracking-[-0.02em] text-sapin md:text-2xl"
+        className="px-5 text-center text-base font-medium text-ardoise"
       >
         {accueil.partenaires.surtitre}
       </h2>
 
       {/* La liste est affichée deux fois ; la piste recule de la moitié de sa
           largeur (= une liste) puis recommence, sans coupure visible. */}
-      <div className="mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] md:mt-12">
+      <div className="mt-8 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] md:mt-9">
         <div className="defilement-piste flex w-max">
           {[0, 1].map((copie) => (
             <ul
