@@ -1,9 +1,8 @@
 import { Bouton } from '@/components/ui/Bouton';
 import { Lien } from '@/components/ui/Lien';
-import { Pictogramme } from '@/components/ui/Pictogramme';
 import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
-import { accueil, formats, type FormatEvenement } from '@/content/site';
+import { accueil, type Evenement } from '@/content/site';
 import { dateLongue } from '@/lib/dates';
 import { getEvenements } from '@/lib/evenements';
 import { cx, typo } from '@/lib/utils';
@@ -35,55 +34,64 @@ export async function Hero() {
       </div>
 
       <div className="border-t border-filet p-5 sm:p-8 md:border-t-0 md:border-l lg:p-10">
-        {/* Le panneau : les trois formats et le prochain rendez-vous, dans la grille 2 × 2 du logo. */}
-        <div className="grid h-full grid-cols-2 auto-rows-[minmax(168px,auto)] overflow-hidden rounded-bouton border border-filet bg-filet gap-px md:min-h-[520px] md:grid-rows-2">
-          <CaseFormat type="lex" />
-
-          <div className="flex flex-col justify-between bg-vif p-4 text-sapin sm:p-6 lg:p-7">
-            {prochain ? (
-              <>
-                <div>
-                  <p className="text-[13px] font-semibold text-sapin">Prochain rendez-vous</p>
-                  <Lien
-                    href={`/evenements/${prochain.slug}`}
-                    className="mt-2 block font-titre text-xl leading-tight font-semibold tracking-[-0.02em] hover:underline hover:underline-offset-4 sm:text-2xl"
-                  >
-                    {prochain.titre}
-                  </Lien>
-                  <p className="mt-1 text-[15px] first-letter:uppercase">{dateLongue(prochain)}</p>
-                </div>
-                {prochain.soutien && (
-                  <Bouton href={`/evenements/${prochain.slug}#soutenir`} variante="noir" taille="petit" className="mt-4 self-start">
-                    Soutenir le projet
-                  </Bouton>
-                )}
-              </>
-            ) : (
-              <Lien href="/evenements" className="font-titre text-xl font-semibold">
-                Voir l’agenda
-              </Lien>
-            )}
-          </div>
-
-          <CaseFormat type="conference" />
-          <CaseFormat type="hackathon" />
-        </div>
+        {prochain ? <CadreRendezVous evenement={prochain} /> : null}
       </div>
     </section>
   );
 }
 
-/** Une case du panneau : le pictogramme du format et son nom, qui mène à l'agenda filtré. */
-function CaseFormat({ type }: { type: FormatEvenement }) {
+/**
+ * Le prochain rendez-vous dans un cadre à double filet, façon billet :
+ * titre, date, puis l'itinéraire ville par ville (ou le lieu), et l'action.
+ */
+function CadreRendezVous({ evenement }: { evenement: Evenement }) {
+  const page = `/evenements/${evenement.slug}`;
+  const date = dateLongue(evenement);
+  const villes = evenement.etapes?.length ? ['Paris', ...evenement.etapes.map((e) => e.ville), 'Paris'] : null;
+  const action = evenement.soutien
+    ? { libelle: 'Soutenir le projet', href: `${page}#soutenir` }
+    : evenement.inscriptionsOuvertes && !evenement.reserveA
+      ? { libelle: 'S’inscrire', href: `${page}#inscription` }
+      : { libelle: 'Découvrir', href: page };
+
   return (
-    <Lien
-      href={`/evenements?format=${type}`}
-      className="group flex flex-col justify-between bg-white p-4 transition-colors duration-200 hover:bg-voile sm:p-6 lg:p-7"
-    >
-      <Pictogramme type={type} className="size-9 text-sapin sm:size-10" />
-      <span className="mt-6 font-titre text-[17px] leading-snug font-semibold tracking-[-0.01em] text-sapin sm:text-xl">
-        {formats[type].nom}
-      </span>
-    </Lien>
+    <div className="h-full rounded-bouton border border-filet bg-white p-2.5 sm:p-3.5">
+      <div className="flex h-full flex-col rounded-[3px] border border-sapin px-6 pt-7 pb-6 sm:px-9 sm:pt-9 sm:pb-8">
+        <p className="text-[13px] text-ardoise">Prochain rendez-vous</p>
+        <h2 className="mt-2.5 text-[38px] leading-none font-semibold tracking-[-0.03em] sm:text-[44px]">
+          <Lien href={page} className="hover:underline hover:decoration-2 hover:underline-offset-[6px]">
+            {evenement.titre}
+          </Lien>
+        </h2>
+        <p className="mt-3 text-[17px] font-medium text-vif-texte">
+          {date.charAt(0).toUpperCase() + date.slice(1)}
+          {evenement.resume && ` · ${evenement.resume}`}
+        </p>
+
+        {villes ? (
+          <ol aria-label="Itinéraire" className="mt-7 mb-8">
+            {villes.map((ville, i) => {
+              const extremite = i === 0 || i === villes.length - 1;
+              return (
+                <li key={`${ville}-${i}`} className="flex items-center gap-3.5 border-t border-filet py-2.5 first:border-t-0">
+                  <span
+                    aria-hidden
+                    className={cx('size-2.5 shrink-0 rounded-full border-[1.5px] border-sapin', extremite ? 'bg-vif' : 'bg-white')}
+                  />
+                  <span className="text-[15px] text-sapin">{ville}</span>
+                </li>
+              );
+            })}
+          </ol>
+        ) : (
+          <p className="mt-6 mb-8 text-[15px]">{evenement.lieu}</p>
+        )}
+
+        <Bouton href={action.href} className="mt-auto self-start">
+          {action.libelle}
+        </Bouton>
+      </div>
+    </div>
   );
 }
+
