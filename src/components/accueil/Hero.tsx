@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import { Bouton } from "@/components/ui/Bouton";
 import Image from "next/image";
 import { marges } from "@/components/ui/Section";
@@ -40,50 +39,6 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-sapin/85 via-sapin/60 to-sapin/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-sapin/50 via-transparent to-transparent" />
       </div>
-
-      {/* Les ondes du logo, tracées fin et très discrètes, qui partent du bord droit (comme les visuels des formats) */}
-      <svg
-        aria-hidden
-        viewBox="0 0 1200 800"
-        preserveAspectRatio="xMaxYMid slice"
-        className="pointer-events-none absolute inset-0 -z-10 hidden size-full lg:block [&_*]:[vector-effect:non-scaling-stroke]"
-      >
-        <g transform="translate(1110 400)" fill="none">
-          {[130, 210, 290, 370, 450, 530, 610, 690].map((r, i) => (
-            <circle
-              key={r}
-              r={r}
-              stroke="#ffffff"
-              strokeOpacity="0.22"
-              strokeWidth="1.5"
-              className="onde"
-              style={{ "--i": i + 1 } as CSSProperties}
-            />
-          ))}
-          <g strokeLinecap="round" strokeWidth="3">
-            <path
-              d="M-92 -92A130 130 0 0 0 -92 92"
-              stroke="#2ec27e"
-              className="onde"
-              style={{ "--i": 1 } as CSSProperties}
-            />
-            <path
-              d="M-148 -148A210 210 0 0 0 -148 148"
-              stroke="#9be0a8"
-              strokeOpacity="0.7"
-              className="onde"
-              style={{ "--i": 2 } as CSSProperties}
-            />
-            <path
-              d="M-205 -205A290 290 0 0 0 -205 205"
-              stroke="#7fd28a"
-              strokeOpacity="0.5"
-              className="onde"
-              style={{ "--i": 3 } as CSSProperties}
-            />
-          </g>
-        </g>
-      </svg>
 
       <div className="lg:col-span-7">
         <h1
