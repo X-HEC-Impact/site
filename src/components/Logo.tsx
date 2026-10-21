@@ -2,24 +2,18 @@ import Link from 'next/link';
 import { cx } from '@/lib/utils';
 
 /**
- * Logo provisoire : un carré découpé en quatre cases (comme la grille du
- * site), dont une case vert vif. À remplacer par le vrai logo si besoin.
+ * Pictogramme du logo : un point d'où partent trois ondes qui s'éloignent
+ * (la prise de parole, la rencontre, l'impact). Couleurs d'origine du logo.
  */
 export function Marque({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 28 28" aria-hidden className={cx('size-7 shrink-0', className)}>
-      <path d="M14 0.75h7.25a6 6 0 0 1 6 6V14H14z" className="fill-vif" />
-      <rect
-        x="0.75"
-        y="0.75"
-        width="26.5"
-        height="26.5"
-        rx="6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-      <path d="M14 1v26M1 14h26" stroke="currentColor" strokeWidth="1.5" />
+    <svg viewBox="-60 -80 140 140" aria-hidden className={cx('size-9 shrink-0', className)}>
+      <circle r="14.5" fill="#7fd28a" />
+      <g fill="none" strokeWidth="10" strokeLinecap="round">
+        <path d="M-24.75 -24.75A35 35 0 0 1 24.75 24.75" stroke="#7fd28a" />
+        <path d="M-38.89 -38.89A55 55 0 0 1 38.89 38.89" stroke="#5aa469" />
+        <path d="M-52.33 -52.33A74 74 0 0 1 52.33 52.33" stroke="#3e7750" />
+      </g>
     </svg>
   );
 }
@@ -32,8 +26,8 @@ export function Logo({ className }: { className?: string }) {
       aria-label="X-HEC Impact, retour à l'accueil"
     >
       <Marque />
-      <span className="font-titre text-[19px] font-medium tracking-[-0.02em] whitespace-nowrap">
-        X-HEC <span className="text-brume">Impact</span>
+      <span className="font-titre text-[20px] tracking-[-0.02em] whitespace-nowrap">
+        <span className="font-bold">X-HEC</span> <span className="font-normal text-vif-texte">impact</span>
       </span>
     </Link>
   );

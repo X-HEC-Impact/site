@@ -58,14 +58,15 @@ export async function imagePartage({ surtitre, titre, titreSuite, details = [] }
       >
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <svg width="44" height="44" viewBox="0 0 28 28">
-            <path d="M14 0.75h7.25a6 6 0 0 1 6 6V14H14z" fill={couleurs.vif} />
-            <rect x="0.75" y="0.75" width="26.5" height="26.5" rx="6" fill="none" stroke="white" strokeWidth="1.5" />
-            <path d="M14 1v26M1 14h26" stroke="white" strokeWidth="1.5" />
+          <svg width="56" height="56" viewBox="-60 -80 140 140">
+            <circle r="14.5" fill="#7fd28a" />
+            <path d="M-24.75 -24.75A35 35 0 0 1 24.75 24.75" fill="none" stroke="#7fd28a" strokeWidth="10" strokeLinecap="round" />
+            <path d="M-38.89 -38.89A55 55 0 0 1 38.89 38.89" fill="none" stroke="#5aa469" strokeWidth="10" strokeLinecap="round" />
+            <path d="M-52.33 -52.33A74 74 0 0 1 52.33 52.33" fill="none" stroke="#3e7750" strokeWidth="10" strokeLinecap="round" />
           </svg>
           <div style={{ display: 'flex', fontFamily: 'Inter Tight', fontSize: 30, letterSpacing: -0.6 }}>
             <span>X-HEC</span>
-            <span style={{ color: couleurs.lichen, marginLeft: 8 }}>Impact</span>
+            <span style={{ color: '#7fd28a', marginLeft: 8 }}>impact</span>
           </div>
         </div>
 
