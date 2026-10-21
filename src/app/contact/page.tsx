@@ -59,7 +59,7 @@ function Reseau({
     </>
   );
   const classes =
-    "flex items-start gap-5 rounded-bouton p-5 text-ardoise md:p-6";
+    "flex items-start gap-5 rounded-bouton p-5 text-ardoise transition-transform duration-300 hover:-translate-y-0.5 md:p-6";
   return (
     <li>
       {href ? (
@@ -120,7 +120,7 @@ export default function PageContact() {
             "grid gap-12 py-14 md:grid-cols-12 md:gap-16 md:py-20",
           )}
         >
-          <section aria-labelledby="email-titre" className="md:col-span-7">
+          <section aria-labelledby="email-titre" data-reveal="monte" className="md:col-span-7">
             <h2 id="email-titre" className="surtitre">
               {pages.contact.email.surtitre}
             </h2>
@@ -153,7 +153,7 @@ export default function PageContact() {
           </section>
 
           {reseaux.length > 0 && (
-            <ul aria-label="Réseaux" className="space-y-4 md:col-span-5">
+            <ul aria-label="Réseaux" data-reveal="liste" className="space-y-4 md:col-span-5">
               {reseaux.map((r) => (
                 <Reseau key={r.titre} {...r} />
               ))}
@@ -165,7 +165,7 @@ export default function PageContact() {
       {/* Partenariats : bandeau photo pleine largeur, comme la bannière finale des autres pages */}
       <section
         aria-labelledby="partenariats-titre"
-        className={cx(marges, "section-sombre relative isolate overflow-hidden py-20 md:py-28")}
+        className={cx(marges, "section-sombre relative isolate overflow-clip py-20 md:py-28")}
       >
         <PhotoFond
           src="/images/contact/cascade.webp"
@@ -176,7 +176,7 @@ export default function PageContact() {
           aria-hidden
           className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-sapin to-transparent"
         />
-        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+        <div data-reveal="monte" className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex items-start gap-5">
             <span className="flex size-11 shrink-0 items-center justify-center rounded-bouton bg-white text-sapin">
               <Handshake aria-hidden className="size-5" strokeWidth={1.75} />

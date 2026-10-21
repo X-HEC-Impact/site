@@ -231,5 +231,363 @@
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
+}
+
+/* ------------------------------------------------------------------
+   Mouvement
+
+   Règles du jeu :
+   - tout ce qui bouge est dans ce bloc, et seulement pour les visiteurs qui
+     n'ont pas demandé de limiter les animations (et pas à l'impression) ;
+   - sans JavaScript, ou si l'animation est limitée, tout s'affiche tel quel :
+     la classe « js » (posée sur <html> par un petit script, voir lib/animations.ts)
+     est la seule à cacher quelque chose avant son apparition ;
+   - le signe distinctif du site : les ondes du logo (elles se propagent sur
+     l'accueil, dans le logo, dans les visuels « Conférences » et « LEX »).
+   ------------------------------------------------------------------ */
+:root {
+  --ease-sortie: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Nombre qui monte jusqu'à sa valeur (chiffres clés) : le texte lu par les
+   lecteurs d'écran reste le vrai chiffre, l'affichage est un compteur CSS. */
+@property --n {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+.compte {
+  --n: var(--cible, 0);
+  counter-reset: n var(--n);
+}
+.compte::before {
+  content: counter(n);
+}
+
+/* Éléments qui n'existent que pour bouger : invisibles sans animation. */
+.ping,
+.pulse-gare,
+.trace-train {
+  opacity: 0;
+}
+.progression {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  background: var(--color-vif);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@keyframes monte {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes tire {
+  from {
+    clip-path: inset(-40% 100% -40% 0);
+  }
+  to {
+    clip-path: inset(-40% -2% -40% 0);
+  }
+}
+@keyframes barre {
+  from {
+    clip-path: inset(0 100% 0 0 round 9999px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 9999px);
+  }
+}
+@keyframes trace {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes gare {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes nom {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes compte {
+  from {
+    --n: 0;
+  }
+}
+@keyframes respire {
+  from {
+    scale: 1.12;
+  }
+  to {
+    scale: 1.22;
+  }
+}
+@keyframes parallaxe {
+  from {
+    translate: 0 -5%;
+  }
+  to {
+    translate: 0 5%;
+  }
+}
+@keyframes onde-ping {
+  0% {
+    transform: scale(0.15);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--pic, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+@keyframes souffle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.14);
+  }
+}
+@keyframes allume {
+  0%,
+  10%,
+  100% {
+    fill: #d8e0a4;
+  }
+  3%,
+  7% {
+    fill: var(--color-vif);
+  }
+}
+@keyframes pulse-gare {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+@keyframes logo-apparait {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes logo-emet {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.2;
+  }
+}
+@keyframes progression {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  /* Entrée au chargement (haut de page) : chaque élément monte, l'un après l'autre. */
+  .entree {
+    animation: monte 900ms var(--ease-sortie) both;
+    animation-delay: var(--d, 0ms);
+  }
+  /* Trait vert sous le mot du titre de l'accueil : tracé de gauche à droite. */
+  .souligne {
+    animation: tire 1000ms cubic-bezier(0.65, 0, 0.35, 1) 1100ms backwards;
+  }
+
+  /* Apparition au défilement. Avant : caché. */
+  .js [data-reveal='monte']:not([data-vu]),
+  .js [data-reveal='zoom']:not([data-vu]) {
+    opacity: 0;
+  }
+  .js [data-reveal='liste']:not([data-vu]) > * {
+    opacity: 0;
+  }
+  .js [data-reveal='barres']:not([data-vu]) [data-barre] {
+    clip-path: inset(0 100% 0 0 round 9999px);
+  }
+  .js [data-reveal='trace']:not([data-vu]) .trace-ligne {
+    clip-path: inset(0 100% 0 0);
+  }
+  .js [data-reveal='trace']:not([data-vu]) :is(.trace-gare, .trace-nom) {
+    opacity: 0;
+  }
+
+  /* Après : l'animation se joue une fois, puis l'élément reprend son style normal
+     (les survols continuent donc de fonctionner). */
+  .js [data-reveal='monte'][data-vu] {
+    animation: monte 900ms var(--ease-sortie) backwards;
+    animation-delay: var(--d, 0ms);
+  }
+  .js [data-reveal='zoom'][data-vu] {
+    animation: zoom 1100ms var(--ease-sortie) backwards;
+    animation-delay: var(--d, 0ms);
+  }
+  .js [data-reveal='liste'][data-vu] > * {
+    animation: monte 800ms var(--ease-sortie) backwards;
+  }
+  .js [data-reveal='liste'][data-vu] > :nth-child(2) { animation-delay: 80ms; }
+  .js [data-reveal='liste'][data-vu] > :nth-child(3) { animation-delay: 160ms; }
+  .js [data-reveal='liste'][data-vu] > :nth-child(4) { animation-delay: 240ms; }
+  .js [data-reveal='liste'][data-vu] > :nth-child(5) { animation-delay: 320ms; }
+  .js [data-reveal='liste'][data-vu] > :nth-child(6) { animation-delay: 400ms; }
+  .js [data-reveal='liste'][data-vu] > :nth-child(7) { animation-delay: 480ms; }
+  .js [data-reveal='liste'][data-vu] > :nth-child(n + 8) { animation-delay: 560ms; }
+  .js [data-reveal='liste'][data-vu] .compte {
+    animation: compte 1600ms var(--ease-sortie) 350ms backwards;
+  }
+  .js [data-reveal='barres'][data-vu] [data-barre] {
+    animation: barre 1300ms var(--ease-sortie) 250ms backwards;
+  }
+  .js [data-reveal='trace'][data-vu] .trace-ligne {
+    animation: trace 1800ms linear backwards;
+  }
+  .js [data-reveal='trace'][data-vu] .trace-gare {
+    animation: gare 600ms var(--ease-sortie) backwards;
+    animation-delay: calc(var(--t, 0) * 1ms);
+  }
+  .js [data-reveal='trace'][data-vu] .trace-nom {
+    animation: nom 600ms var(--ease-sortie) backwards;
+    animation-delay: calc(var(--t, 0) * 1ms + 150ms);
+  }
+  .js [data-reveal='trace'][data-vu] .trace-train {
+    animation: parcours-train 18s infinite;
+    animation-delay: 2600ms;
+  }
+
+  /* Les ondes : elles partent d'un point et s'éloignent en s'effaçant. */
+  .ping {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: onde-ping 6s cubic-bezier(0.2, 0.55, 0.3, 1) infinite;
+    animation-delay: calc(var(--i, 0) * 2s);
+  }
+  .souffle {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: souffle 3.2s ease-in-out infinite;
+  }
+  .bloc-pose {
+    animation: allume 11s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 1.1s);
+  }
+  .pulse-gare {
+    animation: pulse-gare 2.6s ease-out infinite;
+  }
+
+  /* Le logo : les trois ondes s'allument l'une après l'autre, et repartent au survol. */
+  .logo-onde {
+    animation: logo-apparait 700ms var(--ease-sortie) both;
+    animation-delay: calc(var(--i, 0) * 150ms + 250ms);
+  }
+  .logo-lien:hover .logo-onde {
+    animation:
+      logo-apparait 700ms var(--ease-sortie) both,
+      logo-emet 1000ms ease-in-out;
+    animation-delay:
+      calc(var(--i, 0) * 150ms + 250ms),
+      calc(var(--i, 0) * 140ms);
+  }
+
+  /* Les photos respirent (zoom très lent) et glissent un peu moins vite que la page. */
+  .photo-respire {
+    animation: respire 32s ease-in-out infinite alternate;
+  }
+  @supports (animation-timeline: view()) {
+    .photo-parallaxe {
+      scale: 1.12;
+      animation: parallaxe linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+    .photo-parallaxe.photo-respire {
+      animation:
+        respire 32s ease-in-out infinite alternate,
+        parallaxe linear both;
+      animation-timeline: auto, view();
+      animation-range: normal, cover;
+    }
+  }
+
+  /* Fine ligne verte sous la barre du haut : l'avancement dans la page. */
+  @supports (animation-timeline: scroll()) {
+    .progression {
+      animation: progression linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+/* Menu mobile : il glisse à l'ouverture, ses liens arrivent l'un après l'autre. */
+@keyframes menu-ouvre {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  #menu-mobile:not([hidden]) {
+    animation: menu-ouvre 260ms var(--ease-sortie);
+  }
+  #menu-mobile:not([hidden]) li {
+    animation: monte 500ms var(--ease-sortie) backwards;
+  }
+  #menu-mobile:not([hidden]) li:nth-child(2) { animation-delay: 50ms; }
+  #menu-mobile:not([hidden]) li:nth-child(3) { animation-delay: 100ms; }
+  #menu-mobile:not([hidden]) li:nth-child(4) { animation-delay: 150ms; }
+  #menu-mobile:not([hidden]) li:nth-child(n + 5) { animation-delay: 200ms; }
 }

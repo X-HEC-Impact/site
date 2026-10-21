@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import { cx } from '@/lib/utils';
 
@@ -10,9 +11,9 @@ export function Marque({ className }: { className?: string }) {
     <svg viewBox="-60 -80 140 140" aria-hidden className={cx('size-9 shrink-0', className)}>
       <circle r="14.5" fill="#7fd28a" />
       <g fill="none" strokeWidth="10" strokeLinecap="round">
-        <path d="M-24.75 -24.75A35 35 0 0 1 24.75 24.75" stroke="#7fd28a" />
-        <path d="M-38.89 -38.89A55 55 0 0 1 38.89 38.89" stroke="#5aa469" />
-        <path d="M-52.33 -52.33A74 74 0 0 1 52.33 52.33" stroke="#3e7750" />
+        <path className="logo-onde" style={{ '--i': 0 } as CSSProperties} d="M-24.75 -24.75A35 35 0 0 1 24.75 24.75" stroke="#7fd28a" />
+        <path className="logo-onde" style={{ '--i': 1 } as CSSProperties} d="M-38.89 -38.89A55 55 0 0 1 38.89 38.89" stroke="#5aa469" />
+        <path className="logo-onde" style={{ '--i': 2 } as CSSProperties} d="M-52.33 -52.33A74 74 0 0 1 52.33 52.33" stroke="#3e7750" />
       </g>
     </svg>
   );
@@ -22,7 +23,7 @@ export function Logo({ className, sombre }: { className?: string; sombre?: boole
   return (
     <Link
       href="/"
-      className={cx('inline-flex items-center gap-2.5', sombre ? 'text-white' : 'text-sapin', className)}
+      className={cx('logo-lien inline-flex items-center gap-2.5', sombre ? 'text-white' : 'text-sapin', className)}
       aria-label="X-HEC Impact, retour à l'accueil"
     >
       <Marque />

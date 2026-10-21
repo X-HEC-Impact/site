@@ -17,7 +17,7 @@ export function MotEquipe() {
         rythme,
       )}
     >
-      <div className="md:col-span-5">
+      <div data-reveal="monte" className="md:col-span-5">
         <Surtitre>{mot.surtitre}</Surtitre>
         <Titre
           id="mot-titre"
@@ -28,7 +28,7 @@ export function MotEquipe() {
         />
       </div>
 
-      <figure className="md:col-span-7">
+      <figure data-reveal="monte" className="[--d:150ms] md:col-span-7">
         <Quote aria-hidden className="size-7 text-vif" strokeWidth={1.75} />
         <blockquote className="mt-5 font-titre text-[26px] leading-snug tracking-[-0.01em] text-white md:text-[30px]">
           <p>{typo(`« ${mot.citation} »`)}</p>

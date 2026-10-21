@@ -19,6 +19,7 @@ export function EditionsPrecedentes() {
         {editions.liste.map((edition) => (
           <div
             key={edition.libelle}
+            data-reveal="monte"
             className="overflow-hidden rounded-bouton border border-filet [&+&]:mt-6"
           >
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-filet bg-voile px-5 py-4 md:px-7">

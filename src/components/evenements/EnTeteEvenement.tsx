@@ -26,7 +26,7 @@ export function EnTeteEvenement({
     <header
       className={cx(
         marges,
-        "section-sombre relative isolate flex min-h-[28rem] flex-col overflow-hidden bg-sapin pt-10 pb-16 md:min-h-[34rem] md:pt-14 md:pb-24",
+        "section-sombre relative isolate flex min-h-[28rem] flex-col overflow-clip bg-sapin pt-10 pb-16 md:min-h-[34rem] md:pt-14 md:pb-24",
       )}
     >
       <PhotoFond
@@ -34,6 +34,7 @@ export function EnTeteEvenement({
         position={evenement.entete?.position}
         voile="fort"
         priority
+        mouvement="respire"
       />
       {/* Fondu vers la bande sombre qui suit, sans arête */}
       <div
@@ -43,7 +44,7 @@ export function EnTeteEvenement({
 
       <Link
         href="/evenements"
-        className="group inline-flex items-center gap-1.5 self-start text-sm font-medium text-white/85 hover:text-white"
+        className="entree group inline-flex items-center gap-1.5 self-start text-sm font-medium text-white/85 hover:text-white"
       >
         <ArrowLeft
           aria-hidden
@@ -53,7 +54,7 @@ export function EnTeteEvenement({
       </Link>
 
       <div className="mt-auto pt-24 md:pt-32">
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="entree flex flex-wrap items-center gap-3 [--d:120ms]">
           <EtiquetteFormat type={evenement.type} />
           {passe && (
             <span className="text-sm text-white/75">Événement passé</span>
@@ -64,16 +65,16 @@ export function EnTeteEvenement({
           sombre
           debut={debut}
           suite={suite}
-          className="mt-6 max-w-3xl [&>span]:text-white/75"
+          className="entree mt-6 max-w-3xl [--d:220ms] [&>span]:text-white/75"
         />
         {evenement.accroche && (
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-white/90 md:text-lg">
+          <p className="entree mt-6 max-w-2xl text-[17px] leading-relaxed text-white/90 [--d:360ms] md:text-lg">
             {typo(evenement.accroche)}
           </p>
         )}
         {/* Pour un événement à soutenir : l'action des partenaires dès l'en-tête */}
         {evenement.soutien && (
-          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="entree mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 [--d:480ms]">
             <Bouton href="#soutenir">Soutenir le projet</Bouton>
             {evenement.etapes && evenement.etapes.length > 0 && (
               <Link

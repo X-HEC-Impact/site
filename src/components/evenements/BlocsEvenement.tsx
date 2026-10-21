@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import {
   Building2,
@@ -21,6 +22,25 @@ import { cx, typo } from "@/lib/utils";
 const teintesChiffres = ["bg-menthe", "bg-ciel", "bg-prairie", "bg-citron"];
 
 /**
+ * Un chiffre clé. Quand il commence par un nombre entier (« 120 », « 100 % »), il monte
+ * jusqu'à sa valeur à l'arrivée à l'écran (compteur CSS) ; le texte lu par les lecteurs
+ * d'écran, lui, reste la valeur exacte.
+ */
+function Valeur({ valeur }: { valeur: string }) {
+  const m = /^(\d+)(\D*)$/.exec(valeur.trim());
+  if (!m) return <>{valeur}</>;
+  return (
+    <>
+      <span className="sr-only">{valeur}</span>
+      <span aria-hidden>
+        <span className="compte" style={{ "--cible": Number(m[1]) } as CSSProperties} />
+        {m[2]}
+      </span>
+    </>
+  );
+}
+
+/**
  * Rangée de chiffres clés en cartes pastel, à poser sur une bande vert sapin
  * (comme les formats de l'accueil). Elle ne dessine que ses cartes : la bande
  * et ses marges sont celles de la page.
@@ -33,6 +53,7 @@ export function ChiffresCles({
   return (
     <ul
       aria-label="Chiffres clés"
+      data-reveal="liste"
       className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4"
     >
       {chiffres.map((chiffre, i) => (
@@ -43,8 +64,8 @@ export function ChiffresCles({
             teintesChiffres[i % teintesChiffres.length],
           )}
         >
-          <p className="font-titre text-[44px] leading-none font-medium tracking-[-0.03em] text-vif-texte md:text-[52px]">
-            {chiffre.valeur}
+          <p className="font-titre text-[44px] leading-none font-medium tracking-[-0.03em] text-vif-texte tabular-nums md:text-[52px]">
+            <Valeur valeur={chiffre.valeur} />
           </p>
           <p className="mt-3 text-[15px] leading-snug text-sapin/85">
             {chiffre.libelle}
@@ -70,7 +91,7 @@ export function Itineraire({
       <Surtitre>
         <span id="itineraire-titre">L’itinéraire</span>
       </Surtitre>
-      <ol className="mt-8">
+      <ol data-reveal="liste" className="mt-8">
         {etapes.map((etape, i) => (
           <li key={etape.ville} className="relative flex gap-5 pb-9 last:pb-0">
             {/* Le trait qui relie chaque étape à la suivante */}
@@ -131,13 +152,13 @@ export function Rencontres({
       <p className="mt-3 font-titre text-2xl leading-snug font-medium tracking-[-0.02em] text-sapin">
         Des rencontres choisies par les étudiants.
       </p>
-      <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+      <ul data-reveal="liste" className="mt-8 grid gap-3 sm:grid-cols-2">
         {rencontres.map((rencontre, i) => {
           const Icone = icones[i % icones.length];
           return (
             <li
               key={rencontre.titre}
-              className="rounded-bouton border border-filet p-5 md:p-6"
+              className="rounded-bouton border border-filet p-5 transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-sapin/30 md:p-6"
             >
               <Icone
                 aria-hidden
@@ -177,7 +198,7 @@ export function Galerie({
       >
         En images
       </h2>
-      <ul className="mt-8 grid gap-3 sm:grid-cols-2 md:gap-4">
+      <ul data-reveal="liste" className="mt-8 grid gap-3 sm:grid-cols-2 md:gap-4">
         {photos.map((photo, i) => (
           <li
             key={photo.src}
@@ -194,7 +215,7 @@ export function Galerie({
               alt={photo.alt}
               fill
               sizes="(min-width: 1200px) 540px, (min-width: 640px) 50vw, 100vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-700 hover:scale-[1.04]"
             />
           </li>
         ))}
@@ -216,12 +237,12 @@ export function Thematiques({
       <Surtitre>
         <span id="thematiques-titre">Les thématiques</span>
       </Surtitre>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+      <ul data-reveal="liste" className="mt-6 grid gap-3 sm:grid-cols-2">
         {thematiques.map((theme, i) => (
           <li
             key={theme.titre}
             className={cx(
-              "rounded-bouton p-5 md:p-6",
+              "rounded-bouton p-5 transition-transform duration-300 hover:-translate-y-0.5 md:p-6",
               teintes[i % teintes.length],
             )}
           >
@@ -254,7 +275,7 @@ export function Intervenants({
       >
         Intervenants et jury
       </h2>
-      <Grille colonnes="sm:grid-cols-2 lg:grid-cols-3" cadre className="mt-8">
+      <Grille colonnes="sm:grid-cols-2 lg:grid-cols-3" cadre apparition className="mt-8">
         {intervenants.map((personne) => (
           <li key={personne.nom} className="px-6 py-6 md:px-7">
             <p className="font-titre text-xl font-medium tracking-[-0.02em] text-sapin">
@@ -285,7 +306,7 @@ export function PartenairesEvenement({
       >
         Partenaires
       </h2>
-      <Grille colonnes="grid-cols-2 md:grid-cols-3" cadre className="mt-8">
+      <Grille colonnes="grid-cols-2 md:grid-cols-3" cadre apparition className="mt-8">
         {partenaires.map((partenaire) => (
           <li
             key={partenaire.nom}

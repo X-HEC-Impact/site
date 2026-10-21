@@ -24,7 +24,7 @@ export function AppelFinal({
     <section
       aria-labelledby="cta-titre"
       className={cx(
-        "relative overflow-hidden",
+        "relative overflow-clip",
         photo ? "section-sombre isolate" : "border-b border-filet bg-menthe",
       )}
     >
@@ -53,7 +53,7 @@ export function AppelFinal({
         </div>
       )}
 
-      <div className={cx(marges, "relative py-24 md:py-32")}>
+      <div data-reveal="monte" className={cx(marges, "relative py-24 md:py-32")}>
         <Titre
           id="cta-titre"
           sombre={photo}

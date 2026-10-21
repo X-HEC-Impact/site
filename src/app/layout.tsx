@@ -5,6 +5,7 @@ import { EnTete } from '@/components/layout/EnTete';
 import { PiedDePage } from '@/components/layout/PiedDePage';
 import { association, boutonInscription } from '@/content/site';
 import { getEvenements } from '@/lib/evenements';
+import { SCRIPT_APPARITIONS, SCRIPT_ENTETE } from '@/lib/animations';
 import { urlSite } from '@/lib/url';
 import './globals.css';
 
@@ -42,7 +43,11 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
     : null;
 
   return (
-    <html lang="fr" className={jakarta.variable} data-scroll-behavior="smooth">
+    // suppressHydrationWarning : le script d'animations ajoute la classe « js » à <html> avant l'hydratation.
+    <html lang="fr" className={jakarta.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: SCRIPT_ENTETE }} />
+      </head>
       <body>
         <a
           href="#contenu"
@@ -61,6 +66,8 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
           </main>
           <PiedDePage />
         </div>
+
+        <script dangerouslySetInnerHTML={{ __html: SCRIPT_APPARITIONS }} />
       </body>
     </html>
   );

@@ -91,7 +91,7 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
             <div className="space-y-8">
               <EvenementEnVedette evenement={aVenirFiltres[0]} />
               {aVenirFiltres.length > 1 && (
-                <Grille colonnes="md:grid-cols-3" cadre>
+                <Grille colonnes="md:grid-cols-3" cadre apparition>
                   {aVenirFiltres.slice(1).map((evenement) => (
                     <li key={evenement.slug}>
                       <CelluleEvenement evenement={evenement} />
@@ -130,7 +130,7 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
           >
             Événements passés
           </h2>
-          <ul className="mt-8 grid gap-6 md:grid-cols-2">
+          <ul data-reveal="liste" className="mt-8 grid gap-6 md:grid-cols-2">
             {passesFiltres.map((evenement) => (
               <li key={evenement.slug}>
                 <CartePassee evenement={evenement} />
@@ -151,7 +151,7 @@ function EvenementEnVedette({ evenement }: { evenement: Evenement }) {
   const page = `/evenements/${slug}`;
 
   return (
-    <article className="grid overflow-hidden rounded-bouton border border-filet bg-white shadow-[0_1px_2px_rgb(6_42_33/0.05),0_16px_40px_-20px_rgb(6_42_33/0.25)] md:grid-cols-12">
+    <article data-reveal="zoom" className="grid overflow-hidden rounded-bouton border border-filet bg-white shadow-[0_1px_2px_rgb(6_42_33/0.05),0_16px_40px_-20px_rgb(6_42_33/0.25)] md:grid-cols-12">
       <div className="relative aspect-[16/9] md:col-span-5 md:aspect-auto md:min-h-[22rem]">
         <Motif type={type} />
       </div>
@@ -226,7 +226,7 @@ function CartePassee({ evenement }: { evenement: Evenement }) {
   return (
     <Link
       href={`/evenements/${evenement.slug}`}
-      className="group block overflow-hidden rounded-bouton border border-filet bg-white transition-shadow duration-200 hover:shadow-[0_16px_40px_-20px_rgb(6_42_33/0.3)]"
+      className="group block overflow-hidden rounded-bouton border border-filet bg-white transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_rgb(6_42_33/0.3)]"
     >
       <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[3/2]">
         {photo ? (

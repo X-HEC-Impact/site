@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { UserRound } from "lucide-react";
 import { IconeLinkedin } from "@/components/ui/IconesReseaux";
@@ -62,7 +63,7 @@ export function GrilleEquipe() {
         {pages.equipe.grille}
       </h2>
 
-      <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-14">
+      <ul data-reveal="liste" className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 md:mt-12 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-14">
         {equipe.map((membre, index) => (
           <li key={index} className="group">
             <FicheMembre membre={membre} />
@@ -88,7 +89,18 @@ export function GrilleEquipe() {
                     strokeWidth="1.5"
                   />
                 ))}
-                <circle r="16" fill="#2ec27e" />
+                {/* Une onde part du point vert et s'éloigne */}
+                {[0, 1].map((i) => (
+                  <circle
+                    key={i}
+                    className="ping"
+                    style={{ "--i": i, "--pic": 0.5 } as CSSProperties}
+                    r="230"
+                    stroke="#2ec27e"
+                    strokeWidth="2"
+                  />
+                ))}
+                <circle r="16" fill="#2ec27e" className="souffle" />
               </g>
             </svg>
           </li>

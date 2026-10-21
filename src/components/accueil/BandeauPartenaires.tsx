@@ -11,6 +11,7 @@ export function BandeauPartenaires() {
     <section aria-labelledby="partenaires-titre" className="section-sombre border-b border-white/10 bg-sapin py-14 md:py-16">
       <h2
         id="partenaires-titre"
+        data-reveal="monte"
         className="px-5 text-center text-base font-medium text-white/70"
       >
         {accueil.partenaires.surtitre}

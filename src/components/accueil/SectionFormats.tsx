@@ -41,7 +41,7 @@ export async function SectionFormats() {
       />
 
       {/* Cartes espacées ; grid-rows-subgrid garde titres, textes, puces et visuels alignés d'une carte à l'autre. */}
-      <ul className={cx('grid gap-4 md:grid-cols-3 lg:gap-5', ecart)}>
+      <ul data-reveal="liste" className={cx('grid gap-4 md:grid-cols-3 lg:gap-5', ecart)}>
         {(Object.keys(formats) as FormatEvenement[]).map((type) => {
           const format = formats[type];
 
@@ -49,11 +49,11 @@ export async function SectionFormats() {
             <li
               key={type}
               className={cx(
-                'group row-span-5 grid grid-rows-subgrid gap-0 rounded-bouton p-6 text-ardoise lg:p-8',
+                'group row-span-5 grid grid-rows-subgrid gap-0 rounded-bouton p-6 text-ardoise transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_44px_-28px_rgb(0_0_0/0.7)] lg:p-8',
                 fondFormat[type],
               )}
             >
-              <span className="flex size-11 items-center justify-center rounded-bouton bg-white text-sapin">
+              <span className="flex size-11 items-center justify-center rounded-bouton bg-white text-sapin transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
                 <Pictogramme type={type} />
               </span>
 

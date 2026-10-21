@@ -57,7 +57,7 @@ export default async function PageEvenement({
       {/* Bande sombre dans le prolongement de l'en-tête : le visuel de l'événement (sa photo, sinon la texture de son format, avec son logo ou son itinéraire), puis les chiffres clés */}
       <div className="section-sombre bg-sapin">
         <div className={cx(marges, "pb-8 md:pb-10")}>
-          <div className="relative aspect-[16/9] overflow-hidden rounded-bouton lg:aspect-[21/8]">
+          <div data-reveal="zoom" className="relative aspect-[16/9] overflow-hidden rounded-bouton lg:aspect-[21/8]">
             {evenement.image ? (
               <Image
                 src={evenement.image}
@@ -105,7 +105,7 @@ export default async function PageEvenement({
       <div className="border-b border-filet">
         <div className="mx-auto grid max-w-[1200px] md:grid-cols-12">
           <div className={cx(marges, "py-16 md:col-span-7 md:py-24")}>
-            <section aria-labelledby="apropos-titre">
+            <section aria-labelledby="apropos-titre" data-reveal="monte">
               <Surtitre>
                 <span id="apropos-titre">À propos</span>
               </Surtitre>
@@ -141,7 +141,7 @@ export default async function PageEvenement({
                 <Surtitre>
                   <span id="programme-titre">Programme</span>
                 </Surtitre>
-                <ol className="mt-6 overflow-hidden rounded-bouton border border-filet">
+                <ol data-reveal="liste" className="mt-6 overflow-hidden rounded-bouton border border-filet">
                   {evenement.programme.map((etape, i) => (
                     <li
                       key={i}

@@ -10,6 +10,11 @@ type Props = {
   voile?: "normal" | "fort";
   priority?: boolean;
   className?: string;
+  /**
+   * Mouvement de la photo : « parallaxe » (elle glisse un peu moins vite que la page),
+   * « respire » (en plus, un zoom très lent), ou « aucun ».
+   */
+  mouvement?: "parallaxe" | "respire" | "aucun";
 };
 
 /**
@@ -23,12 +28,13 @@ export function PhotoFond({
   voile = "normal",
   priority,
   className,
+  mouvement = "parallaxe",
 }: Props) {
   return (
     <div
       aria-hidden
       className={cx(
-        "pointer-events-none absolute inset-0 -z-10 bg-sapin",
+        "pointer-events-none absolute inset-0 -z-10 overflow-clip bg-sapin",
         className,
       )}
     >
@@ -38,7 +44,11 @@ export function PhotoFond({
         fill
         priority={priority}
         sizes="100vw"
-        className="object-cover"
+        className={cx(
+          "object-cover",
+          mouvement !== "aucun" && "photo-parallaxe",
+          mouvement === "respire" && "photo-respire",
+        )}
         style={{ objectPosition: position }}
       />
       <div

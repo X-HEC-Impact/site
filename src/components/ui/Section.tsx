@@ -53,7 +53,7 @@ type PropsEnTete = {
 /** En-tête de section : surtitre, titre en deux tons, intro facultative, lien facultatif. */
 export function EnTeteSection({ surtitre, titre, titreSuite, id, intro, lien, sombre }: PropsEnTete) {
   return (
-    <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <div data-reveal="monte" className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div className="max-w-2xl">
         {surtitre && <Surtitre className="mb-5">{surtitre}</Surtitre>}
         <Titre id={id} debut={titre} suite={titreSuite} sombre={sombre} />

@@ -21,6 +21,7 @@ function BarrePart({ part, className }: { part: string; className?: string }) {
       )}
     >
       <span
+        data-barre
         className="block h-full rounded-full bg-vif"
         style={{ width: `${pourcentage(part)}%` }}
       />
@@ -59,6 +60,7 @@ export function Soutien({ soutien }: { soutien: DonneesSoutien }) {
       </h3>
       <ul
         aria-labelledby="niveaux-titre"
+        data-reveal="liste"
         className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-stretch"
       >
         {niveaux.map((niveau, i) => {
@@ -67,7 +69,7 @@ export function Soutien({ soutien }: { soutien: DonneesSoutien }) {
             <li
               key={niveau.nom}
               className={cx(
-                "flex flex-col rounded-bouton p-6 lg:p-7",
+                "flex flex-col rounded-bouton p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7",
                 principal
                   ? "section-sombre bg-sapin text-white/80 shadow-[0_20px_40px_-24px_rgb(6_42_33/0.6)]"
                   : "border border-filet bg-white",
@@ -147,7 +149,7 @@ export function Soutien({ soutien }: { soutien: DonneesSoutien }) {
       <h3 className="mt-16 text-2xl md:mt-20">
         Ce que vous apporte ce partenariat
       </h3>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <ul data-reveal="liste" className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {avantages.map((avantage) => (
           <li
             key={avantage.titre}
@@ -163,7 +165,7 @@ export function Soutien({ soutien }: { soutien: DonneesSoutien }) {
       <h3 className="mt-16 text-2xl md:mt-20">Budget prévisionnel</h3>
 
       {/* Sur mobile : une carte par poste, le total en dernier */}
-      <div className="mt-6 md:hidden">
+      <div data-reveal="barres" className="mt-6 md:hidden">
         <ul className="overflow-hidden rounded-bouton border border-filet text-[15px]">
           {budget.map((ligne) => (
             <li key={ligne.poste} className="border-b border-filet px-5 py-4">
@@ -192,7 +194,7 @@ export function Soutien({ soutien }: { soutien: DonneesSoutien }) {
       </div>
 
       {/* À partir de 768 px : le tableau, avec une barre dans la colonne « Part » */}
-      <div className="mt-6 hidden overflow-hidden rounded-bouton border border-filet md:block">
+      <div data-reveal="barres" className="mt-6 hidden overflow-hidden rounded-bouton border border-filet md:block">
         <table className="w-full border-collapse text-left text-[15px]">
           <caption className="sr-only">Budget prévisionnel</caption>
           <thead className="bg-voile text-sapin">
@@ -259,7 +261,7 @@ export function Soutien({ soutien }: { soutien: DonneesSoutien }) {
       </div>
 
       {/* 4. Contact */}
-      <div className="mt-16 flex flex-col gap-8 rounded-bouton bg-menthe p-6 md:mt-20 md:flex-row md:items-center md:justify-between md:p-10">
+      <div data-reveal="monte" className="mt-16 flex flex-col gap-8 rounded-bouton bg-menthe p-6 md:mt-20 md:flex-row md:items-center md:justify-between md:p-10">
         <div>
           <p className="font-titre text-2xl font-medium tracking-[-0.02em] text-sapin">
             Parlons de votre engagement

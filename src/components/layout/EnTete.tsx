@@ -45,6 +45,8 @@ export function EnTete({ inscription }: Props) {
         sombre ? 'section-sombre border-white/10 bg-sapin' : 'border-filet bg-white/90',
       )}
     >
+      {/* Avancement dans la page (navigateurs récents) */}
+      <div aria-hidden className="progression" />
       <div className="marges flex h-[68px] items-center justify-between gap-6 md:grid md:grid-cols-[1fr_auto_1fr]">
         <Logo sombre={sombre} />
 

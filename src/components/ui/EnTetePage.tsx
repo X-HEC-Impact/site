@@ -26,13 +26,13 @@ export function EnTetePage({ surtitre, titre, titreSuite, description, photo, ph
     <header
       className={cx(
         marges,
-        'section-sombre relative isolate grid gap-8 overflow-hidden bg-sapin pt-20 pb-16 md:grid-cols-12 md:items-end md:gap-12 md:pt-28 md:pb-24',
+        'section-sombre relative isolate grid gap-8 overflow-clip bg-sapin pt-20 pb-16 md:grid-cols-12 md:items-end md:gap-12 md:pt-28 md:pb-24',
         photo && 'min-h-[22rem] pt-24 pb-24 md:min-h-[30rem] md:pt-32 md:pb-32',
       )}
     >
       {photo && (
         <>
-          <PhotoFond src={photoSrc} position={photo} voile="fort" priority />
+          <PhotoFond src={photoSrc} position={photo} voile="fort" priority mouvement="respire" />
           {/* Fondu vers la section sombre qui suit */}
           {fonduBas && (
             <div
@@ -58,11 +58,11 @@ export function EnTetePage({ surtitre, titre, titreSuite, description, photo, ph
       )}
 
       <div className="md:col-span-7">
-        <p className="surtitre">{surtitre}</p>
-        <Titre niveau="h1" sombre debut={titre} suite={titreSuite} className={cx('mt-5', photo && '[&>span]:text-white/75')} />
+        <p className="surtitre entree [--d:60ms]">{surtitre}</p>
+        <Titre niveau="h1" sombre debut={titre} suite={titreSuite} className={cx('entree mt-5 [--d:160ms]', photo && '[&>span]:text-white/75')} />
       </div>
       {description && (
-        <p className="max-w-md text-[17px] leading-relaxed text-white/85 md:col-span-5 md:justify-self-end">{typo(description)}</p>
+        <p className="entree max-w-md text-[17px] leading-relaxed text-white/85 [--d:300ms] md:col-span-5 md:justify-self-end">{typo(description)}</p>
       )}
     </header>
   );
