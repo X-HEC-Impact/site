@@ -15,7 +15,7 @@ export async function Hero() {
 
   return (
     <section aria-labelledby="hero-titre" className="grid border-b border-filet md:grid-cols-2">
-      <div className={cx(marges, 'flex flex-col justify-center py-14 md:py-24')}>
+      <div className={cx(marges, 'flex flex-col justify-center py-20 md:py-32')}>
         <Surtitre>{hero.surtitre}</Surtitre>
         <Titre
           id="hero-titre"
@@ -23,10 +23,10 @@ export async function Hero() {
           debut={hero.titre}
           suite={hero.titreSuite}
           surligne={hero.titreSurligne}
-          className="mt-5"
+          className="mt-6"
         />
-        <p className="mt-6 max-w-[34rem] text-[17px]">{typo(hero.texte)}</p>
-        <div className="mt-9 flex flex-wrap gap-3">
+        <p className="mt-7 max-w-[32rem] text-[17px] leading-relaxed">{typo(hero.texte)}</p>
+        <div className="mt-10 flex flex-wrap gap-3">
           <Bouton href="/evenements">Voir nos événements</Bouton>
           <Bouton href="/equipe" variante="contour">
             Rencontrer l’équipe
@@ -34,8 +34,8 @@ export async function Hero() {
         </div>
       </div>
 
-      <div className="border-t border-filet p-4 md:border-t-0 md:border-l md:p-6 lg:p-8">
-        <div className="relative aspect-square overflow-hidden sm:aspect-[4/3] rounded-bouton md:aspect-auto md:h-full md:min-h-[480px]">
+      <div className="border-t border-filet p-5 sm:p-8 md:border-t-0 md:border-l lg:p-10">
+        <div className="relative aspect-square overflow-hidden sm:aspect-[4/3] rounded-bouton md:aspect-auto md:h-full md:min-h-[520px]">
           <Image
             src={hero.image}
             alt={hero.imageAlt}

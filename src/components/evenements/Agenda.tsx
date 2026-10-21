@@ -4,7 +4,7 @@ import { CelluleEvenement } from '@/components/evenements/CelluleEvenement';
 import { EtiquetteFormat } from '@/components/evenements/EtiquetteFormat';
 import { Grille } from '@/components/ui/Grille';
 import { LienFleche } from '@/components/ui/LienFleche';
-import { marges } from '@/components/ui/Section';
+import { marges, rythme } from '@/components/ui/Section';
 import { formats, type Evenement, type FormatEvenement } from '@/content/site';
 import { dateCourte } from '@/lib/dates';
 import { cx } from '@/lib/utils';
@@ -36,38 +36,38 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
 
   return (
     <>
-      {/* Onglets de filtre */}
-      <nav aria-label="Filtrer par format" className="border-b border-filet">
-        <ul className={cx(marges, 'flex gap-2 overflow-x-auto py-5 [scrollbar-width:none]')}>
-          {onglets.map(({ cle, libelle }) => {
-            const actif = filtre === cle;
-            return (
-              <li key={cle} className="shrink-0">
-                <Link
-                  href={cle === 'tous' ? '/evenements' : `/evenements?format=${cle}`}
-                  scroll={false}
-                  aria-current={actif ? 'true' : undefined}
-                  className={cx(
-                    'inline-flex h-9 items-center rounded-bouton px-3.5 text-sm font-medium whitespace-nowrap transition-colors',
-                    actif ? 'bg-sapin text-white' : 'border border-filet text-ardoise hover:border-brume hover:text-sapin',
-                  )}
-                >
-                  {libelle}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+      <section aria-labelledby="a-venir-titre" className={cx('border-b border-filet', marges, rythme)}>
+        {/* Onglets de filtre */}
+        <nav aria-label="Filtrer par format">
+          <ul className="-mx-1 flex gap-2 overflow-x-auto px-1 py-1 [scrollbar-width:none]">
+            {onglets.map(({ cle, libelle }) => {
+              const actif = filtre === cle;
+              return (
+                <li key={cle} className="shrink-0">
+                  <Link
+                    href={cle === 'tous' ? '/evenements' : `/evenements?format=${cle}`}
+                    scroll={false}
+                    aria-current={actif ? 'true' : undefined}
+                    className={cx(
+                      'inline-flex h-10 items-center rounded-bouton px-4 text-sm font-medium whitespace-nowrap transition-colors',
+                      actif ? 'bg-sapin text-white' : 'border border-filet text-ardoise hover:border-brume hover:text-sapin',
+                    )}
+                  >
+                    {libelle}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
-      {/* À venir */}
-      <section aria-labelledby="a-venir-titre" className="border-b border-filet">
-        <h2 id="a-venir-titre" className="surtitre px-5 py-8 text-center md:py-10">
+        {/* À venir */}
+        <h2 id="a-venir-titre" className="mt-14 text-[28px] leading-tight md:mt-16 md:text-[32px]">
           À venir
         </h2>
-        <div className="border-t border-filet">
+        <div className="mt-8">
           {aVenirFiltres.length > 0 ? (
-            <Grille colonnes="md:grid-cols-3">
+            <Grille colonnes="md:grid-cols-3" cadre>
               {aVenirFiltres.map((evenement) => (
                 <li key={evenement.slug}>
                   <CelluleEvenement evenement={evenement} />
@@ -87,7 +87,7 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
               )}
             </Grille>
           ) : (
-            <div className={cx(marges, 'flex flex-col items-start gap-4 bg-voile py-12')}>
+            <div className="flex flex-col items-start gap-4 rounded-bouton bg-voile p-8 md:p-10">
               <CalendarDays aria-hidden className="size-6 text-brume" strokeWidth={1.5} />
               <p className="font-titre text-xl font-medium tracking-[-0.02em] text-sapin">
                 Aucun événement à venir dans ce format pour l’instant.
@@ -100,11 +100,11 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
 
       {/* Passés */}
       {passesFiltres.length > 0 && (
-        <section aria-labelledby="passes-titre" className="border-b border-filet">
-          <h2 id="passes-titre" className="surtitre px-5 py-8 text-center md:py-10">
+        <section aria-labelledby="passes-titre" className={cx('border-b border-filet', marges, rythme)}>
+          <h2 id="passes-titre" className="text-[28px] leading-tight md:text-[32px]">
             Événements passés
           </h2>
-          <ul className="border-t border-filet">
+          <ul className="mt-8 overflow-hidden rounded-bouton border border-filet">
             {passesFiltres.map((evenement) => (
               <li key={evenement.slug} className="border-b border-filet last:border-b-0">
                 <LignePassee evenement={evenement} />
@@ -124,10 +124,7 @@ function LignePassee({ evenement }: { evenement: Evenement }) {
   return (
     <Link
       href={`/evenements/${evenement.slug}`}
-      className={cx(
-        marges,
-        'group grid gap-x-6 gap-y-2 py-6 transition-colors hover:bg-voile md:grid-cols-12 md:items-center',
-      )}
+      className="group grid gap-x-6 gap-y-2 px-6 py-6 transition-colors hover:bg-voile md:grid-cols-12 md:items-center md:px-8 md:py-7"
     >
       <p className="font-titre text-vif-texte md:col-span-2">
         <span className="text-2xl tracking-[-0.02em]">{principal}</span>{' '}

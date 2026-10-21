@@ -46,7 +46,7 @@ export function PiedDePage() {
 
   return (
     <footer className="text-[15px]">
-      <div className={cx(marges, 'grid gap-12 py-14 md:grid-cols-12 md:py-16')}>
+      <div className={cx(marges, 'grid gap-12 py-16 md:grid-cols-12 md:py-20')}>
         <div className="md:col-span-5">
           <Logo />
           <p className="mt-4 max-w-sm">{association.accroche}</p>
@@ -104,7 +104,7 @@ export function PiedDePage() {
       <div
         className={cx(
           marges,
-          'flex flex-col gap-1 border-t border-filet py-5 text-[13px] text-brume sm:flex-row sm:justify-between',
+          'flex flex-col gap-1 border-t border-filet py-6 text-[13px] text-brume sm:flex-row sm:justify-between',
         )}
       >
         <p>© {association.nom}</p>

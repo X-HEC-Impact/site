@@ -19,10 +19,10 @@ export function AppelFinal() {
         <Image src={cta.image} alt="" fill sizes="600px" className="object-cover" />
       </div>
 
-      <div className={cx(marges, 'apparition relative py-20 md:py-28')}>
+      <div className={cx(marges, 'apparition relative py-24 md:py-32')}>
         <Titre id="cta-titre" debut={cta.titre} suite={cta.titreSuite} className="max-w-xl" />
-        <p className="mt-5 max-w-md">{typo(cta.texte)}</p>
-        <Bouton href="/contact" className="mt-9">
+        <p className="mt-6 max-w-md text-[17px] leading-relaxed">{typo(cta.texte)}</p>
+        <Bouton href="/contact" className="mt-10">
           {cta.bouton}
           <ArrowRight aria-hidden className="size-4" />
         </Bouton>

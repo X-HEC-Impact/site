@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { UserRound } from 'lucide-react';
-import { Grille } from '@/components/ui/Grille';
 import { IconeLinkedin } from '@/components/ui/IconesReseaux';
+import { Section } from '@/components/ui/Section';
 import { equipe, pages, type Membre } from '@/content/site';
 import { estPlaceholder } from '@/lib/utils';
 
@@ -11,7 +11,7 @@ function FicheMembre({ membre }: { membre: Membre }) {
   const aLinkedin = membre.linkedin && !estPlaceholder(membre.linkedin);
 
   return (
-    <article className="flex h-full flex-col p-3 transition-colors duration-200 hover:bg-voile sm:p-5 lg:p-6">
+    <article className="flex h-full flex-col">
       <div className="relative aspect-square overflow-hidden rounded-bouton bg-voile">
         {membre.photo ? (
           <Image
@@ -28,7 +28,7 @@ function FicheMembre({ membre }: { membre: Membre }) {
         )}
       </div>
 
-      <div className="mt-4 flex items-start justify-between gap-3 sm:mt-5">
+      <div className="mt-5 flex items-start justify-between gap-3">
         <h3 className="text-lg leading-snug sm:text-[22px]">{nomComplet}</h3>
         {aLinkedin && (
           <a
@@ -43,28 +43,25 @@ function FicheMembre({ membre }: { membre: Membre }) {
         )}
       </div>
       <p className="mt-1 text-sm leading-snug text-brume sm:text-[15px]">{membre.role}</p>
-
     </article>
   );
 }
 
-/** Grille des membres : une case bordurée par personne. */
+/** Grille des membres : portraits espacés, sans filets entre eux. */
 export function GrilleEquipe() {
   return (
-    <section aria-labelledby="membres-titre" className="border-b border-filet">
-      <h2 id="membres-titre" className="surtitre px-5 py-8 text-center md:py-10">
+    <Section titreId="membres-titre">
+      <h2 id="membres-titre" className="text-[28px] leading-tight md:text-[32px]">
         {pages.equipe.grille}
       </h2>
 
-      <div className="border-t border-filet">
-        <Grille colonnes="grid-cols-2 lg:grid-cols-3">
-          {equipe.map((membre, index) => (
-            <li key={index} className="group">
-              <FicheMembre membre={membre} />
-            </li>
-          ))}
-        </Grille>
-      </div>
-    </section>
+      <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 md:mt-12 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
+        {equipe.map((membre, index) => (
+          <li key={index} className="group">
+            <FicheMembre membre={membre} />
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 }

@@ -1,31 +1,70 @@
 import type { ReactNode } from 'react';
-import { cx } from '@/lib/utils';
+import { LienFleche } from '@/components/ui/LienFleche';
+import { Surtitre, Titre } from '@/components/ui/Titre';
+import { cx, typo } from '@/lib/utils';
 
-/** Marges intérieures standard d'une section (réutilisables ailleurs). */
-export const marges = 'px-5 md:px-10 lg:px-14';
+/* ------------------------------------------------------------------
+   Rythme du site : trois réglages utilisés partout.
+   Pour aérer ou resserrer tout le site, c'est ici qu'il faut agir.
+   ------------------------------------------------------------------ */
 
-type Props = {
+/** Marges gauche/droite du contenu dans la colonne cadrée. */
+export const marges = 'px-5 sm:px-8 md:px-12 lg:px-16';
+
+/** Espace vertical d'une section (haut et bas). */
+export const rythme = 'py-20 md:py-28';
+
+/** Espace entre l'en-tête d'une section et son contenu. */
+export const ecart = 'mt-12 md:mt-16';
+
+type PropsSection = {
   children: ReactNode;
   id?: string;
   /** id du titre de la section, pour l'accessibilité. */
   titreId?: string;
-  /** false pour une section dont le contenu touche les bords de la colonne (grilles). */
-  avecMarges?: boolean;
   className?: string;
 };
 
 /**
- * Une bande de la page. Chaque section se termine par un filet horizontal
+ * Une bande de la page : marges, rythme vertical, et un seul filet en bas
  * qui touche les deux filets verticaux de la colonne.
  */
-export function Section({ children, id, titreId, avecMarges = true, className }: Props) {
+export function Section({ children, id, titreId, className }: PropsSection) {
   return (
-    <section
-      id={id}
-      aria-labelledby={titreId}
-      className={cx('border-b border-filet', avecMarges && cx(marges, 'py-16 md:py-24'), className)}
-    >
+    <section id={id} aria-labelledby={titreId} className={cx('border-b border-filet', marges, rythme, className)}>
       {children}
     </section>
+  );
+}
+
+type PropsEnTete = {
+  surtitre: string;
+  titre: string;
+  titreSuite?: string;
+  /** id posé sur le titre (relié à la section par aria-labelledby). */
+  id: string;
+  intro?: string;
+  /** Lien à droite du titre, par exemple « Tous les événements ». */
+  lien?: { href: string; libelle: string };
+  sombre?: boolean;
+};
+
+/** En-tête de section : surtitre, titre en deux tons, intro facultative, lien facultatif. */
+export function EnTeteSection({ surtitre, titre, titreSuite, id, intro, lien, sombre }: PropsEnTete) {
+  return (
+    <div className="apparition flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div className="max-w-2xl">
+        <Surtitre>{surtitre}</Surtitre>
+        <Titre id={id} debut={titre} suite={titreSuite} sombre={sombre} className="mt-5" />
+        {intro && (
+          <p className={cx('mt-5 max-w-xl text-[17px]', sombre && 'text-white/75')}>{typo(intro)}</p>
+        )}
+      </div>
+      {lien && (
+        <LienFleche href={lien.href} className={cx('shrink-0', sombre && 'text-white')}>
+          {lien.libelle}
+        </LienFleche>
+      )}
+    </div>
   );
 }

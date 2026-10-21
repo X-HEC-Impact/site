@@ -5,7 +5,7 @@ import { cx } from '@/lib/utils';
 
 export default function PageIntrouvable() {
   return (
-    <section className={cx(marges, 'border-b border-filet py-24 md:py-32')}>
+    <section className={cx(marges, 'border-b border-filet py-28 md:py-40')}>
       <Surtitre>Page introuvable</Surtitre>
       <Titre niveau="h1" debut="Cette page" suite="n’existe pas." className="mt-5" />
       <p className="mt-6 max-w-md text-[17px]">Elle a peut-être été déplacée, ou l’adresse contient une faute de frappe.</p>

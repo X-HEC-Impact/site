@@ -1,5 +1,5 @@
 import { Quote } from 'lucide-react';
-import { marges } from '@/components/ui/Section';
+import { marges, rythme } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
 import { pages } from '@/content/site';
 import { cx, typo } from '@/lib/utils';
@@ -12,13 +12,14 @@ export function MotEquipe() {
     <section
       aria-labelledby="mot-titre"
       className={cx(
-        'section-sombre grid gap-10 border-b border-filet bg-sapin py-16 md:grid-cols-12 md:py-24',
+        'section-sombre grid gap-10 border-b border-filet bg-sapin md:grid-cols-12 md:gap-12',
         marges,
+        rythme,
       )}
     >
       <div className="apparition md:col-span-5">
         <Surtitre>{mot.surtitre}</Surtitre>
-        <Titre id="mot-titre" sombre debut={mot.titre} suite={mot.titreSuite} className="mt-4" />
+        <Titre id="mot-titre" sombre debut={mot.titre} suite={mot.titreSuite} className="mt-5" />
       </div>
 
       <figure className="apparition md:col-span-7">

@@ -1,16 +1,17 @@
 import Image from 'next/image';
 import { accueil, partenaires } from '@/content/site';
 
+/** Logos des partenaires qui défilent en boucle, d'un bord à l'autre de la colonne. */
 export function BandeauPartenaires() {
   return (
-    <section aria-labelledby="partenaires-titre" className="border-b border-filet">
-      <h2 id="partenaires-titre" className="surtitre px-5 py-8 text-center md:py-10">
+    <section aria-labelledby="partenaires-titre" className="border-b border-filet py-16 md:py-20">
+      <h2 id="partenaires-titre" className="surtitre px-5 text-center">
         {accueil.partenaires.surtitre}
       </h2>
 
       {/* Les logos défilent en boucle : la liste est affichée deux fois,
           et la piste recule de la moitié de sa largeur avant de recommencer. */}
-      <div className="overflow-hidden pb-10 md:pb-14">
+      <div className="mt-10 overflow-hidden md:mt-12">
         <div className="defilement-piste flex w-max">
           {[0, 1].map((copie) => (
             <ul

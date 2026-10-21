@@ -2,8 +2,7 @@ import Image from 'next/image';
 import { ArrowRight, Compass, Lightbulb, MessagesSquare, type LucideIcon } from 'lucide-react';
 import { fondFormat } from '@/components/evenements/EtiquetteFormat';
 import { Lien } from '@/components/ui/Lien';
-import { marges } from '@/components/ui/Section';
-import { Surtitre, Titre } from '@/components/ui/Titre';
+import { EnTeteSection, ecart, marges, rythme } from '@/components/ui/Section';
 import { accueil, formats, type FormatEvenement } from '@/content/site';
 import { getEvenements } from '@/lib/evenements';
 import { cx, typo } from '@/lib/utils';
@@ -41,24 +40,19 @@ export async function SectionFormats() {
   return (
     <section
       aria-labelledby="formats-titre"
-      className={cx('section-sombre border-b border-filet bg-sapin py-16 text-white/80 md:py-24', marges)}
+      className={cx('section-sombre border-b border-filet bg-sapin text-white/80', marges, rythme)}
     >
-      <div className="apparition">
-        <Surtitre>{accueil.formats.surtitre}</Surtitre>
-        <Titre
-          id="formats-titre"
-          sombre
-          debut={accueil.formats.titre}
-          suite={accueil.formats.titreSuite}
-          className="mt-4"
-        />
-        {accueil.formats.intro && (
-          <p className="mt-4 max-w-xl text-[17px] text-white/75">{typo(accueil.formats.intro)}</p>
-        )}
-      </div>
+      <EnTeteSection
+        id="formats-titre"
+        sombre
+        surtitre={accueil.formats.surtitre}
+        titre={accueil.formats.titre}
+        titreSuite={accueil.formats.titreSuite}
+        intro={accueil.formats.intro}
+      />
 
-      {/* grid-rows-subgrid : titres, textes, puces et visuels restent alignés d'une carte à l'autre. */}
-      <ul className="apparition mt-12 grid gap-px overflow-hidden rounded-bouton md:mt-14 md:grid-cols-3">
+      {/* Cartes espacées ; grid-rows-subgrid garde titres, textes, puces et visuels alignés d'une carte à l'autre. */}
+      <ul className={cx('apparition grid gap-4 md:grid-cols-3 lg:gap-5', ecart)}>
         {(Object.keys(formats) as FormatEvenement[]).map((type) => {
           const format = formats[type];
           const Icone = icones[type];
@@ -67,7 +61,7 @@ export async function SectionFormats() {
             <li
               key={type}
               className={cx(
-                'group row-span-5 grid grid-rows-subgrid gap-0 p-6 text-ardoise lg:p-8',
+                'group row-span-5 grid grid-rows-subgrid gap-0 rounded-bouton p-6 text-ardoise lg:p-8',
                 fondFormat[type],
               )}
             >

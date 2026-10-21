@@ -45,10 +45,10 @@ function Cellule({
           />
         )}
       </div>
-      <h2 className="mt-6 text-2xl">{titre}</h2>
-      <p className="mt-1.5">{typo(texte)}</p>
+      <h2 className="mt-8 text-2xl">{titre}</h2>
+      <p className="mt-2">{typo(texte)}</p>
       {href && libelleLien && (
-        <p className="mt-4 font-medium text-sapin group-hover:underline group-hover:underline-offset-4">
+        <p className="mt-5 font-medium text-sapin group-hover:underline group-hover:underline-offset-4">
           {libelleLien}
         </p>
       )}
@@ -58,11 +58,11 @@ function Cellule({
   return (
     <li className={cx('border-b border-filet last:border-b-0', className)}>
       {href ? (
-        <Lien href={href} className="group block p-6 transition-colors hover:bg-black/[0.02] md:p-8">
+        <Lien href={href} className="group block p-6 transition-colors hover:bg-black/[0.02] md:p-10">
           {contenu}
         </Lien>
       ) : (
-        <div className="p-6 md:p-8">{contenu}</div>
+        <div className="p-6 md:p-10">{contenu}</div>
       )}
     </li>
   );
@@ -80,13 +80,13 @@ export default function PageContact() {
 
       <div className="grid border-b border-filet md:grid-cols-12">
         {/* À gauche : l'e-mail */}
-        <section aria-labelledby="email-titre" className={cx(marges, 'py-14 md:col-span-7 md:py-20')}>
+        <section aria-labelledby="email-titre" className={cx(marges, 'py-16 md:col-span-7 md:py-24')}>
           <Surtitre>
             <span id="email-titre">{pages.contact.email.surtitre}</span>
           </Surtitre>
-          <p className="mt-3 text-[17px]">{typo(pages.contact.email.texte)}</p>
+          <p className="mt-4 text-[17px]">{typo(pages.contact.email.texte)}</p>
 
-          <p className="mt-8 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-[36px]">
+          <p className="mt-10 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-[36px]">
             <Mail aria-hidden className="size-7 shrink-0 text-vif-texte" strokeWidth={1.75} />
             {emailPret ? (
               <a href={`mailto:${email}`} className="underline-offset-[6px] hover:underline">
@@ -98,7 +98,7 @@ export default function PageContact() {
           </p>
 
           {emailPret && (
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-3">
               <Bouton href={`mailto:${email}`}>Nous écrire</Bouton>
               <CopierEmail email={email} />
             </div>
