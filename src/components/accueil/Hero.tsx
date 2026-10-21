@@ -23,10 +23,10 @@ export function Hero() {
       <div className="flex flex-1 items-center py-14 md:py-16">
         <h1
           id="hero-titre"
-          className="-ml-[0.05em] text-[clamp(46px,8.2vw,124px)] leading-[1] font-medium tracking-[-0.04em]"
+          className="-ml-[0.05em] text-[clamp(44px,9vw,76px)] leading-[1.02] font-medium tracking-[-0.04em] lg:text-[min(7vw,84px)] lg:whitespace-nowrap"
         >
-          <span className="block">{typo(hero.titre)}</span>
-          <span className="block text-brume">
+          <span className="block lg:inline">{typo(hero.titre)}</span>{' '}
+          <span className="block text-brume lg:inline">
             {position === -1 ? (
               suite
             ) : (
