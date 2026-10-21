@@ -16,14 +16,14 @@ export default async function PageEvenements() {
 
   return (
     <>
-      <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} photo="50% 42%" photoSrc="/images/evenements/tatry.webp" />
+      <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} photo="50% 38%" photoSrc="/images/evenements/lac-montagne.webp" />
 
       {/* Pendant le chargement (et sans JavaScript), tous les événements s'affichent. */}
       <Suspense fallback={<Agenda aVenir={aVenir} passes={passes} filtre="tous" />}>
         <AgendaFiltre aVenir={aVenir} passes={passes} />
       </Suspense>
 
-      <AppelFinal photo fonduHaut={false} photoSrc="/images/evenements/tatry.webp" photoPosition="0% 0%" />
+      <AppelFinal photo fonduHaut={false} photoSrc="/images/evenements/lac-montagne.webp" photoPosition="50% 80%" />
     </>
   );
 }
