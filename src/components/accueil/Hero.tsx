@@ -19,9 +19,29 @@ export function Hero() {
       aria-labelledby="hero-titre"
       className={cx(
         marges,
-        'grid min-h-[calc(100svh-108px)] content-center gap-10 border-b border-filet py-16 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-12',
+        'relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden border-b border-filet py-16 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-12',
       )}
     >
+      {/* Les ondes du logo, tracées fin et très discrètes, qui partent du bord droit (comme les visuels des formats) */}
+      <svg
+        aria-hidden
+        viewBox="0 0 1200 800"
+        preserveAspectRatio="xMaxYMid slice"
+        className="pointer-events-none absolute inset-0 -z-10 hidden size-full lg:block [mask-image:linear-gradient(to_right,transparent_50%,black_88%)] [&_*]:[vector-effect:non-scaling-stroke]"
+      >
+        <g transform="translate(1200 400)" fill="none">
+          {[130, 210, 290, 370, 450, 530, 610, 690].map((r) => (
+            <circle key={r} r={r} stroke="#062a21" strokeOpacity="0.09" strokeWidth="1.5" />
+          ))}
+          <g strokeLinecap="round" strokeWidth="3">
+            <path d="M-92 -92A130 130 0 0 0 -92 92" stroke="#2ec27e" />
+            <path d="M-148 -148A210 210 0 0 0 -148 148" stroke="#5aa469" strokeOpacity="0.7" />
+            <path d="M-205 -205A290 290 0 0 0 -205 205" stroke="#3e7750" strokeOpacity="0.5" />
+          </g>
+          <circle r="26" fill="#2ec27e" />
+        </g>
+      </svg>
+
       <div className="lg:col-span-7">
         <h1
           id="hero-titre"
