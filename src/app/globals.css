@@ -154,14 +154,24 @@
    animations, les logos s'affichent une seule fois, centrés, sans bouger.
    ------------------------------------------------------------------ */
 @keyframes defilement {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .defilement-piste {
     animation: defilement 50s linear infinite;
+    /* Calque dédié : évite que Safari « oublie » de peindre des morceaux de logos. */
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  /* Le survol met le défilement en pause (le temps de lire un logo). */
+  .defilement-piste:hover {
+    animation-play-state: paused;
   }
 }
 
