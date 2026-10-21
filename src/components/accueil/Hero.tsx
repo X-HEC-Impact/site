@@ -20,7 +20,7 @@ export function Hero() {
       aria-labelledby="hero-titre"
       className={cx(
         marges,
-        "relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden py-16 md:py-24 lg:grid-cols-12 lg:items-center lg:gap-12",
+        "relative isolate grid min-h-[calc(100svh-68px)] content-center gap-10 overflow-hidden py-16 md:py-24 lg:grid-cols-12 lg:items-center lg:gap-12",
       )}
     >
       <PhotoFond priority />

@@ -67,7 +67,7 @@ export const formats: Record<
    ------------------------------------------------------------------ */
 
 export const annonce = {
-  afficher: true,
+  afficher: false,
   texte: 'Prochain événement : LEX Europe, avril 2027.',
   libelleLien: 'Découvrir',
   lien: '/evenements/lex-europe',
