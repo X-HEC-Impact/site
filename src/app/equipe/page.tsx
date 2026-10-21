@@ -5,11 +5,9 @@ import { GrilleEquipe } from '@/components/equipe/GrilleEquipe';
 import { MotEquipe } from '@/components/equipe/MotEquipe';
 import { EnTetePage } from '@/components/ui/EnTetePage';
 import { pages } from '@/content/site';
+import { metaPage } from '@/lib/meta';
 
-export const metadata: Metadata = {
-  title: 'Équipe',
-  description: pages.equipe.description,
-};
+export const metadata: Metadata = metaPage('Équipe', pages.equipe.description);
 
 export default function PageEquipe() {
   const { surtitre, titre, titreSuite, description } = pages.equipe;

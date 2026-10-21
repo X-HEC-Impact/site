@@ -3,7 +3,9 @@ import { Inter, Inter_Tight } from 'next/font/google';
 import { BarreAnnonce } from '@/components/layout/BarreAnnonce';
 import { EnTete } from '@/components/layout/EnTete';
 import { PiedDePage } from '@/components/layout/PiedDePage';
-import { association } from '@/content/site';
+import { association, boutonInscription } from '@/content/site';
+import { getEvenements } from '@/lib/evenements';
+import { urlSite } from '@/lib/url';
 import './globals.css';
 
 // Les polices sont téléchargées au build et servies par le site (aucun appel à Google côté visiteur).
@@ -11,7 +13,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 const interTight = Inter_Tight({ subsets: ['latin'], variable: '--font-inter-tight', display: 'swap' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
+  metadataBase: new URL(urlSite),
   title: {
     default: `${association.nom} · Entreprendre pour l'impact`,
     template: `%s · ${association.nom}`,
@@ -21,14 +23,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_FR',
     siteName: association.nom,
+    title: `${association.nom} · Entreprendre pour l'impact`,
+    description: association.description,
   },
+  twitter: { card: 'summary_large_image' },
 };
 
 export const viewport: Viewport = {
   themeColor: '#062a21',
 };
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
+export default async function RootLayout({ children }: LayoutProps<'/'>) {
+  // Prochain événement ouvert aux inscriptions (sinon, pas de bouton « S'inscrire »).
+  const { aVenir } = await getEvenements();
+  const ouvert = aVenir.find((e) => e.inscriptionsOuvertes && !e.reserveA);
+  const inscription = ouvert
+    ? { href: `/evenements/${ouvert.slug}#inscription`, libelle: boutonInscription.libelle }
+    : null;
+
   return (
     <html lang="fr" className={`${inter.variable} ${interTight.variable}`}>
       <body>
@@ -44,7 +56,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         {/* La colonne « cadrée » : 1200 px max, bordée de deux filets verticaux (dès 768 px). */}
         <div className="md:px-6">
           <div className="mx-auto flex min-h-screen max-w-[1200px] flex-col border-filet md:border-x">
-            <EnTete />
+            <EnTete inscription={inscription} />
             <main id="contenu" className="flex-1">
               {children}
             </main>

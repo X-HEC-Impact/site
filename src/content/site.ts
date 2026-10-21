@@ -76,10 +76,14 @@ export const annonce = {
   lien: '/evenements/lex-europe',
 };
 
-/** Bouton noir à droite du menu. */
+/**
+ * Bouton noir « S'inscrire » à droite du menu.
+ * Il s'affiche tout seul dès qu'un événement à venir a inscriptionsOuvertes: true
+ * (et n'est pas réservé aux étudiants), et mène au formulaire de cet événement.
+ * Sinon il est masqué.
+ */
 export const boutonInscription = {
   libelle: 'S’inscrire',
-  href: '/evenements',
 };
 
 /* ------------------------------------------------------------------

@@ -20,6 +20,7 @@ import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
 import { evenements, formats } from '@/content/site';
 import { evenementEstPasse, getEvenement } from '@/lib/evenements';
+import { metaPage } from '@/lib/meta';
 import { cx, decouperTitre, typo } from '@/lib/utils';
 
 export function generateStaticParams() {
@@ -30,10 +31,7 @@ export async function generateMetadata({ params }: PageProps<'/evenements/[slug]
   const { slug } = await params;
   const evenement = getEvenement(slug);
   if (!evenement) return {};
-  return {
-    title: evenement.titre,
-    description: evenement.description.split('. ')[0].replace(/\.?$/, '.'),
-  };
+  return metaPage(evenement.titre, evenement.description.split('. ')[0].replace(/\.?$/, '.'), false);
 }
 
 export default async function PageEvenement({ params }: PageProps<'/evenements/[slug]'>) {

@@ -9,12 +9,10 @@ import { marges } from '@/components/ui/Section';
 import { EnTetePage } from '@/components/ui/EnTetePage';
 import { Surtitre } from '@/components/ui/Titre';
 import { association, pages } from '@/content/site';
+import { metaPage } from '@/lib/meta';
 import { cx, estPlaceholder, typo } from '@/lib/utils';
 
-export const metadata: Metadata = {
-  title: 'Contact',
-  description: pages.contact.description,
-};
+export const metadata: Metadata = metaPage('Contact', pages.contact.description);
 
 /** Une case de la colonne de droite : icône, titre, texte et lien. */
 function Cellule({

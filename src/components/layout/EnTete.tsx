@@ -6,14 +6,19 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { Bouton } from '@/components/ui/Bouton';
-import { boutonInscription, navigation } from '@/content/site';
+import { navigation } from '@/content/site';
 import { cx } from '@/lib/utils';
 
 function estActif(pathname: string, href: string) {
   return href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function EnTete() {
+type Props = {
+  /** Bouton « S'inscrire », ou null s'il n'y a aucun événement ouvert aux inscriptions. */
+  inscription: { href: string; libelle: string } | null;
+};
+
+export function EnTete({ inscription }: Props) {
   const pathname = usePathname();
   const [ouvert, setOuvert] = useState(false);
 
@@ -64,9 +69,11 @@ export function EnTete() {
               Contact
             </Bouton>
           </span>
-          <Bouton href={boutonInscription.href} variante="noir" taille="petit">
-            {boutonInscription.libelle}
-          </Bouton>
+          {inscription && (
+            <Bouton href={inscription.href} variante="noir" taille="petit">
+              {inscription.libelle}
+            </Bouton>
+          )}
         </div>
 
         {/* Bouton burger (moins de 768 px) */}
@@ -111,13 +118,15 @@ export function EnTete() {
             })}
           </ul>
         </nav>
-        <div className="grid grid-cols-2 gap-2.5 p-5">
+        <div className={cx("grid gap-2.5 p-5", inscription && "grid-cols-2")}>
           <Bouton href="/contact" variante="contour" onClick={fermer}>
             Contact
           </Bouton>
-          <Bouton href={boutonInscription.href} variante="noir" onClick={fermer}>
-            {boutonInscription.libelle}
-          </Bouton>
+          {inscription && (
+            <Bouton href={inscription.href} variante="noir" onClick={fermer}>
+              {inscription.libelle}
+            </Bouton>
+          )}
         </div>
       </div>
     </header>
