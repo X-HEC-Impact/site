@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { Bouton } from '@/components/ui/Bouton';
 import { LienFleche } from '@/components/ui/LienFleche';
+import { MosaiqueFormats } from '@/components/ui/Motif';
 import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
 import { accueil } from '@/content/site';
@@ -36,14 +36,7 @@ export async function Hero() {
 
       <div className="border-t border-filet p-5 sm:p-8 md:border-t-0 md:border-l lg:p-10">
         <div className="relative aspect-square overflow-hidden sm:aspect-[4/3] rounded-bouton md:aspect-auto md:h-full md:min-h-[520px]">
-          <Image
-            src={hero.image}
-            alt={hero.imageAlt}
-            fill
-            priority
-            sizes="(min-width: 1200px) 560px, (min-width: 768px) 50vw, 100vw"
-            className="object-cover"
-          />
+          <MosaiqueFormats />
 
           {/* Petite carte discrète posée sur le visuel : le prochain rendez-vous. */}
           {prochain && (

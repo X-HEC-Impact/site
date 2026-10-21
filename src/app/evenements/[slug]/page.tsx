@@ -15,10 +15,11 @@ import {
 } from '@/components/evenements/BlocsEvenement';
 import { CarteInscription } from '@/components/evenements/CarteInscription';
 import { Soutien } from '@/components/evenements/Soutien';
+import { Motif } from '@/components/ui/Motif';
 import { EtiquetteFormat } from '@/components/evenements/EtiquetteFormat';
 import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
-import { evenements, formats } from '@/content/site';
+import { evenements } from '@/content/site';
 import { evenementEstPasse, getEvenement } from '@/lib/evenements';
 import { metaPage } from '@/lib/meta';
 import { cx, decouperTitre, typo } from '@/lib/utils';
@@ -65,14 +66,18 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
       {/* Visuel : la photo de l'événement, sinon la texture de son format (avec le logo de l'événement s'il en a un) */}
       <div className="border-b border-filet p-5 sm:p-8 lg:p-10">
         <div className="relative aspect-[16/9] overflow-hidden rounded-bouton lg:aspect-[21/8]">
-          <Image
-            src={evenement.image ?? formats[evenement.type].image}
-            alt={evenement.image ? (evenement.imageAlt ?? evenement.titre) : ''}
-            fill
-            priority
-            sizes="(min-width: 1200px) 1136px, 100vw"
-            className="object-cover"
-          />
+          {evenement.image ? (
+            <Image
+              src={evenement.image}
+              alt={evenement.imageAlt ?? evenement.titre}
+              fill
+              priority
+              sizes="(min-width: 1200px) 1136px, 100vw"
+              className="object-cover"
+            />
+          ) : (
+            <Motif type={evenement.type} />
+          )}
           {evenement.logo && !evenement.image && (
             <div className="absolute inset-0 flex items-center justify-center p-6">
               <div className="w-[min(80%,30rem)] rounded-bouton bg-white px-6 py-7 shadow-[0_1px_2px_rgb(6_42_33/0.06),0_12px_32px_-12px_rgb(6_42_33/0.25)] sm:px-10 sm:py-10">

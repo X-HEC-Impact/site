@@ -16,7 +16,6 @@ export async function ProchainsEvenements() {
     <Section titreId="agenda-titre">
       <EnTeteSection
         id="agenda-titre"
-        surtitre={accueil.agenda.surtitre}
         titre={accueil.agenda.titre}
         titreSuite={accueil.agenda.titreSuite}
         lien={{ href: '/evenements', libelle: 'Tous les événements' }}

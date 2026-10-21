@@ -40,28 +40,25 @@ export type FormatEvenement = 'lex' | 'conference' | 'hackathon';
 
 export const formats: Record<
   FormatEvenement,
-  { nom: string; etiquette: string; texte: string; image: string }
+  { nom: string; etiquette: string; texte: string }
 > = {
   lex: {
     nom: 'LEX Europe',
     etiquette: 'LEX Europe',
     texte:
       'Une learning expedition à travers l’Europe, alternative à la LEX San Francisco.',
-    image: '/images/textures/lex.webp',
   },
   conference: {
     nom: 'Conférences & tables rondes',
     etiquette: 'Conférence',
     texte:
       'Fondateurs, chercheurs et décideurs partagent leur expérience et débattent.',
-    image: '/images/textures/conference.webp',
   },
   hackathon: {
     nom: 'Hackathon Impact',
     etiquette: 'Hackathon',
     texte:
       'Une journée de création autour d’un objectif de développement durable rarement abordé.',
-    image: '/images/textures/hackathon.webp',
   },
 };
 
@@ -110,9 +107,6 @@ export const accueil = {
     titreSurligne: 'impact',
     texte:
       "X-HEC Impact rassemble, accompagne et connecte les porteurs de projets à impact social et environnemental. Learning expedition, conférences, hackathon : on crée les occasions de passer de l’idée à l’action.",
-    image: '/images/textures/hero.webp',
-    /** Laisser vide pour une texture décorative. Décrire la photo si c'en est une. */
-    imageAlt: '',
   },
   partenaires: {
     surtitre: 'Partenaires qui nous accompagnent',
@@ -134,7 +128,6 @@ export const accueil = {
     texte:
       'Intervenir lors d’une table ronde, soutenir la LEX Europe, proposer un sujet de hackathon : écrivez-nous.',
     bouton: 'Nous écrire',
-    image: '/images/textures/appel.webp',
   },
 };
 

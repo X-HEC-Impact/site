@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Inter_Tight } from 'next/font/google';
+import { Funnel_Display, Funnel_Sans } from 'next/font/google';
 import { BarreAnnonce } from '@/components/layout/BarreAnnonce';
 import { EnTete } from '@/components/layout/EnTete';
 import { PiedDePage } from '@/components/layout/PiedDePage';
@@ -9,8 +9,9 @@ import { urlSite } from '@/lib/url';
 import './globals.css';
 
 // Les polices sont téléchargées au build et servies par le site (aucun appel à Google côté visiteur).
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const interTight = Inter_Tight({ subsets: ['latin'], variable: '--font-inter-tight', display: 'swap' });
+// Funnel Display pour les titres, Funnel Sans pour le texte : une même famille, plus de caractère qu'Inter.
+const funnelSans = Funnel_Sans({ subsets: ['latin'], variable: '--font-funnel-sans', display: 'swap' });
+const funnelDisplay = Funnel_Display({ subsets: ['latin'], variable: '--font-funnel-display', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(urlSite),
@@ -42,7 +43,7 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
     : null;
 
   return (
-    <html lang="fr" className={`${inter.variable} ${interTight.variable}`}>
+    <html lang="fr" className={`${funnelSans.variable} ${funnelDisplay.variable}`}>
       <body>
         <a
           href="#contenu"

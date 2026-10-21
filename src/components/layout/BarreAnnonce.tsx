@@ -1,4 +1,3 @@
-import { ArrowRight } from 'lucide-react';
 import { Lien } from '@/components/ui/Lien';
 import { annonce } from '@/content/site';
 
@@ -7,18 +6,14 @@ export function BarreAnnonce() {
   if (!annonce.afficher) return null;
 
   return (
-    <div className="section-sombre bg-sapin px-4 py-2.5 text-center text-[13px] leading-5 text-white">
+    <aside aria-label="Annonce" className="section-sombre bg-sapin px-4 py-2.5 text-center text-[13px] leading-5 text-white">
       <span>{annonce.texte}</span>{' '}
       <Lien
         href={annonce.lien}
-        className="group inline-flex items-center gap-1 font-medium text-vif underline-offset-4 hover:underline"
+        className="font-medium text-vif underline decoration-vif/40 underline-offset-4 transition-colors hover:decoration-vif"
       >
         {annonce.libelleLien}
-        <ArrowRight
-          aria-hidden
-          className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-        />
       </Lien>
-    </div>
+    </aside>
   );
 }

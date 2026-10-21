@@ -38,7 +38,8 @@ export function Section({ children, id, titreId, className }: PropsSection) {
 }
 
 type PropsEnTete = {
-  surtitre: string;
+  /** Petit texte en capitales au-dessus du titre (facultatif). */
+  surtitre?: string;
   titre: string;
   titreSuite?: string;
   /** id posé sur le titre (relié à la section par aria-labelledby). */
@@ -52,10 +53,10 @@ type PropsEnTete = {
 /** En-tête de section : surtitre, titre en deux tons, intro facultative, lien facultatif. */
 export function EnTeteSection({ surtitre, titre, titreSuite, id, intro, lien, sombre }: PropsEnTete) {
   return (
-    <div className="apparition flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div className="max-w-2xl">
-        <Surtitre>{surtitre}</Surtitre>
-        <Titre id={id} debut={titre} suite={titreSuite} sombre={sombre} className="mt-5" />
+        {surtitre && <Surtitre className="mb-5">{surtitre}</Surtitre>}
+        <Titre id={id} debut={titre} suite={titreSuite} sombre={sombre} />
         {intro && (
           <p className={cx('mt-5 max-w-xl text-[17px]', sombre && 'text-white/75')}>{typo(intro)}</p>
         )}

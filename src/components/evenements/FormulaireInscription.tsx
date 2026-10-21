@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import { ArrowRight, CircleCheck, CircleAlert, LoaderCircle } from 'lucide-react';
+import { CircleCheck, CircleAlert, LoaderCircle } from 'lucide-react';
 import { inscrire } from '@/app/evenements/[slug]/actions';
 import { classesBouton } from '@/components/ui/Bouton';
 import {
@@ -153,7 +153,6 @@ export function FormulaireInscription({ slug, titre }: { slug: string; titre: st
         ) : (
           <>
             S’inscrire
-            <ArrowRight aria-hidden className="size-4" />
           </>
         )}
       </button>

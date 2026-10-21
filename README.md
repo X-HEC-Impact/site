@@ -75,7 +75,7 @@ Deuxième paragraphe (séparé par une ligne vide).`,
 |---|---|
 | `dateFin` | événement sur plusieurs jours |
 | `accroche` | phrase sous le titre |
-| `image`, `imageAlt` | bannière en haut de la page (sinon : texture du format) |
+| `image`, `imageAlt` | bannière en haut de la page (sinon : le visuel dessiné du format) |
 | `photos` | galerie « En images » en bas de la page |
 | `chiffres` | rangée de chiffres clés (4 idéalement) |
 | `thematiques` | cartes de thématiques |
@@ -133,7 +133,7 @@ Format conseillé : **PNG à fond transparent** (ou SVG), recadré au plus près
 | `public/images/team/` | portraits | carré, ~640 px, JPG ou WebP |
 | `public/images/partners/` | logos | PNG transparent ou SVG |
 | `public/images/events/<slug>/` | bannières et photos d'événements | ~1600 px de large, JPG |
-| `public/images/textures/` | textures floues du site | ne pas toucher |
+| `public/images/textures/` | grain des visuels dessinés (`src/components/ui/Motif.tsx`) | ne pas toucher |
 
 Les images sont optimisées automatiquement à l'affichage, mais évitez les fichiers de plusieurs Mo : redimensionnez-les avant. Retirez aussi les métadonnées (localisation GPS) des photos.
 

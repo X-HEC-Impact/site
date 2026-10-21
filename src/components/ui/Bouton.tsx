@@ -21,7 +21,7 @@ const tailles: Record<Taille, string> = {
 
 export function classesBouton(variante: Variante = 'principal', taille: Taille = 'normal') {
   return cx(
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-bouton font-medium transition-colors duration-200',
+    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-bouton font-medium transition-[background-color,border-color,transform] duration-200 active:translate-y-px',
     variantes[variante],
     tailles[taille],
   );

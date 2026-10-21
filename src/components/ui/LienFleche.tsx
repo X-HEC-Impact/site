@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { ArrowRight } from 'lucide-react';
 import { Lien } from './Lien';
 import { cx } from '@/lib/utils';
 
@@ -9,21 +8,11 @@ type Props = {
   className?: string;
 };
 
-/** Lien texte suivi d'une flèche qui glisse au survol : « S'inscrire → ». */
+/** Lien texte souligné d'un trait vert qui se remplit au survol (sans flèche). */
 export function LienFleche({ href, children, className }: Props) {
   return (
-    <Lien
-      href={href}
-      className={cx(
-        'group inline-flex items-center gap-1.5 font-medium text-sapin underline-offset-4 hover:underline',
-        className,
-      )}
-    >
+    <Lien href={href} className={cx('lien-trait font-medium text-sapin', className)}>
       {children}
-      <ArrowRight
-        aria-hidden
-        className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
-      />
     </Lien>
   );
 }

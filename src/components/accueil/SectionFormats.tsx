@@ -1,17 +1,12 @@
-import Image from 'next/image';
-import { ArrowRight, Compass, Lightbulb, MessagesSquare, type LucideIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { fondFormat } from '@/components/evenements/EtiquetteFormat';
 import { Lien } from '@/components/ui/Lien';
+import { Motif } from '@/components/ui/Motif';
+import { Pictogramme } from '@/components/ui/Pictogramme';
 import { EnTeteSection, ecart, marges, rythme } from '@/components/ui/Section';
 import { accueil, formats, type FormatEvenement } from '@/content/site';
 import { getEvenements } from '@/lib/evenements';
 import { cx, typo } from '@/lib/utils';
-
-const icones: Record<FormatEvenement, LucideIcon> = {
-  lex: Compass,
-  conference: MessagesSquare,
-  hackathon: Lightbulb,
-};
 
 /** Section sombre « Ce qu’on fait » : une carte pastel par format. */
 export async function SectionFormats() {
@@ -40,17 +35,15 @@ export async function SectionFormats() {
       <EnTeteSection
         id="formats-titre"
         sombre
-        surtitre={accueil.formats.surtitre}
         titre={accueil.formats.titre}
         titreSuite={accueil.formats.titreSuite}
         intro={accueil.formats.intro}
       />
 
       {/* Cartes espacées ; grid-rows-subgrid garde titres, textes, puces et visuels alignés d'une carte à l'autre. */}
-      <ul className={cx('apparition grid gap-4 md:grid-cols-3 lg:gap-5', ecart)}>
+      <ul className={cx('grid gap-4 md:grid-cols-3 lg:gap-5', ecart)}>
         {(Object.keys(formats) as FormatEvenement[]).map((type) => {
           const format = formats[type];
-          const Icone = icones[type];
 
           return (
             <li
@@ -61,7 +54,7 @@ export async function SectionFormats() {
               )}
             >
               <span className="flex size-11 items-center justify-center rounded-bouton bg-white text-sapin">
-                <Icone aria-hidden className="size-5" strokeWidth={1.75} />
+                <Pictogramme type={type} />
               </span>
 
               <h3 className="mt-7 text-2xl">{format.nom}</h3>
@@ -85,13 +78,7 @@ export async function SectionFormats() {
               </ul>
 
               <div className="relative mt-7 aspect-[16/9] overflow-hidden rounded-bouton">
-                <Image
-                  src={format.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 768px) 380px, 100vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                />
+                <Motif type={type} className="transition-transform duration-500 group-hover:scale-[1.04]" />
               </div>
             </li>
           );
