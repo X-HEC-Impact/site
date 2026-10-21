@@ -470,6 +470,7 @@ export const equipe: Membre[] = [
     nom: 'de Lambertye',
     role: '[RÔLE]',
     photo: '/images/team/eleonore-de-lambertye.webp',
+    linkedin: 'https://www.linkedin.com/in/eleonore-de-lambertye/',
   },
 ];
 
