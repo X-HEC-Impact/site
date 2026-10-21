@@ -23,14 +23,9 @@ export function Hero() {
       )}
     >
       <div className="lg:col-span-6">
-        <p className="flex items-center gap-2.5 text-sm font-medium text-ardoise">
-          <span aria-hidden className="size-2 rounded-full bg-vif" />
-          {hero.surtitre}
-        </p>
-
         <h1
           id="hero-titre"
-          className="mt-7 text-[clamp(44px,5.6vw,76px)] leading-[1.02] font-medium tracking-[-0.035em]"
+          className="-ml-[0.05em] text-[clamp(44px,5.6vw,76px)] leading-[1.02] font-medium tracking-[-0.035em]"
         >
           <span className="block">{typo(hero.titre)}</span>
           <span className="block text-brume">
@@ -63,6 +58,8 @@ export function Hero() {
             )}
           </span>
         </h1>
+
+        <p className="mt-6 text-base font-medium text-ardoise">{hero.surtitre}</p>
       </div>
 
       {/* À droite, centré en hauteur sur le titre : le texte et les boutons */}
