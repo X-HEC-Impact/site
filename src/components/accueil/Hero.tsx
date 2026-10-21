@@ -17,15 +17,13 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-titre"
-      className={cx(
-        marges,
-        'grid min-h-[calc(100svh-108px)] content-center gap-10 border-b border-filet py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-12',
-      )}
+      className={cx(marges, 'flex min-h-[calc(100svh-108px)] flex-col border-b border-filet')}
     >
-      <div className="lg:col-span-6">
+      {/* Le titre occupe le haut de l'écran, centré dans l'espace disponible. */}
+      <div className="flex flex-1 items-center py-14 md:py-16">
         <h1
           id="hero-titre"
-          className="-ml-[0.05em] text-[clamp(44px,5.6vw,76px)] leading-[1.02] font-medium tracking-[-0.035em]"
+          className="-ml-[0.05em] text-[clamp(46px,8.2vw,124px)] leading-[1] font-medium tracking-[-0.04em]"
         >
           <span className="block">{typo(hero.titre)}</span>
           <span className="block text-brume">
@@ -58,18 +56,19 @@ export function Hero() {
             )}
           </span>
         </h1>
-
-        <p className="mt-6 text-base font-medium text-ardoise">{hero.surtitre}</p>
       </div>
 
-      {/* À droite, centré en hauteur sur le titre : le texte et les boutons */}
-      <div className="max-w-xl lg:col-span-6 lg:w-full lg:max-w-[28rem] lg:justify-self-end">
-        <p className="text-[17px] leading-relaxed">{typo(hero.texte)}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Bouton href="/evenements">Voir nos événements</Bouton>
-          <Bouton href="/equipe" variante="contour">
-            Rencontrer l’équipe
-          </Bouton>
+      {/* Bandeau du bas : qui nous sommes, ce qu'on fait, et les deux boutons. */}
+      <div className="grid gap-8 border-t border-filet py-8 md:py-10 lg:grid-cols-12 lg:gap-12">
+        <p className="text-base font-medium text-ardoise lg:col-span-5">{hero.surtitre}</p>
+        <div className="lg:col-span-7">
+          <p className="max-w-[34rem] text-[17px] leading-relaxed">{typo(hero.texte)}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Bouton href="/evenements">Voir nos événements</Bouton>
+            <Bouton href="/equipe" variante="contour">
+              Rencontrer l’équipe
+            </Bouton>
+          </div>
         </div>
       </div>
     </section>
