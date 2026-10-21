@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
-import { AppelFinal } from '@/components/AppelFinal';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
+import { AppelFinal } from "@/components/AppelFinal";
 import {
   ChiffresCles,
   Galerie,
@@ -12,30 +12,40 @@ import {
   PartenairesEvenement,
   Rencontres,
   Thematiques,
-} from '@/components/evenements/BlocsEvenement';
-import { CarteInscription } from '@/components/evenements/CarteInscription';
-import { Soutien } from '@/components/evenements/Soutien';
-import { Motif } from '@/components/ui/Motif';
-import { EtiquetteFormat } from '@/components/evenements/EtiquetteFormat';
-import { marges } from '@/components/ui/Section';
-import { Surtitre, Titre } from '@/components/ui/Titre';
-import { evenements } from '@/content/site';
-import { evenementEstPasse, getEvenement } from '@/lib/evenements';
-import { metaPage } from '@/lib/meta';
-import { cx, decouperTitre, typo } from '@/lib/utils';
+} from "@/components/evenements/BlocsEvenement";
+import { CarteInscription } from "@/components/evenements/CarteInscription";
+import { ParcoursLex } from "@/components/evenements/ParcoursLex";
+import { Soutien } from "@/components/evenements/Soutien";
+import { Bouton } from "@/components/ui/Bouton";
+import { Motif } from "@/components/ui/Motif";
+import { EtiquetteFormat } from "@/components/evenements/EtiquetteFormat";
+import { marges } from "@/components/ui/Section";
+import { Surtitre, Titre } from "@/components/ui/Titre";
+import { evenements } from "@/content/site";
+import { evenementEstPasse, getEvenement } from "@/lib/evenements";
+import { metaPage } from "@/lib/meta";
+import { cx, decouperTitre, typo } from "@/lib/utils";
 
 export function generateStaticParams() {
   return evenements.map((e) => ({ slug: e.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<'/evenements/[slug]'>): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/evenements/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const evenement = getEvenement(slug);
   if (!evenement) return {};
-  return metaPage(evenement.titre, evenement.description.split('. ')[0].replace(/\.?$/, '.'), false);
+  return metaPage(
+    evenement.titre,
+    evenement.description.split(". ")[0].replace(/\.?$/, "."),
+    false,
+  );
 }
 
-export default async function PageEvenement({ params }: PageProps<'/evenements/[slug]'>) {
+export default async function PageEvenement({
+  params,
+}: PageProps<"/evenements/[slug]">) {
   const { slug } = await params;
   const evenement = getEvenement(slug);
   if (!evenement) notFound();
@@ -47,26 +57,57 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
   return (
     <>
       {/* En-tête */}
-      <header className={cx(marges, 'border-b border-filet pt-12 pb-16 md:pt-16 md:pb-24')}>
+      <header
+        className={cx(
+          marges,
+          "border-b border-filet pt-12 pb-16 md:pt-16 md:pb-24",
+        )}
+      >
         <Link
           href="/evenements"
           className="group inline-flex items-center gap-1.5 text-sm font-medium text-ardoise hover:text-sapin"
         >
-          <ArrowLeft aria-hidden className="size-4 transition-transform group-hover:-translate-x-0.5" />
+          <ArrowLeft
+            aria-hidden
+            className="size-4 transition-transform group-hover:-translate-x-0.5"
+          />
           Tous les événements
         </Link>
         <div className="mt-12 flex flex-wrap items-center gap-3 md:mt-16">
           <EtiquetteFormat type={evenement.type} />
           {passe && <span className="text-sm text-brume">Événement passé</span>}
         </div>
-        <Titre niveau="h1" debut={debut} suite={suite} className="mt-6 max-w-3xl" />
+        <Titre
+          niveau="h1"
+          debut={debut}
+          suite={suite}
+          className="mt-6 max-w-3xl"
+        />
         {evenement.accroche && (
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed md:text-lg">{typo(evenement.accroche)}</p>
+          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed md:text-lg">
+            {typo(evenement.accroche)}
+          </p>
+        )}
+        {/* Pour un événement à soutenir : l'action des partenaires dès l'en-tête */}
+        {evenement.soutien && (
+          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Bouton href="#soutenir">Soutenir le projet</Bouton>
+            {evenement.etapes && evenement.etapes.length > 0 && (
+              <Link
+                href="#itineraire"
+                className="font-medium text-sapin underline-offset-4 hover:underline"
+              >
+                Voir l’itinéraire
+              </Link>
+            )}
+          </div>
         )}
       </header>
 
       {/* Visuel : la photo de l'événement, sinon la texture de son format (avec le logo de l'événement s'il en a un) */}
-      <div className={cx(marges, 'border-b border-filet py-5 sm:py-8 lg:py-10')}>
+      <div
+        className={cx(marges, "border-b border-filet py-5 sm:py-8 lg:py-10")}
+      >
         <div className="relative aspect-[16/9] overflow-hidden rounded-bouton lg:aspect-[21/8]">
           {evenement.image ? (
             <Image
@@ -77,6 +118,10 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
               sizes="(min-width: 1200px) 1136px, 100vw"
               className="object-cover"
             />
+          ) : evenement.type === "lex" &&
+            evenement.etapes &&
+            evenement.etapes.length > 0 ? (
+            <ParcoursLex etapes={evenement.etapes} />
           ) : (
             <Motif type={evenement.type} />
           )}
@@ -98,12 +143,14 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
         </div>
       </div>
 
-      {evenement.chiffres && evenement.chiffres.length > 0 && <ChiffresCles chiffres={evenement.chiffres} />}
+      {evenement.chiffres && evenement.chiffres.length > 0 && (
+        <ChiffresCles chiffres={evenement.chiffres} />
+      )}
 
       {/* Deux colonnes : contenu à gauche, carte collante à droite */}
       <div className="border-b border-filet">
         <div className="mx-auto grid max-w-[1200px] md:grid-cols-12">
-          <div className={cx(marges, 'py-16 md:col-span-7 md:py-24')}>
+          <div className={cx(marges, "py-16 md:col-span-7 md:py-24")}>
             <section aria-labelledby="apropos-titre">
               <Surtitre>
                 <span id="apropos-titre">À propos</span>
@@ -115,7 +162,9 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
               </div>
             </section>
 
-            {evenement.etapes && evenement.etapes.length > 0 && <Itineraire etapes={evenement.etapes} />}
+            {evenement.etapes && evenement.etapes.length > 0 && (
+              <Itineraire etapes={evenement.etapes} />
+            )}
 
             {evenement.thematiques && evenement.thematiques.length > 0 && (
               <Thematiques thematiques={evenement.thematiques} />
@@ -130,7 +179,11 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
             )}
 
             {evenement.programme && evenement.programme.length > 0 && (
-              <section id="programme" aria-labelledby="programme-titre" className="mt-16 md:mt-20">
+              <section
+                id="programme"
+                aria-labelledby="programme-titre"
+                className="mt-16 md:mt-20"
+              >
                 <Surtitre>
                   <span id="programme-titre">Programme</span>
                 </Surtitre>
@@ -140,7 +193,9 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
                       key={i}
                       className="grid gap-1 border-b border-filet px-5 py-4 last:border-b-0 sm:grid-cols-[9rem_1fr] sm:gap-6"
                     >
-                      <span className="font-titre font-medium text-vif-texte">{etape.quand}</span>
+                      <span className="font-titre font-medium text-vif-texte">
+                        {etape.quand}
+                      </span>
                       <span className="text-sapin">{typo(etape.quoi)}</span>
                     </li>
                   ))}
@@ -161,7 +216,10 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
       </div>
 
       {evenement.intervenants && evenement.intervenants.length > 0 && (
-        <Intervenants intervenants={evenement.intervenants} note={evenement.intervenantsNote} />
+        <Intervenants
+          intervenants={evenement.intervenants}
+          note={evenement.intervenantsNote}
+        />
       )}
 
       {evenement.partenaires && evenement.partenaires.length > 0 && (
@@ -170,7 +228,9 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
 
       {evenement.soutien && <Soutien soutien={evenement.soutien} />}
 
-      {evenement.photos && evenement.photos.length > 0 && <Galerie photos={evenement.photos} />}
+      {evenement.photos && evenement.photos.length > 0 && (
+        <Galerie photos={evenement.photos} />
+      )}
 
       <AppelFinal />
     </>

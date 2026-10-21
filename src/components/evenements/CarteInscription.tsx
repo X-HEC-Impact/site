@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { CalendarDays, Clock, LockKeyhole, MapPin, Tag } from "lucide-react";
+import { Bouton } from "@/components/ui/Bouton";
 import { FormulaireInscription } from "@/components/evenements/FormulaireInscription";
 import { formats, type Evenement } from "@/content/site";
 import { dateLongue } from "@/lib/dates";
@@ -59,13 +60,25 @@ export function CarteInscription({
         </h2>
 
         {evenement.reserveA ? (
-          <p className="mt-3 flex items-start gap-2 rounded-bouton bg-voile p-4 text-[15px]">
-            <LockKeyhole
-              aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-brume"
-            />
-            {evenement.reserveA}
-          </p>
+          <>
+            <p className="mt-3 flex items-start gap-2 rounded-bouton bg-voile p-4 text-[15px]">
+              <LockKeyhole
+                aria-hidden
+                className="mt-0.5 size-4 shrink-0 text-brume"
+              />
+              {evenement.reserveA}
+            </p>
+            {evenement.soutien && (
+              <div className="mt-4 border-t border-filet pt-4">
+                <p className="text-[15px]">
+                  Entreprise, fondation, école : soutenez la LEX Europe.
+                </p>
+                <Bouton href="#soutenir" className="mt-3 w-full justify-center">
+                  Soutenir le projet
+                </Bouton>
+              </div>
+            )}
+          </>
         ) : passe ? (
           <p className="mt-3 flex items-center gap-2 rounded-bouton bg-voile p-4 text-[15px]">
             <Clock aria-hidden className="size-4 shrink-0 text-brume" />
