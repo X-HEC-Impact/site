@@ -18,16 +18,16 @@ export function Marque({ className }: { className?: string }) {
   );
 }
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({ className, sombre }: { className?: string; sombre?: boolean }) {
   return (
     <Link
       href="/"
-      className={cx('inline-flex items-center gap-2.5 text-sapin', className)}
+      className={cx('inline-flex items-center gap-2.5', sombre ? 'text-white' : 'text-sapin', className)}
       aria-label="X-HEC Impact, retour à l'accueil"
     >
       <Marque />
       <span className="font-titre text-[20px] tracking-[-0.02em] whitespace-nowrap">
-        <span className="font-bold">X-HEC</span> <span className="font-normal text-vif-texte">impact</span>
+        <span className="font-bold">X-HEC</span> <span className={cx('font-normal', sombre ? 'text-vif' : 'text-vif-texte')}>impact</span>
       </span>
     </Link>
   );

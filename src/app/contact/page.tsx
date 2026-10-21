@@ -102,6 +102,7 @@ export default function PageContact() {
         titre={titre}
         titreSuite={titreSuite}
         description={description}
+        position="60% 30%"
       />
 
       {/* L'e-mail, en grand, et les réseaux à côté */}

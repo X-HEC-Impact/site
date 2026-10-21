@@ -16,7 +16,7 @@ export default async function PageEvenements() {
 
   return (
     <>
-      <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} />
+      <EnTetePage surtitre={surtitre} titre={titre} titreSuite={titreSuite} description={description} position="50% 100%" />
 
       {/* Pendant le chargement (et sans JavaScript), tous les événements s'affichent. */}
       <Suspense fallback={<Agenda aVenir={aVenir} passes={passes} filtre="tous" />}>

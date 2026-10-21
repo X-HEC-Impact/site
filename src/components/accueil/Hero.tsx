@@ -1,5 +1,5 @@
 import { Bouton } from "@/components/ui/Bouton";
-import Image from "next/image";
+import { PhotoFond } from "@/components/ui/PhotoFond";
 import { marges } from "@/components/ui/Section";
 import { accueil } from "@/content/site";
 import { cx, typo } from "@/lib/utils";
@@ -23,22 +23,7 @@ export function Hero() {
         "relative isolate grid min-h-[calc(100svh-108px)] content-center gap-10 overflow-hidden border-b border-filet py-16 md:py-24 lg:grid-cols-12 lg:items-center lg:gap-12",
       )}
     >
-      {/* Photo de paysage sur tout le haut de page, teintée de vert sapin pour que le texte blanc reste lisible */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-sapin"
-      >
-        <Image
-          src="/images/accueil/paysage.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[50%_58%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-sapin/85 via-sapin/60 to-sapin/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-sapin/50 via-transparent to-transparent" />
-      </div>
+      <PhotoFond priority />
 
       <div className="lg:col-span-7">
         <h1
