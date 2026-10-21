@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { AppelFinal } from '@/components/AppelFinal';
 import { ChiffresCles, Galerie, Itineraire, Rencontres } from '@/components/evenements/BlocsEvenement';
 import { CarteInscription } from '@/components/evenements/CarteInscription';
+import { Soutien } from '@/components/evenements/Soutien';
 import { EtiquetteFormat } from '@/components/evenements/EtiquetteFormat';
 import { marges } from '@/components/ui/Section';
 import { Surtitre, Titre } from '@/components/ui/Titre';
@@ -124,6 +125,8 @@ export default async function PageEvenement({ params }: PageProps<'/evenements/[
           </div>
         </aside>
       </div>
+
+      {evenement.soutien && <Soutien soutien={evenement.soutien} />}
 
       {evenement.photos && evenement.photos.length > 0 && <Galerie photos={evenement.photos} />}
 

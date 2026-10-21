@@ -4,7 +4,7 @@ import { pages } from '@/content/site';
 import { cx, typo } from '@/lib/utils';
 
 // Les cartes reprennent les teintes pastel du site, dans l'ordre.
-const teintes = ['bg-menthe', 'bg-ciel', 'bg-lavande'];
+const teintes = ['bg-menthe', 'bg-ciel', 'bg-lavande', 'bg-citron/50'];
 
 /** Bloc « Nos pôles » : une carte pastel par pôle, espacées. */
 export function NosPoles() {
@@ -14,7 +14,7 @@ export function NosPoles() {
     <Section titreId="poles-titre">
       <EnTeteSection id="poles-titre" surtitre={poles.surtitre} titre={poles.titre} titreSuite={poles.titreSuite} />
 
-      <ul className={cx('apparition grid gap-4 md:grid-cols-3 lg:gap-5', ecart)}>
+      <ul className={cx('apparition grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5', ecart)}>
         {poles.liste.map((pole, index) => (
           <li key={index} className={cx('flex flex-col rounded-bouton p-6 lg:p-8', teintes[index % teintes.length])}>
             <h3 className="text-2xl">{pole.nom}</h3>

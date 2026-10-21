@@ -1,6 +1,6 @@
 import { cacheLife } from 'next/cache';
 import { evenements, type Evenement } from '@/content/site';
-import { dateEstFixee } from '@/lib/dates';
+import { dateConnue, dateEstMois } from '@/lib/dates';
 
 /* ------------------------------------------------------------------
    Événements « à venir » et « passés » (côté serveur uniquement).
@@ -21,14 +21,16 @@ function aujourdhuiAParis() {
 }
 
 function estPasse(evenement: Evenement, aujourdhui: string) {
-  const derniereDate = dateEstFixee(evenement.dateFin) ? evenement.dateFin : evenement.date;
-  return dateEstFixee(derniereDate) && derniereDate < aujourdhui;
+  const derniereDate = dateConnue(evenement.dateFin) ? evenement.dateFin : evenement.date;
+  if (!dateConnue(derniereDate)) return false;
+  // Date au mois près ('2027-04') : passée seulement une fois le mois terminé.
+  return derniereDate < (dateEstMois(derniereDate) ? aujourdhui.slice(0, 7) : aujourdhui);
 }
 
 /** Les dates fixées d'abord, de la plus proche à la plus lointaine ; les « [DATE] » ensuite. */
 function parDateCroissante(a: Evenement, b: Evenement) {
-  const fixeeA = dateEstFixee(a.date);
-  const fixeeB = dateEstFixee(b.date);
+  const fixeeA = dateConnue(a.date);
+  const fixeeB = dateConnue(b.date);
   if (fixeeA && fixeeB) return a.date.localeCompare(b.date);
   return Number(fixeeB) - Number(fixeeA);
 }

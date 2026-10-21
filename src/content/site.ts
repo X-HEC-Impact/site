@@ -71,7 +71,7 @@ export const formats: Record<
 
 export const annonce = {
   afficher: true,
-  texte: 'Prochain événement : LEX Europe, [DATES].',
+  texte: 'Prochain événement : LEX Europe, avril 2027.',
   libelleLien: 'Découvrir',
   lien: '/evenements/lex-europe',
 };
@@ -140,9 +140,10 @@ export const accueil = {
    Pour ajouter un événement, copiez un bloc { … } et modifiez-le.
    - slug : identifiant dans l'adresse (/evenements/mon-slug), sans
      espace ni accent.
-   - date : au format 'AAAA-MM-JJ'. Tant qu'elle n'est pas fixée, mettez
-     un placeholder entre crochets ('[DATES]') : l'événement est alors
-     classé « à venir ».
+   - date : au format 'AAAA-MM-JJ', ou 'AAAA-MM' si seul le mois est
+     connu (ex. '2027-04' s'affiche « avril 2027 »). Tant qu'elle n'est pas
+     fixée, mettez un placeholder entre crochets ('[DATES]') : l'événement
+     est alors classé « à venir ».
    - dateFin : facultatif, pour un événement sur plusieurs jours.
    - Un événement passe automatiquement dans « Événements passés »
      le lendemain de sa date (ou de sa date de fin).
@@ -177,6 +178,20 @@ export type Evenement = {
   etapes?: { ville: string; texte: string }[];
   rencontres?: { titre: string; texte: string }[];
   secteurs?: string;
+  soutien?: Soutien;
+};
+
+/** Bloc « Soutenir le projet » d'un événement (budget, niveaux de partenariat, contact). */
+export type Soutien = {
+  titre: string;
+  titreSuite?: string;
+  intro?: string;
+  budget: { poste: string; couvre: string; montant: string; part: string }[];
+  total: { montant: string; part: string };
+  avantages: { titre: string; texte: string }[];
+  niveaux: { nom: string; montant: string; avantages: string[] }[];
+  note?: string;
+  contact: { nom: string; role: string; email: string; telephone?: string };
 };
 
 export const evenements: Evenement[] = [
@@ -185,7 +200,7 @@ export const evenements: Evenement[] = [
     slug: 'lex-europe',
     type: 'lex',
     titre: 'LEX Europe',
-    date: '[DATES]',
+    date: '2027-04',
     lieu: 'Lille · Amsterdam · Munich · Zurich · Milan',
     accroche:
       '5 pays · 10 jours · 10 étudiants du Master X-HEC Entrepreneurs, en train au départ de Paris.',
@@ -216,15 +231,76 @@ Un voyage à faible impact carbone : 19,3 kg de CO2e par étudiant pour 10 jours
     secteurs: 'impact, tech, food, retail, logistique, mode, santé, défense…',
     inscriptionsOuvertes: false,
     reserveA: 'Ce voyage est réservé aux étudiants du Master X-HEC Entrepreneurs.',
-  },
-  {
-    slug: 'conference-1',
-    type: 'conference',
-    titre: '[TITRE DE LA CONFÉRENCE]',
-    date: '[DATE]',
-    lieu: '[LIEU]',
-    description: '[DESCRIPTION DE LA CONFÉRENCE ET DES INTERVENANTS]',
-    inscriptionsOuvertes: false,
+    // Bloc « Soutenir le projet » (repris du dossier de partenariat).
+    soutien: {
+      titre: 'Soutenir',
+      titreSuite: 'la LEX Europe.',
+      intro: 'Nous avons besoin de 25 000 € pour ce voyage.',
+      budget: [
+        { poste: 'Hébergement', couvre: '10 nuits pour 10 étudiants', montant: '8 500 €', part: '34 %' },
+        { poste: 'Transport en train', couvre: 'Paris, 5 villes, retour à Paris', montant: '6 000 €', part: '24 %' },
+        { poste: 'Repas', couvre: 'Pendant les 10 jours', montant: '5 000 €', part: '20 %' },
+        { poste: 'Organisation', couvre: 'Transports locaux, tables rondes, photo et vidéo', montant: '5 500 €', part: '22 %' },
+      ],
+      total: { montant: '25 000 €', part: '100 %' },
+      avantages: [
+        {
+          titre: 'Visibilité',
+          texte: 'Des posts tout au long du voyage, un relais avec le réseau X-HEC Entrepreneurs, du matériel à votre nom.',
+        },
+        {
+          titre: 'Rencontres avec les étudiants',
+          texte: 'Un lien renforcé entre votre entreprise et de futurs entrepreneurs et repreneurs passionnés par l’écosystème européen.',
+        },
+        {
+          titre: 'Un engagement RSE concret',
+          texte: 'Vous soutenez un projet bas carbone au service de l’entrepreneuriat européen.',
+        },
+        {
+          titre: 'Élargir votre réseau européen',
+          texte: 'Des mises en relation avec les incubateurs, investisseurs et startups rencontrés dans 5 pays.',
+        },
+      ],
+      niveaux: [
+        {
+          nom: 'Voyageur',
+          montant: '1 000 €',
+          avantages: ['Votre logo et nos remerciements dans les posts LinkedIn du voyage', 'Carnet de voyage envoyé au retour'],
+        },
+        {
+          nom: 'Explorateur',
+          montant: '3 000 €',
+          avantages: [
+            'Un post LinkedIn dédié à votre entreprise',
+            'Organisation d’un dîner avec les étudiants du voyage pour un échange en comité réduit',
+          ],
+        },
+        {
+          nom: 'Ambassadeur',
+          montant: '5 000 €',
+          avantages: [
+            'Votre logo sur le merch’ des étudiants et mis en avant pendant le voyage',
+            'Organisation d’une conférence par l’association X-HEC Impact sur le sujet de votre choix',
+          ],
+        },
+        {
+          nom: 'Partenaire principal',
+          montant: '10 000 €',
+          avantages: [
+            'Votre nom associé au voyage',
+            'Restitution du voyage devant vos équipes',
+            'Cocktail de networking avant le départ',
+          ],
+        },
+      ],
+      note: 'Chaque offre inclut les avantages précédents. Nous pouvons également organiser une visite de vos bureaux si vous vous trouvez dans les villes concernées.',
+      contact: {
+        nom: 'Thomas Rapoport',
+        role: 'Responsable LEX Europe 2027',
+        email: 'thomas.rapoport@hec.edu',
+        telephone: '07 81 61 65 85',
+      },
+    },
   },
   {
     slug: 'hackathon-impact-2025',
@@ -363,9 +439,26 @@ export const pages = {
       titre: 'Comment',
       titreSuite: 'on s’organise.',
       liste: [
-        { nom: '[PÔLE]', description: '[DESCRIPTION DU PÔLE]', membres: '[MEMBRES]' },
-        { nom: '[PÔLE]', description: '[DESCRIPTION DU PÔLE]', membres: '[MEMBRES]' },
-        { nom: '[PÔLE]', description: '[DESCRIPTION DU PÔLE]', membres: '[MEMBRES]' },
+        {
+          nom: 'Bureau',
+          description: 'Pilote l’association, ses partenariats et son budget.',
+          membres: 'Louis Honoré, Thomas Corvaisier, Renan Chauveau',
+        },
+        {
+          nom: 'LEX Europe',
+          description: 'Organise la learning expedition en train : itinéraire, visites et partenaires.',
+          membres: 'Thomas Rapoport, Simon Pelissier',
+        },
+        {
+          nom: 'Hackathon Impact',
+          description: 'Prépare le hackathon : sujet, mentors, jury et partenaires.',
+          membres: 'Simon Pelissier',
+        },
+        {
+          nom: 'Conférences & tables rondes',
+          description: 'Invite fondateurs, chercheurs et décideurs à partager leur expérience.',
+          membres: 'Matéo Gosselin',
+        },
       ],
     },
     /** Bloc « Éditions précédentes » : les équipes qui ont organisé les éditions passées. */
@@ -394,7 +487,8 @@ export const pages = {
       surtitre: 'Mot de l’équipe',
       titre: 'Pourquoi',
       titreSuite: 'X-HEC Impact ?',
-      citation: '[MOT DE L’ÉQUIPE]',
+      citation:
+        'Nous croyons qu’entreprendre est l’un des leviers les plus puissants pour répondre aux défis sociaux et environnementaux. Avec X-HEC Impact, nous créons des occasions concrètes d’apprendre, de rencontrer celles et ceux qui agissent déjà, et de passer de l’idée à l’action.',
       signature: 'L’équipe X-HEC Impact',
     },
   },
