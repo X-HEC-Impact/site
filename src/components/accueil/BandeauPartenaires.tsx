@@ -11,9 +11,8 @@ export function BandeauPartenaires() {
     <section aria-labelledby="partenaires-titre" className="border-b border-filet py-16 md:py-20">
       <h2
         id="partenaires-titre"
-        className="flex items-center justify-center gap-2.5 px-5 font-sans text-sm font-medium tracking-normal text-ardoise"
+        className="px-5 text-center font-titre text-xl font-medium tracking-[-0.02em] text-sapin md:text-2xl"
       >
-        <span aria-hidden className="size-2 rounded-full bg-vif" />
         {accueil.partenaires.surtitre}
       </h2>
 
