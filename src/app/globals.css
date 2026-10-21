@@ -10,12 +10,11 @@
   --color-ardoise: #4a5c57; /* texte courant */
   --color-brume: #657671; /* second ton des titres, surtitres (contraste ≥ 4.5:1) */
   --color-lichen: #93aba3; /* second ton des titres sur fond sapin */
-  --color-filet: #d5deda; /* tous les filets et bordures */
-  --color-voile: #f6f9f7; /* fonds de cellules alternés */
+  --color-filet: #dce2d3; /* tous les filets et bordures */
+  --color-voile: #f4f6ec; /* fonds de cellules alternés */
   --color-menthe: #e3f5ea; /* carte LEX Europe */
   --color-ciel: #e5eefb; /* carte Conférences */
   --color-prairie: #eef1d6; /* carte Hackathon : le vert-jaune des prairies de la photo */
-  --color-pre: #f2f4e3; /* bande des partenaires : le vert-jaune très pâle des prairies de la photo */
   --color-citron: #e4fa9b; /* surlignage ponctuel d'un mot */
 
   --radius-bouton: 6px;

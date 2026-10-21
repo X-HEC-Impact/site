@@ -60,12 +60,12 @@ export default async function PageEvenement({
       <header
         className={cx(
           marges,
-          "border-b border-filet pt-12 pb-16 md:pt-16 md:pb-24",
+          "section-sombre bg-sapin pt-12 pb-16 md:pt-16 md:pb-24",
         )}
       >
         <Link
           href="/evenements"
-          className="group inline-flex items-center gap-1.5 text-sm font-medium text-ardoise hover:text-sapin"
+          className="group inline-flex items-center gap-1.5 text-sm font-medium text-white/75 hover:text-white"
         >
           <ArrowLeft
             aria-hidden
@@ -75,16 +75,17 @@ export default async function PageEvenement({
         </Link>
         <div className="mt-12 flex flex-wrap items-center gap-3 md:mt-16">
           <EtiquetteFormat type={evenement.type} />
-          {passe && <span className="text-sm text-brume">Événement passé</span>}
+          {passe && <span className="text-sm text-lichen">Événement passé</span>}
         </div>
         <Titre
           niveau="h1"
+          sombre
           debut={debut}
           suite={suite}
           className="mt-6 max-w-3xl"
         />
         {evenement.accroche && (
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed md:text-lg">
+          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-white/85 md:text-lg">
             {typo(evenement.accroche)}
           </p>
         )}
@@ -95,7 +96,7 @@ export default async function PageEvenement({
             {evenement.etapes && evenement.etapes.length > 0 && (
               <Link
                 href="#itineraire"
-                className="font-medium text-sapin underline-offset-4 hover:underline"
+                className="font-medium text-white underline-offset-4 hover:underline"
               >
                 Voir l’itinéraire
               </Link>

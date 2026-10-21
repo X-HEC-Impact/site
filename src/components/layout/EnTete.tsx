@@ -21,8 +21,8 @@ type Props = {
 export function EnTete({ inscription }: Props) {
   const pathname = usePathname();
   const [ouvert, setOuvert] = useState(false);
-  // Sur l'accueil, la barre est vert sapin translucide au-dessus de la photo ; ailleurs, elle reste blanche.
-  const sombre = pathname === '/';
+  // Barre vert sapin sur toutes les pages, comme le pied de page.
+  const sombre = true;
 
   // Ferme le menu mobile avec la touche Échap.
   useEffect(() => {
