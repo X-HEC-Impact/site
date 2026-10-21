@@ -25,23 +25,20 @@ export function Hero() {
       )}
     >
       <PhotoFond priority mouvement="respire" />
-      {/* Les ondes du logo, qui partent du coin en bas à droite et s'éloignent */}
+      {/* Une onde du logo part du coin en bas à droite à l'ouverture de la page, s'éloigne et s'efface (une seule fois) */}
       <svg
         aria-hidden
         viewBox="-300 -300 600 600"
         className="pointer-events-none absolute -right-40 -bottom-40 -z-10 size-[32rem] [&_*]:[vector-effect:non-scaling-stroke] md:-right-24 md:-bottom-24 md:size-[48rem]"
       >
-        {[0, 1, 2].map((i) => (
-          <circle
-            key={i}
-            className="ping"
-            style={{ "--i": i, "--pic": 0.32 } as CSSProperties}
-            r="300"
-            fill="none"
-            stroke="#ffffff"
-            strokeWidth="2"
-          />
-        ))}
+        <circle
+          className="onde-unique"
+          style={{ "--pic": 0.45 } as CSSProperties}
+          r="300"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="2"
+        />
       </svg>
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-sapin to-transparent" />
 

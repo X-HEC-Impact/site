@@ -268,6 +268,7 @@
 
 /* Éléments qui n'existent que pour bouger : invisibles sans animation. */
 .ping,
+.onde-unique,
 .pulse-gare,
 .trace-train {
   opacity: 0;
@@ -511,6 +512,12 @@
     transform-origin: center;
     animation: onde-ping 6s cubic-bezier(0.2, 0.55, 0.3, 1) infinite;
     animation-delay: calc(var(--i, 0) * 2s);
+  }
+  /* L'onde de l'accueil : une seule fois, juste après l'entrée du titre. */
+  .onde-unique {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: onde-ping 4.2s cubic-bezier(0.2, 0.55, 0.3, 1) 700ms 1 both;
   }
   .souffle {
     transform-box: fill-box;
