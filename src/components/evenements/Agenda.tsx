@@ -4,7 +4,10 @@ import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { Bouton } from "@/components/ui/Bouton";
 import { Motif } from "@/components/ui/Motif";
 import { CelluleEvenement } from "@/components/evenements/CelluleEvenement";
-import { EtiquetteFormat } from "@/components/evenements/EtiquetteFormat";
+import {
+  EtiquetteFormat,
+  fondFormat,
+} from "@/components/evenements/EtiquetteFormat";
 import { Grille } from "@/components/ui/Grille";
 import { LienFleche } from "@/components/ui/LienFleche";
 import { Pictogramme } from "@/components/ui/Pictogramme";
@@ -219,28 +222,27 @@ function EvenementEnVedette({ evenement }: { evenement: Evenement }) {
 /** Un événement passé : photo (ou visuel du format), date, titre, lieu. Toute la carte est cliquable. */
 function CartePassee({ evenement }: { evenement: Evenement }) {
   const { principal, annee } = dateCourte(evenement);
+  const photo = evenement.image ?? evenement.photos?.[0]?.src;
 
   return (
     <Link
       href={`/evenements/${evenement.slug}`}
       className="group block overflow-hidden rounded-bouton border border-filet bg-white transition-shadow duration-200 hover:shadow-[0_16px_40px_-20px_rgb(6_42_33/0.3)]"
     >
-      <div className="relative aspect-[16/9] overflow-hidden">
-        <Motif type={evenement.type} />
-        {evenement.logo && (
-          <div className="absolute inset-0 flex items-center justify-center p-6">
-            <div className="w-[min(60%,16rem)] rounded-bouton bg-white px-5 py-5 shadow-[0_1px_2px_rgb(6_42_33/0.06),0_12px_32px_-12px_rgb(6_42_33/0.25)]">
-              <Image
-                src={evenement.logo.src}
-                alt=""
-                width={965}
-                height={296}
-                sizes="256px"
-                className="h-auto w-full"
-              />
-            </div>
-          </div>
-        )}
+      <div className={cx("p-3 md:p-4", fondFormat[evenement.type])}>
+        <div className="relative aspect-[16/9] overflow-hidden rounded-bouton">
+          {photo ? (
+            <Image
+              src={photo}
+              alt=""
+              fill
+              sizes="(min-width: 1200px) 520px, (min-width: 768px) 42vw, 90vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <Motif type={evenement.type} />
+          )}
+        </div>
       </div>
       <div className="p-6 md:p-7">
         <div className="flex items-center justify-between gap-4">
