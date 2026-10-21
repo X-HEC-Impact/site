@@ -14,7 +14,7 @@ export async function ProchainsEvenements() {
   const affiches = aVenir.slice(0, NOMBRE_MAX);
 
   return (
-    <Section titreId="agenda-titre" className="bg-glacier">
+    <Section titreId="agenda-titre" className="bg-pre">
       <EnTeteSection
         id="agenda-titre"
         titre={accueil.agenda.titre}
