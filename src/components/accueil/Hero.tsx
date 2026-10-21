@@ -27,9 +27,9 @@ export function Hero() {
         aria-hidden
         viewBox="0 0 1200 800"
         preserveAspectRatio="xMaxYMid slice"
-        className="pointer-events-none absolute inset-0 -z-10 hidden size-full lg:block [mask-image:linear-gradient(to_right,transparent_50%,black_88%)] [&_*]:[vector-effect:non-scaling-stroke]"
+        className="pointer-events-none absolute inset-0 -z-10 hidden size-full lg:block [&_*]:[vector-effect:non-scaling-stroke]"
       >
-        <g transform="translate(1200 400)" fill="none">
+        <g transform="translate(1110 400)" fill="none">
           {[130, 210, 290, 370, 450, 530, 610, 690].map((r) => (
             <circle key={r} r={r} stroke="#062a21" strokeOpacity="0.09" strokeWidth="1.5" />
           ))}
