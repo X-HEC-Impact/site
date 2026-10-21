@@ -19,24 +19,17 @@ export async function SectionFormats() {
 
   // Chaque carte pointe vers le prochain événement du format, sinon vers l'agenda filtré.
   // Événement à soutenir (ex. la LEX) : « Soutenir le projet » ; événement interne : « Découvrir ».
+  // « S'inscrire » n'apparaît que si les inscriptions sont réellement ouvertes.
   const puces = (type: FormatEvenement) => {
     const prochain = aVenir.find((e) => e.type === type);
-    if (!prochain) {
-      const agenda = `/evenements?format=${type}`;
-      return [
-        { libelle: 'Programme', href: agenda },
-        { libelle: 'S’inscrire', href: agenda },
-      ];
-    }
+    if (!prochain) return [{ libelle: 'Programme', href: `/evenements?format=${type}` }];
+
     const page = `/evenements/${prochain.slug}`;
-    return [
-      { libelle: 'Programme', href: `${page}#programme` },
-      prochain.soutien
-        ? { libelle: 'Soutenir le projet', href: `${page}#soutenir` }
-        : prochain.reserveA
-          ? { libelle: 'Découvrir', href: page }
-          : { libelle: 'S’inscrire', href: `${page}#inscription` },
-    ];
+    const programme = { libelle: 'Programme', href: `${page}#programme` };
+    if (prochain.soutien) return [programme, { libelle: 'Soutenir le projet', href: `${page}#soutenir` }];
+    if (prochain.reserveA) return [programme, { libelle: 'Découvrir', href: page }];
+    if (prochain.inscriptionsOuvertes) return [programme, { libelle: 'S’inscrire', href: `${page}#inscription` }];
+    return [programme];
   };
 
   return (
