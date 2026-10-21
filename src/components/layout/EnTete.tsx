@@ -21,6 +21,8 @@ type Props = {
 export function EnTete({ inscription }: Props) {
   const pathname = usePathname();
   const [ouvert, setOuvert] = useState(false);
+  // Sur l'accueil, la barre est vert sapin translucide au-dessus de la photo ; ailleurs, elle reste blanche.
+  const sombre = pathname === '/';
 
   // Ferme le menu mobile avec la touche Échap.
   useEffect(() => {
@@ -33,9 +35,14 @@ export function EnTete({ inscription }: Props) {
   const fermer = () => setOuvert(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-filet bg-white/90 backdrop-blur-md">
+    <header
+      className={cx(
+        'sticky top-0 z-40 border-b backdrop-blur-md',
+        sombre ? 'section-sombre border-white/10 bg-sapin' : 'border-filet bg-white/90',
+      )}
+    >
       <div className="marges flex h-[68px] items-center justify-between gap-6 md:grid md:grid-cols-[1fr_auto_1fr]">
-        <Logo />
+        <Logo sombre={sombre} />
 
         {/* Menu bureau (768 px et plus) */}
         <nav aria-label="Navigation principale" className="hidden md:block">
@@ -48,10 +55,16 @@ export function EnTete({ inscription }: Props) {
                     href={lien.href}
                     aria-current={actif ? 'page' : undefined}
                     className={cx(
-                      'transition-colors hover:text-sapin',
+                      'transition-colors',
+                      sombre ? 'hover:text-white' : 'hover:text-sapin',
                       actif
-                        ? 'font-medium text-sapin underline decoration-vif decoration-2 underline-offset-[10px]'
-                        : 'text-ardoise',
+                        ? cx(
+                            'font-medium underline decoration-vif decoration-2 underline-offset-[10px]',
+                            sombre ? 'text-white' : 'text-sapin',
+                          )
+                        : sombre
+                          ? 'text-white/75'
+                          : 'text-ardoise',
                     )}
                   >
                     {lien.libelle}
@@ -64,7 +77,7 @@ export function EnTete({ inscription }: Props) {
 
         <div className="hidden items-center gap-2.5 justify-self-end md:flex">
           {inscription && (
-            <Bouton href={inscription.href} variante="noir" taille="petit">
+            <Bouton href={inscription.href} variante={sombre ? 'principal' : 'noir'} taille="petit">
               {inscription.libelle}
             </Bouton>
           )}
@@ -73,7 +86,10 @@ export function EnTete({ inscription }: Props) {
         {/* Bouton burger (moins de 768 px) */}
         <button
           type="button"
-          className="-mr-2 inline-flex size-10 items-center justify-center rounded-bouton text-sapin md:hidden"
+          className={cx(
+            '-mr-2 inline-flex size-10 items-center justify-center rounded-bouton md:hidden',
+            sombre ? 'text-white' : 'text-sapin',
+          )}
           aria-expanded={ouvert}
           aria-controls="menu-mobile"
           aria-label={ouvert ? 'Fermer le menu' : 'Ouvrir le menu'}
@@ -87,21 +103,24 @@ export function EnTete({ inscription }: Props) {
       <div
         id="menu-mobile"
         hidden={!ouvert}
-        className="absolute inset-x-0 top-full border-b border-filet bg-white md:hidden"
+        className={cx(
+          'absolute inset-x-0 top-full border-b md:hidden',
+          sombre ? 'section-sombre border-white/10 bg-sapin' : 'border-filet bg-white',
+        )}
       >
         <nav aria-label="Navigation mobile">
           <ul>
             {navigation.map((lien) => {
               const actif = estActif(pathname, lien.href);
               return (
-                <li key={lien.href} className="border-b border-filet">
+                <li key={lien.href} className={cx('border-b', sombre ? 'border-white/10' : 'border-filet')}>
                   <Link
                     href={lien.href}
                     onClick={fermer}
                     aria-current={actif ? 'page' : undefined}
                     className={cx(
                       'flex items-center justify-between px-5 py-4 font-titre text-xl tracking-[-0.02em]',
-                      actif ? 'text-sapin' : 'text-ardoise',
+                      actif ? (sombre ? 'text-white' : 'text-sapin') : sombre ? 'text-white/75' : 'text-ardoise',
                     )}
                   >
                     {lien.libelle}
@@ -117,7 +136,7 @@ export function EnTete({ inscription }: Props) {
             Contact
           </Bouton>
           {inscription && (
-            <Bouton href={inscription.href} variante="noir" onClick={fermer}>
+            <Bouton href={inscription.href} variante={sombre ? 'principal' : 'noir'} onClick={fermer}>
               {inscription.libelle}
             </Bouton>
           )}
