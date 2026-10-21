@@ -81,7 +81,7 @@ export function Hero() {
         <p className="mt-6 text-base font-medium text-ardoise">{hero.surtitre}</p>
       </div>
 
-      <div className="max-w-xl lg:col-span-5 lg:max-w-[28rem] lg:justify-self-end">
+      <div className="relative max-w-xl before:absolute before:-inset-y-8 before:right-0 before:-left-10 before:-z-10 before:rounded-[3rem] before:bg-white/90 before:blur-xl lg:col-span-5 lg:max-w-[28rem] lg:justify-self-end">
         <p className="text-[17px] leading-relaxed">{typo(hero.texte)}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Bouton href="/evenements">Voir nos événements</Bouton>
