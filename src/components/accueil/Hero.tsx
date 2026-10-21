@@ -82,12 +82,6 @@ export function Hero() {
               style={{ "--i": 3 } as CSSProperties}
             />
           </g>
-          <circle
-            r="26"
-            fill="#2ec27e"
-            className="onde"
-            style={{ "--i": 0 } as CSSProperties}
-          />
         </g>
       </svg>
 
