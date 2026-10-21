@@ -19,7 +19,14 @@ export function AppelFinal({ photo = false }: { photo?: boolean }) {
       )}
     >
       {photo ? (
-        <PhotoFond position="50% 100%" voile="fort" />
+        <>
+          <PhotoFond position="50% 100%" voile="fort" />
+          {/* Fondu depuis la section sombre du dessus, sans arête */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-sapin to-transparent"
+          />
+        </>
       ) : (
         /* Le dessin de la ligne de train, discret, qui s'estompe vers le texte. */
         <div
