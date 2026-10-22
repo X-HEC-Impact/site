@@ -27,12 +27,13 @@ export function EnTetePage({ surtitre, titre, titreSuite, description, photo, ph
       className={cx(
         marges,
         'section-sombre relative isolate grid gap-8 overflow-clip bg-sapin pt-20 pb-16 md:grid-cols-12 md:items-end md:gap-12 md:pt-28 md:pb-24',
-        photo && 'min-h-[22rem] pt-24 pb-24 md:min-h-[30rem] md:pt-32 md:pb-32',
+        photo &&
+          'hero-photo -mt-(--h-barre) min-h-[calc(22rem+var(--h-barre))] pt-[calc(6rem+var(--h-barre))] pb-24 md:min-h-[calc(30rem+var(--h-barre))] md:pt-[calc(8rem+var(--h-barre))] md:pb-32',
       )}
     >
       {photo && (
         <>
-          <PhotoFond src={photoSrc} position={photo} voile="fort" priority mouvement="respire" />
+          <PhotoFond src={photoSrc} position={photo} voile="fort" priority sousBarre mouvement="respire" />
           {/* Fondu vers la section sombre qui suit */}
           {fonduBas && (
             <div

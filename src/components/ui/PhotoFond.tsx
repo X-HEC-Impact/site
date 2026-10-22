@@ -9,6 +9,8 @@ type Props = {
   /** Voile vert sapin plus ou moins foncé, pour que le texte blanc reste lisible. */
   voile?: "normal" | "fort";
   priority?: boolean;
+  /** Photo qui passe sous la barre de navigation transparente : un voile en haut garde les liens lisibles. */
+  sousBarre?: boolean;
   className?: string;
   /**
    * Mouvement de la photo : « parallaxe » (elle glisse un peu moins vite que la page),
@@ -27,6 +29,7 @@ export function PhotoFond({
   position = "50% 58%",
   voile = "normal",
   priority,
+  sousBarre,
   className,
   mouvement = "parallaxe",
 }: Props) {
@@ -58,6 +61,9 @@ export function PhotoFond({
         )}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-sapin/50 via-transparent to-transparent" />
+      {sousBarre && (
+        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-sapin/85 via-sapin/40 to-transparent" />
+      )}
     </div>
   );
 }

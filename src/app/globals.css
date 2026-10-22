@@ -249,6 +249,31 @@
    ------------------------------------------------------------------ */
 :root {
   --ease-sortie: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Hauteur de la barre de navigation (68 px + son trait du bas) : les bandeaux photo passent dessous. */
+  --h-barre: 69px;
+}
+
+/* Barre de navigation : vert sapin plein par défaut ; transparente sur la photo tout en haut
+   des pages qui commencent par une photo (classe « hero-photo ») ; vitrée dès qu'on défile
+   (attribut data-defile posé sur <html> par lib/animations.ts) ou quand le menu mobile est ouvert. */
+.barre {
+  background-color: var(--color-sapin);
+  border-color: rgb(255 255 255 / 0.1);
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+html[data-defile] .barre:not([data-ouvert]) {
+  background-color: rgb(6 42 33 / 0.9);
+  border-color: rgb(255 255 255 / 0.12);
+  box-shadow: 0 12px 28px -18px rgb(0 0 0 / 0.75);
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  backdrop-filter: blur(14px) saturate(1.25);
+}
+html:not([data-defile]) body:has(.hero-photo) .barre:not([data-ouvert]) {
+  background-color: transparent;
+  border-color: transparent;
 }
 
 /* Nombre qui monte jusqu'à sa valeur (chiffres clés) : le texte lu par les

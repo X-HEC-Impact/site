@@ -5,7 +5,7 @@ import { EnTete } from '@/components/layout/EnTete';
 import { PiedDePage } from '@/components/layout/PiedDePage';
 import { association, boutonInscription } from '@/content/site';
 import { getEvenements } from '@/lib/evenements';
-import { SCRIPT_APPARITIONS, SCRIPT_ENTETE } from '@/lib/animations';
+import { SCRIPT_APPARITIONS, SCRIPT_BARRE, SCRIPT_ENTETE } from '@/lib/animations';
 import { urlSite } from '@/lib/url';
 import './globals.css';
 
@@ -47,6 +47,7 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
     <html lang="fr" className={jakarta.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_ENTETE }} />
+        <script dangerouslySetInnerHTML={{ __html: SCRIPT_BARRE }} />
       </head>
       <body>
         <a

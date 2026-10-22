@@ -21,10 +21,10 @@ export function Hero() {
       aria-labelledby="hero-titre"
       className={cx(
         marges,
-        "relative isolate grid min-h-[calc(100svh-68px)] content-center gap-10 overflow-clip py-16 md:py-24 lg:grid-cols-12 lg:items-center lg:gap-12",
+        "hero-photo relative isolate -mt-(--h-barre) grid min-h-svh content-center gap-10 overflow-clip pt-[calc(4rem+var(--h-barre))] pb-16 md:pt-[calc(6rem+var(--h-barre))] md:pb-24 lg:grid-cols-12 lg:items-center lg:gap-12",
       )}
     >
-      <PhotoFond priority mouvement="respire" />
+      <PhotoFond priority sousBarre mouvement="respire" />
       {/* Une onde du logo part du coin en bas à droite à l'ouverture de la page, s'éloigne et s'efface (une seule fois) */}
       <svg
         aria-hidden

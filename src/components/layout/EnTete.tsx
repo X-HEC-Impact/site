@@ -40,10 +40,8 @@ export function EnTete({ inscription }: Props) {
 
   return (
     <header
-      className={cx(
-        'sticky top-0 z-40 border-b backdrop-blur-md',
-        sombre ? 'section-sombre border-white/10 bg-sapin' : 'border-filet bg-white/90',
-      )}
+      data-ouvert={ouvert ? '' : undefined}
+      className={cx('barre sticky top-0 z-40 border-b', sombre ? 'section-sombre' : 'border-filet bg-white/90')}
     >
       {/* Avancement dans la page (navigateurs récents) */}
       <div aria-hidden className="progression" />
@@ -64,14 +62,12 @@ export function EnTete({ inscription }: Props) {
                     className={cx(
                       'transition-colors',
                       sombre ? 'hover:text-white' : 'hover:text-sapin',
+                      'underline decoration-2 underline-offset-[10px]',
                       actif
-                        ? cx(
-                            'font-medium underline decoration-vif decoration-2 underline-offset-[10px]',
-                            sombre ? 'text-white' : 'text-sapin',
-                          )
-                        : sombre
-                          ? 'text-white/75'
-                          : 'text-ardoise',
+                        ? cx('font-medium decoration-vif', sombre ? 'text-white' : 'text-sapin')
+                        : cx(
+                            sombre ? 'text-white/75 decoration-transparent hover:decoration-white/35' : 'text-ardoise decoration-transparent hover:decoration-sapin/25',
+                          ),
                     )}
                   >
                     {lien.libelle}
@@ -109,6 +105,17 @@ export function EnTete({ inscription }: Props) {
           {ouvert ? <X className="size-6" aria-hidden /> : <Menu className="size-6" aria-hidden />}
         </button>
       </div>
+
+      {/* Menu mobile : la page s'assombrit derrière, un clic à côté le ferme. */}
+      {ouvert && (
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-label="Fermer le menu"
+          onClick={fermer}
+          className="absolute inset-x-0 top-full h-dvh cursor-default bg-black/45 backdrop-blur-[2px] md:hidden"
+        />
+      )}
 
       {/* Menu mobile */}
       <div

@@ -26,7 +26,7 @@ export function EnTeteEvenement({
     <header
       className={cx(
         marges,
-        "section-sombre relative isolate flex min-h-[28rem] flex-col overflow-clip bg-sapin pt-10 pb-16 md:min-h-[34rem] md:pt-14 md:pb-24",
+        "section-sombre hero-photo relative isolate -mt-(--h-barre) flex min-h-[calc(28rem+var(--h-barre))] flex-col overflow-clip bg-sapin pt-[calc(2.5rem+var(--h-barre))] pb-16 md:min-h-[calc(34rem+var(--h-barre))] md:pt-[calc(3.5rem+var(--h-barre))] md:pb-24",
       )}
     >
       <PhotoFond
@@ -34,6 +34,7 @@ export function EnTeteEvenement({
         position={evenement.entete?.position}
         voile="fort"
         priority
+        sousBarre
         mouvement="respire"
       />
       {/* Fondu vers la bande sombre qui suit, sans arête */}
