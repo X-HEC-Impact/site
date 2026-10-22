@@ -1,15 +1,17 @@
 import { accueil } from '@/content/site';
-import { imagePartage, taillePartage } from '@/lib/image-partage';
+import { imagePartage, photoPartage, taillePartage } from '@/lib/image-partage';
 
 export const alt = 'X-HEC Impact : entreprendre pour l’impact';
 export const size = taillePartage;
 export const contentType = 'image/png';
 
 export default async function Image() {
+  const { hero } = accueil;
   return imagePartage({
-    surtitre: accueil.hero.surtitre,
-    titre: accueil.hero.titre,
-    titreSuite: accueil.hero.titreSuite,
-    details: ['LEX Europe', 'Conférences', 'Hackathon Impact'],
+    titre: hero.titre,
+    titreSuite: hero.titreSuite,
+    souligne: hero.titreSurligne || undefined,
+    sousTitre: hero.surtitre,
+    photo: photoPartage(),
   });
 }
