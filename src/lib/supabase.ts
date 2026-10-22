@@ -17,3 +17,8 @@ export function clientSupabase() {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }
+
+/** Vrai quand les deux variables d'environnement Supabase sont renseignées (sans ouvrir de connexion). */
+export function supabaseConfigure() {
+  return Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+}

@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { Bouton } from '@/components/ui/Bouton';
-import { navigation } from '@/content/site';
+import { boutonContact, navigation } from '@/content/site';
 import { cx } from '@/lib/utils';
 
 function estActif(pathname: string, href: string) {
@@ -82,7 +82,11 @@ export function EnTete({ inscription }: Props) {
           </ul>
         </nav>
 
+        {/* « Nous écrire » est toujours là ; « S'inscrire » s'y ajoute quand un événement est ouvert. */}
         <div className="hidden items-center gap-2.5 justify-self-end md:flex">
+          <Bouton href={boutonContact.href} variante={inscription ? 'contour' : 'principal'} taille="petit">
+            {boutonContact.libelle}
+          </Bouton>
           {inscription && (
             <Bouton href={inscription.href} variante={sombre ? 'principal' : 'noir'} taille="petit">
               {inscription.libelle}
@@ -142,8 +146,8 @@ export function EnTete({ inscription }: Props) {
           </ul>
         </nav>
         <div className={cx('grid gap-2.5 p-5', inscription && 'grid-cols-2')}>
-          <Bouton href="/contact" variante="contour" onClick={fermer}>
-            Contact
+          <Bouton href={boutonContact.href} variante={inscription ? 'contour' : 'principal'} onClick={fermer}>
+            {boutonContact.libelle}
           </Bouton>
           {inscription && (
             <Bouton href={inscription.href} variante={sombre ? 'principal' : 'noir'} onClick={fermer}>

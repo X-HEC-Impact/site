@@ -83,6 +83,27 @@ export const boutonInscription = {
   libelle: 'S’inscrire',
 };
 
+/**
+ * Bouton « Nous écrire » à droite du menu, toujours visible : il mène au formulaire
+ * de la page Contact (l'ancre #formulaire).
+ */
+export const boutonContact = {
+  libelle: 'Nous écrire',
+  href: '/contact#formulaire',
+};
+
+/**
+ * Sujets proposés dans le formulaire de contact. La valeur est enregistrée telle quelle
+ * dans Supabase (colonne `sujet`) : si vous la changez ou en ajoutez une, mettez aussi à jour
+ * la contrainte `messages_sujet_valide` dans supabase/schema.sql.
+ */
+export const sujetsContact = [
+  { valeur: 'table-ronde', libelle: 'Table ronde' },
+  { valeur: 'sponsoring-lex', libelle: 'Sponsoring LEX Europe' },
+  { valeur: 'hackathon', libelle: 'Hackathon' },
+  { valeur: 'autre', libelle: 'Autre' },
+] as const;
+
 /* ------------------------------------------------------------------
    Menu principal
    ------------------------------------------------------------------ */
@@ -493,6 +514,12 @@ export const pages = {
     titreSuite: "Pour passer de l’idée à l’action.",
     description:
       'LEX Europe, conférences, tables rondes et Hackathon Impact : tous les événements de X-HEC Impact.',
+    /** Quand le filtre « Conférences & tables rondes » ne trouve rien : invitation à nous écrire. */
+    videConference: {
+      texte: 'Intervenez dans une table ronde : écrivez-nous.',
+      libelle: 'Nous écrire',
+      href: '/contact?sujet=table-ronde#formulaire',
+    },
   },
   equipe: {
     surtitre: "L’équipe",
@@ -538,6 +565,14 @@ export const pages = {
     titreSuite: 'Écrivez-nous.',
     description:
       'Une question sur nos événements, une envie de participer ou de nous soutenir ? Voici comment nous joindre.',
+    /** Formulaire de contact (affiché dès que Supabase est configuré, voir README §8). */
+    formulaire: {
+      surtitre: 'Votre message',
+      texte: 'Pour toute question sur l’association et ses événements.',
+      consentement: 'J’accepte que X-HEC Impact utilise ces informations pour répondre à mon message.',
+      envoi: 'Envoyer le message',
+      succes: { titre: 'Message envoyé', texte: 'Merci, nous vous répondrons par e-mail.' },
+    },
     email: {
       surtitre: 'Par e-mail',
       texte: 'Pour toute question sur l’association et ses événements.',

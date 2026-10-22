@@ -11,7 +11,7 @@ import { Grille } from "@/components/ui/Grille";
 import { LienFleche } from "@/components/ui/LienFleche";
 import { Pictogramme } from "@/components/ui/Pictogramme";
 import { marges, rythme } from "@/components/ui/Section";
-import { formats, type Evenement, type FormatEvenement } from "@/content/site";
+import { formats, pages, type Evenement, type FormatEvenement } from "@/content/site";
 import { dateCourte } from "@/lib/dates";
 import { cx } from "@/lib/utils";
 
@@ -110,7 +110,19 @@ export function Agenda({ aVenir, passes, filtre }: Props) {
               <p className="font-titre text-xl font-medium tracking-[-0.02em] text-white">
                 Aucun événement à venir dans ce format pour l’instant.
               </p>
-              <LienFleche href="/evenements">
+              {/* Conférences et tables rondes : l'agenda est vide, on invite à proposer une intervention. */}
+              {filtre === "conference" && (
+                <>
+                  <p className="max-w-lg text-[17px] text-white/85">
+                    {pages.evenements.videConference.texte}
+                  </p>
+                  <Bouton href={pages.evenements.videConference.href}>
+                    {pages.evenements.videConference.libelle}
+                  </Bouton>
+                </>
+              )}
+              {/* La carte est sur fond sombre : lien en blanc (il était vert sapin, donc illisible). */}
+              <LienFleche href="/evenements" className="text-white">
                 Voir tous les événements
               </LienFleche>
             </div>

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import { ArrowUpRight, Handshake, Mail } from "lucide-react";
 import { CopierEmail } from "@/components/contact/CopierEmail";
+import { FormulaireContact } from "@/components/contact/FormulaireContact";
+import { FormulaireContactUrl } from "@/components/contact/FormulaireContactUrl";
 import { Bouton } from "@/components/ui/Bouton";
 import { IconeInstagram, IconeLinkedin } from "@/components/ui/IconesReseaux";
 import { Lien } from "@/components/ui/Lien";
@@ -10,6 +12,7 @@ import { marges } from "@/components/ui/Section";
 import { EnTetePage } from "@/components/ui/EnTetePage";
 import { association, pages } from "@/content/site";
 import { metaPage } from "@/lib/meta";
+import { supabaseConfigure } from "@/lib/supabase";
 import { cx, estPlaceholder, typo } from "@/lib/utils";
 
 export const metadata: Metadata = metaPage(
@@ -80,7 +83,10 @@ export default function PageContact() {
   const { surtitre, titre, titreSuite, description } = pages.contact;
   const { email, linkedin, instagram } = association;
   const emailPret = !estPlaceholder(email);
-  const { partenariats } = pages.contact;
+  const { partenariats, formulaire } = pages.contact;
+  // Le formulaire apparaît dès que Supabase est configuré (voir README §8) ;
+  // sinon la page garde l'adresse e-mail en grand, comme avant.
+  const formulaireActif = supabaseConfigure();
 
   const reseaux = [
     linkedin && {
@@ -112,7 +118,7 @@ export default function PageContact() {
         photoSrc="/images/contact/cascade.webp"
       />
 
-      {/* L'e-mail, en grand, et les réseaux à côté */}
+      {/* Le formulaire (ou l'e-mail en grand tant que Supabase n'est pas configuré) et les réseaux à côté */}
       <div>
         <div
           className={cx(
@@ -120,45 +126,85 @@ export default function PageContact() {
             "grid gap-12 py-14 md:grid-cols-12 md:gap-16 md:py-20",
           )}
         >
-          <section aria-labelledby="email-titre" data-reveal="monte" className="md:col-span-7">
-            <h2 id="email-titre" className="surtitre">
-              {pages.contact.email.surtitre}
-            </h2>
-            <p className="mt-3 max-w-xl text-[17px]">
-              {typo(pages.contact.email.texte)}
-            </p>
-            <p className="mt-8 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-[40px]">
-              <Mail
-                aria-hidden
-                className="size-7 shrink-0 text-vif-texte sm:size-9"
-                strokeWidth={1.75}
-              />
-              {emailPret ? (
-                <a
-                  href={`mailto:${email}`}
-                  className="underline-offset-[6px] hover:underline"
-                >
-                  {email}
-                </a>
-              ) : (
-                <span>{email}</span>
-              )}
-            </p>
-            {emailPret && (
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Bouton href={`mailto:${email}`}>Nous écrire</Bouton>
-                <CopierEmail email={email} />
+          {formulaireActif ? (
+            <section
+              id="formulaire"
+              aria-labelledby="formulaire-titre"
+              data-reveal="monte"
+              className="md:col-span-7"
+            >
+              <h2 id="formulaire-titre" className="surtitre">
+                {formulaire.surtitre}
+              </h2>
+              <p className="mt-3 max-w-xl text-[17px]">{typo(formulaire.texte)}</p>
+              <div className="mt-6">
+                {/* L'adresse peut présélectionner un sujet (?sujet=table-ronde) ; en attendant, le formulaire s'affiche sans. */}
+                <Suspense fallback={<FormulaireContact />}>
+                  <FormulaireContactUrl />
+                </Suspense>
               </div>
-            )}
-          </section>
-
-          {reseaux.length > 0 && (
-            <ul aria-label="Réseaux" data-reveal="liste" className="space-y-4 md:col-span-5">
-              {reseaux.map((r) => (
-                <Reseau key={r.titre} {...r} />
-              ))}
-            </ul>
+            </section>
+          ) : (
+            <section aria-labelledby="email-titre" data-reveal="monte" className="md:col-span-7">
+              <h2 id="email-titre" className="surtitre">
+                {pages.contact.email.surtitre}
+              </h2>
+              <p className="mt-3 max-w-xl text-[17px]">
+                {typo(pages.contact.email.texte)}
+              </p>
+              <p className="mt-8 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-[40px]">
+                <Mail
+                  aria-hidden
+                  className="size-7 shrink-0 text-vif-texte sm:size-9"
+                  strokeWidth={1.75}
+                />
+                {emailPret ? (
+                  <a
+                    href={`mailto:${email}`}
+                    className="underline-offset-[6px] hover:underline"
+                  >
+                    {email}
+                  </a>
+                ) : (
+                  <span>{email}</span>
+                )}
+              </p>
+              {emailPret && (
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Bouton href={`mailto:${email}`}>Nous écrire</Bouton>
+                  <CopierEmail email={email} />
+                </div>
+              )}
+            </section>
           )}
+
+          <div className="space-y-10 md:col-span-5">
+            {/* Avec le formulaire, l'adresse e-mail passe en second (et reste cachée tant qu'elle n'existe pas). */}
+            {formulaireActif && emailPret && (
+              <section aria-labelledby="email-titre" data-reveal="monte">
+                <h2 id="email-titre" className="surtitre">
+                  {pages.contact.email.surtitre}
+                </h2>
+                <p className="mt-3 flex items-center gap-2.5 font-titre text-xl leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-2xl">
+                  <Mail aria-hidden className="size-6 shrink-0 text-vif-texte" strokeWidth={1.75} />
+                  <a href={`mailto:${email}`} className="underline-offset-[5px] hover:underline">
+                    {email}
+                  </a>
+                </p>
+                <div className="mt-5">
+                  <CopierEmail email={email} />
+                </div>
+              </section>
+            )}
+
+            {reseaux.length > 0 && (
+              <ul aria-label="Réseaux" data-reveal="liste" className="space-y-4">
+                {reseaux.map((r) => (
+                  <Reseau key={r.titre} {...r} />
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
 

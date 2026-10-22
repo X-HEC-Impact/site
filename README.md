@@ -181,7 +181,9 @@ npm run build     # vérifie que le site se construit sans erreur
 
 ## 8. Inscriptions et Supabase
 
-Le formulaire d'inscription enregistre les inscriptions dans une base **Supabase** (table `inscriptions`). Tant que Supabase n'est pas configuré, le formulaire affiche « Les inscriptions en ligne ne sont pas encore activées ».
+Deux formulaires enregistrent leurs données dans une base **Supabase** :
+- le formulaire d'**inscription** aux événements (table `inscriptions`) : tant que Supabase n'est pas configuré, il affiche « Les inscriptions en ligne ne sont pas encore activées » ;
+- le formulaire de **contact** de la page Contact (table `messages`) : le visiteur choisit un sujet (table ronde, sponsoring LEX Europe, hackathon, autre) puis écrit son message. Tant que Supabase n'est pas configuré, la page Contact n'affiche **pas** le formulaire (elle montre l'adresse e-mail à la place) ; il apparaît tout seul après la mise en place ci-dessous et un redéploiement. Les sujets se modifient dans `sujetsContact` (`src/content/site.ts`).
 
 **Mise en place (une seule fois)** :
 1. Créez un projet sur [supabase.com](https://supabase.com) (région **West EU (Paris)**).
@@ -189,7 +191,7 @@ Le formulaire d'inscription enregistre les inscriptions dans une base **Supabase
 3. Récupérez l'URL du projet et la clé secrète (`service_role`) dans **Project Settings**.
 4. Ajoutez-les dans Vercel (voir [§ 9](#9-variables-denvironnement)), puis redéployez.
 
-**Consulter les inscriptions** : Supabase → Table Editor → `inscriptions` (export CSV possible). Une requête d'exemple est en bas de `supabase/schema.sql`.
+**Consulter les inscriptions et les messages** : Supabase → Table Editor → `inscriptions` ou `messages` (export CSV possible). Dans `messages`, la colonne `traite` se coche à la main quand un message a reçu une réponse. Des requêtes d'exemple sont dans `supabase/schema.sql`. Supabase n'envoie pas d'e-mail à chaque message : il faut ouvrir la table pour les lire.
 
 **Sécurité** :
 - la table est protégée (RLS activé, aucune règle publique) : seul le serveur du site peut écrire ;
@@ -205,8 +207,8 @@ Le formulaire d'inscription enregistre les inscriptions dans une base **Supabase
 | Variable | Rôle | Obligatoire ? |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | adresse publique du site (images de partage, plan du site) | non (par défaut `https://xhec-impact.vercel.app`) |
-| `SUPABASE_URL` | URL du projet Supabase | pour les inscriptions |
-| `SUPABASE_SERVICE_ROLE_KEY` | clé secrète Supabase, côté serveur uniquement | pour les inscriptions |
+| `SUPABASE_URL` | URL du projet Supabase | pour les inscriptions et le formulaire de contact |
+| `SUPABASE_SERVICE_ROLE_KEY` | clé secrète Supabase, côté serveur uniquement | pour les inscriptions et le formulaire de contact |
 
 Après avoir modifié une variable dans Vercel, **redéployez** (Deployments → ⋯ → Redeploy) pour qu'elle soit prise en compte.
 
@@ -231,7 +233,7 @@ src/
 ├── components/            ← les blocs réutilisables (rangés par page)
 └── lib/                   ← dates, inscriptions, Supabase, images de partage
 public/images/             ← photos, logos, textures
-supabase/schema.sql        ← création de la table des inscriptions
+supabase/schema.sql        ← création des tables (inscriptions, messages)
 assets/fonts/              ← polices utilisées pour les images de partage
 ```
 
