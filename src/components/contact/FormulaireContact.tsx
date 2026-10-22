@@ -3,7 +3,9 @@
 import { useActionState, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { CircleAlert, CircleCheck, LoaderCircle } from 'lucide-react';
 import { envoyerMessage } from '@/app/contact/actions';
+import { fondFormat } from '@/components/evenements/EtiquetteFormat';
 import { classesBouton } from '@/components/ui/Bouton';
+import { Pictogramme } from '@/components/ui/Pictogramme';
 import { pages, sujetsContact } from '@/content/site';
 import {
   erreursContact,
@@ -105,7 +107,7 @@ export function FormulaireContact({ sujetInitial }: { sujetInitial?: string }) {
       action={envoyer}
       onSubmit={verifier}
       noValidate
-      className="space-y-5 rounded-bouton bg-voile p-5 sm:p-6 md:p-8"
+      className="space-y-6 rounded-bouton border border-filet bg-white p-5 shadow-[0_1px_2px_rgb(6_42_33/0.05),0_28px_56px_-28px_rgb(0_0_0/0.6)] sm:p-6 md:p-8"
     >
       {/* Champ piège pour les robots, invisible pour les visiteurs. */}
       <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
@@ -115,9 +117,9 @@ export function FormulaireContact({ sujetInitial }: { sujetInitial?: string }) {
 
       <fieldset aria-describedby={erreurs.sujet ? 'contact-sujet-erreur' : undefined}>
         <legend className="mb-2 text-sm font-medium text-sapin">Sujet</legend>
-        <div className="flex flex-wrap gap-2">
-          {sujetsContact.map(({ valeur, libelle }) => (
-            <label key={valeur} className="cursor-pointer">
+        <div className="grid grid-cols-2 gap-2">
+          {sujetsContact.map(({ valeur, libelle, format }) => (
+            <label key={valeur} className="block cursor-pointer">
               <input
                 type="radio"
                 name="sujet"
@@ -125,7 +127,14 @@ export function FormulaireContact({ sujetInitial }: { sujetInitial?: string }) {
                 defaultChecked={sujetCoche === valeur}
                 className="peer sr-only"
               />
-              <span className="inline-flex h-10 items-center rounded-bouton border border-filet bg-white px-4 text-sm font-medium text-ardoise transition-colors hover:border-brume peer-checked:border-sapin peer-checked:bg-sapin peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sapin">
+              {/* Chaque sujet reprend la couleur et le pictogramme de son format (LEX, conférence, hackathon). */}
+              <span
+                className={cx(
+                  'flex min-h-11 w-full items-center gap-1.5 rounded-bouton px-2.5 py-1.5 text-[13px] leading-tight sm:gap-2 sm:px-3.5 sm:text-sm font-medium text-sapin transition-[background-color,color,transform] duration-200 hover:-translate-y-0.5 peer-checked:bg-sapin peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sapin',
+                  format ? fondFormat[format] : 'bg-voile',
+                )}
+              >
+                {format && <Pictogramme type={format} className="size-[18px] shrink-0 sm:size-5" />}
                 {libelle}
               </span>
             </label>

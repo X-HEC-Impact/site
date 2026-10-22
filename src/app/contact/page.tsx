@@ -20,6 +20,11 @@ export const metadata: Metadata = metaPage(
   pages.contact.description,
 );
 
+/** Carte pastel : pastille blanche à gauche, texte à droite (même langage que les cartes de l'accueil). */
+const carte = "flex items-start gap-5 rounded-bouton p-5 text-ardoise md:p-6";
+const tuile = "flex size-11 shrink-0 items-center justify-center rounded-bouton bg-white text-sapin";
+const titreCarte = "block font-titre text-xl font-medium text-sapin";
+
 /** Un réseau : pastille, titre, texte, avec une flèche quand le lien existe. */
 function Reseau({
   icone,
@@ -39,13 +44,9 @@ function Reseau({
 }) {
   const contenu = (
     <>
-      <span className="flex size-11 shrink-0 items-center justify-center rounded-bouton bg-white text-sapin ring-1 ring-filet">
-        {icone}
-      </span>
+      <span className={tuile}>{icone}</span>
       <span className="min-w-0 flex-1">
-        <span className="block font-titre text-xl font-medium text-sapin">
-          {titre}
-        </span>
+        <span className={titreCarte}>{titre}</span>
         <span className="mt-1 block text-[15px]">{typo(texte)}</span>
         {href && libelleLien && (
           <span className="mt-3 block font-medium text-sapin group-hover:underline group-hover:underline-offset-4">
@@ -61,8 +62,7 @@ function Reseau({
       )}
     </>
   );
-  const classes =
-    "flex items-start gap-5 rounded-bouton p-5 text-ardoise transition-transform duration-300 hover:-translate-y-0.5 md:p-6";
+  const classes = cx(carte, "transition-transform duration-300 hover:-translate-y-0.5");
   return (
     <li>
       {href ? (
@@ -98,7 +98,7 @@ export default function PageContact() {
       libelleLien: "Voir la page X-HEC Impact",
     },
     instagram && {
-      fond: "bg-ciel",
+      fond: "bg-prairie",
       icone: <IconeInstagram className="size-5" />,
       titre: "Instagram",
       texte: pages.contact.instagram,
@@ -118,95 +118,96 @@ export default function PageContact() {
         photoSrc="/images/contact/cascade.webp"
       />
 
-      {/* Le formulaire (ou l'e-mail en grand tant que Supabase n'est pas configuré) et les réseaux à côté */}
-      <div>
-        <div
-          className={cx(
-            marges,
-            "grid gap-12 py-14 md:grid-cols-12 md:gap-16 md:py-20",
-          )}
+      {/* Bande sombre dans la continuité de l'en-tête photo : le formulaire en carte claire
+          (ou l'e-mail en grand tant que Supabase n'est pas configuré), et les cartes pastel à côté. */}
+      <section
+        aria-label="Nous contacter"
+        // Le haut de la bande est court : l'en-tête photo se fond déjà dans le vert sapin juste au-dessus.
+        className={cx("section-sombre relative isolate overflow-clip bg-sapin pt-4 pb-20 md:pt-6 md:pb-28", marges)}
+      >
+        {/* Les ondes du logo, très discrètes, qui partent du bord droit (comme l'en-tête des autres pages) */}
+        <svg
+          aria-hidden
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="xMaxYMid slice"
+          className="pointer-events-none absolute inset-0 -z-10 hidden size-full [mask-image:linear-gradient(to_right,transparent_40%,black_85%)] lg:block [&_*]:[vector-effect:non-scaling-stroke]"
         >
-          {formulaireActif ? (
-            <section
-              id="formulaire"
-              aria-labelledby="formulaire-titre"
-              data-reveal="monte"
-              className="md:col-span-7"
-            >
-              <h2 id="formulaire-titre" className="surtitre">
-                {formulaire.surtitre}
-              </h2>
-              <p className="mt-3 max-w-xl text-[17px]">{typo(formulaire.texte)}</p>
-              <div className="mt-6">
+          <g transform="translate(1180 400)" fill="none" stroke="#ffffff" strokeOpacity="0.09" strokeWidth="1.5">
+            {[130, 210, 290, 370, 450, 530, 610, 690].map((r) => (
+              <circle key={r} r={r} />
+            ))}
+          </g>
+        </svg>
+
+        {/* L'ancre #formulaire (bouton « Nous écrire » de l'en-tête) mène ici, titre compris. */}
+        <div id={formulaireActif ? "formulaire" : undefined}>
+          {formulaireActif && (
+            <div data-reveal="monte">
+              <h2 className="surtitre">{formulaire.surtitre}</h2>
+              <p className="mt-3 max-w-xl text-[17px] text-white/80">{typo(formulaire.texte)}</p>
+            </div>
+          )}
+
+          <div className={cx("grid gap-12 md:grid-cols-12 md:gap-14 lg:gap-16", formulaireActif && "mt-8")}>
+            {formulaireActif ? (
+              <div data-reveal="monte" className="md:col-span-7">
                 {/* L'adresse peut présélectionner un sujet (?sujet=table-ronde) ; en attendant, le formulaire s'affiche sans. */}
                 <Suspense fallback={<FormulaireContact />}>
                   <FormulaireContactUrl />
                 </Suspense>
               </div>
-            </section>
-          ) : (
-            <section aria-labelledby="email-titre" data-reveal="monte" className="md:col-span-7">
-              <h2 id="email-titre" className="surtitre">
-                {pages.contact.email.surtitre}
-              </h2>
-              <p className="mt-3 max-w-xl text-[17px]">
-                {typo(pages.contact.email.texte)}
-              </p>
-              <p className="mt-8 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-[40px]">
-                <Mail
-                  aria-hidden
-                  className="size-7 shrink-0 text-vif-texte sm:size-9"
-                  strokeWidth={1.75}
-                />
-                {emailPret ? (
-                  <a
-                    href={`mailto:${email}`}
-                    className="underline-offset-[6px] hover:underline"
-                  >
-                    {email}
-                  </a>
-                ) : (
-                  <span>{email}</span>
-                )}
-              </p>
-              {emailPret && (
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Bouton href={`mailto:${email}`}>Nous écrire</Bouton>
-                  <CopierEmail email={email} />
-                </div>
-              )}
-            </section>
-          )}
-
-          <div className="space-y-10 md:col-span-5">
-            {/* Avec le formulaire, l'adresse e-mail passe en second (et reste cachée tant qu'elle n'existe pas). */}
-            {formulaireActif && emailPret && (
-              <section aria-labelledby="email-titre" data-reveal="monte">
-                <h2 id="email-titre" className="surtitre">
-                  {pages.contact.email.surtitre}
-                </h2>
-                <p className="mt-3 flex items-center gap-2.5 font-titre text-xl leading-tight font-medium tracking-[-0.02em] break-all text-sapin sm:text-2xl">
-                  <Mail aria-hidden className="size-6 shrink-0 text-vif-texte" strokeWidth={1.75} />
-                  <a href={`mailto:${email}`} className="underline-offset-[5px] hover:underline">
-                    {email}
-                  </a>
+            ) : (
+              <div data-reveal="monte" className="md:col-span-7">
+                <h2 className="surtitre">{pages.contact.email.surtitre}</h2>
+                <p className="mt-3 max-w-xl text-[17px] text-white/80">{typo(pages.contact.email.texte)}</p>
+                <p className="mt-8 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-white sm:text-[40px]">
+                  <Mail aria-hidden className="size-7 shrink-0 text-vif sm:size-9" strokeWidth={1.75} />
+                  {emailPret ? (
+                    <a href={`mailto:${email}`} className="underline-offset-[6px] hover:underline">
+                      {email}
+                    </a>
+                  ) : (
+                    <span>{email}</span>
+                  )}
                 </p>
-                <div className="mt-5">
-                  <CopierEmail email={email} />
-                </div>
-              </section>
+                {emailPret && (
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <Bouton href={`mailto:${email}`}>Nous écrire</Bouton>
+                    <CopierEmail email={email} />
+                  </div>
+                )}
+              </div>
             )}
 
-            {reseaux.length > 0 && (
-              <ul aria-label="Réseaux" data-reveal="liste" className="space-y-4">
-                {reseaux.map((r) => (
-                  <Reseau key={r.titre} {...r} />
-                ))}
-              </ul>
-            )}
+            {/* Cartes pastel, comme les formats de l'accueil. Avec le formulaire, l'e-mail passe ici
+                (et reste caché tant que l'adresse n'existe pas). */}
+            <ul aria-label="Autres moyens de nous joindre" data-reveal="liste" className="space-y-4 self-start md:col-span-5">
+              {formulaireActif && emailPret && (
+                <li className={cx(carte, "bg-ciel")}>
+                  <span className={tuile}>
+                    <Mail aria-hidden className="size-5" strokeWidth={1.75} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className={titreCarte}>{pages.contact.email.surtitre}</span>
+                    <a
+                      href={`mailto:${email}`}
+                      className="mt-1 block text-[15px] font-medium break-all text-sapin underline-offset-4 hover:underline"
+                    >
+                      {email}
+                    </a>
+                    <span className="mt-4 block">
+                      <CopierEmail email={email} />
+                    </span>
+                  </span>
+                </li>
+              )}
+              {reseaux.map((r) => (
+                <Reseau key={r.titre} {...r} />
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Partenariats : bandeau photo pleine largeur, comme la bannière finale des autres pages */}
       <section
@@ -217,6 +218,11 @@ export default function PageContact() {
           src="/images/contact/cascade.webp"
           position="45% 96%"
           voile="fort"
+        />
+        {/* Fondu depuis la bande sombre du dessus et vers le pied de page, sans arête */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-sapin to-transparent"
         />
         <div
           aria-hidden

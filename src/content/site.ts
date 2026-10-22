@@ -98,11 +98,12 @@ export const boutonContact = {
  * la contrainte `messages_sujet_valide` dans supabase/schema.sql.
  */
 export const sujetsContact = [
-  { valeur: 'table-ronde', libelle: 'Table ronde' },
-  { valeur: 'sponsoring-lex', libelle: 'Sponsoring LEX Europe' },
-  { valeur: 'hackathon', libelle: 'Hackathon' },
-  { valeur: 'autre', libelle: 'Autre' },
-] as const;
+  // `format` : la couleur pastel et le pictogramme du format, comme sur les cartes du site.
+  { valeur: 'table-ronde', libelle: 'Table ronde', format: 'conference' },
+  { valeur: 'sponsoring-lex', libelle: 'Sponsoring LEX', format: 'lex' },
+  { valeur: 'hackathon', libelle: 'Hackathon', format: 'hackathon' },
+  { valeur: 'autre', libelle: 'Autre', format: undefined },
+] as const satisfies readonly { valeur: string; libelle: string; format: FormatEvenement | undefined }[];
 
 /* ------------------------------------------------------------------
    Menu principal
