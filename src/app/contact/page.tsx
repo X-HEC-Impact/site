@@ -125,20 +125,6 @@ export default function PageContact() {
         // Le haut de la bande est court : l'en-tête photo se fond déjà dans le vert sapin juste au-dessus.
         className={cx("section-sombre relative isolate overflow-clip bg-sapin pt-4 pb-20 md:pt-6 md:pb-28", marges)}
       >
-        {/* Les ondes du logo, très discrètes, qui partent du bord droit (comme l'en-tête des autres pages) */}
-        <svg
-          aria-hidden
-          viewBox="0 0 1200 800"
-          preserveAspectRatio="xMaxYMid slice"
-          className="pointer-events-none absolute inset-0 -z-10 hidden size-full [mask-image:linear-gradient(to_right,transparent_40%,black_85%)] lg:block [&_*]:[vector-effect:non-scaling-stroke]"
-        >
-          <g transform="translate(1180 400)" fill="none" stroke="#ffffff" strokeOpacity="0.09" strokeWidth="1.5">
-            {[130, 210, 290, 370, 450, 530, 610, 690].map((r) => (
-              <circle key={r} r={r} />
-            ))}
-          </g>
-        </svg>
-
         {/* L'ancre #formulaire (bouton « Nous écrire » de l'en-tête) mène ici, titre compris. */}
         <div id={formulaireActif ? "formulaire" : undefined}>
           {formulaireActif && (
