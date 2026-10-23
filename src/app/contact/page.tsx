@@ -146,7 +146,7 @@ export default function PageContact() {
               <div data-reveal="monte" className="md:col-span-7">
                 <h2 className="surtitre">{pages.contact.email.surtitre}</h2>
                 <p className="mt-3 max-w-xl text-[17px] text-white/80">{typo(pages.contact.email.texte)}</p>
-                <p className="mt-8 flex items-center gap-3 font-titre text-[28px] leading-tight font-medium tracking-[-0.02em] break-all text-white sm:text-[40px]">
+                <p className="mt-8 flex items-center gap-3 font-titre text-[clamp(20px,6vw,28px)] leading-tight font-medium tracking-[-0.02em] [overflow-wrap:anywhere] text-white sm:text-[34px] md:text-[clamp(22px,2.9vw,40px)]">
                   <Mail aria-hidden className="size-7 shrink-0 text-vif sm:size-9" strokeWidth={1.75} />
                   {emailPret ? (
                     <a href={`mailto:${email}`} className="underline-offset-[6px] hover:underline">

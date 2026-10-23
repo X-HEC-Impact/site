@@ -23,8 +23,8 @@ export const association = {
   /** Phrase courte du pied de page. */
   accroche:
     'Rassembler, accompagner et connecter les porteurs de projets à impact social et environnemental.',
-  /** Adresse e-mail de contact : remplacer [EMAIL] dès que l'adresse est créée. */
-  email: '[EMAIL]',
+  /** Adresse e-mail de contact (redirigée vers la boîte Gmail de l'association, réglage sur Namecheap). */
+  email: 'contact@xhecimpact.com',
   linkedin: 'https://www.linkedin.com/company/x-hec-impact/',
   /** Laisser vide ('') pour masquer Instagram partout sur le site. */
   instagram: '',
