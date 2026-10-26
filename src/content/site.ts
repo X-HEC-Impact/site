@@ -498,7 +498,7 @@ export const equipe: Membre[] = [
   {
     prenom: 'Éléonore',
     nom: 'de Lambertye',
-    role: '[RÔLE]',
+    role: 'Responsable événements',
     photo: '/images/team/eleonore-de-lambertye.webp',
     linkedin: 'https://www.linkedin.com/in/eleonore-de-lambertye/',
   },
